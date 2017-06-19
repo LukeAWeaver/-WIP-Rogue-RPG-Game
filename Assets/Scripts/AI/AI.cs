@@ -8,8 +8,10 @@ using UnityEngine.SceneManagement;
 public class AI : MonoBehaviour {
     bool turn;
     int ctr;
-
-
+    public string flip;
+    public GameObject player;
+    public goblinInterface Thisgoblin;
+    public GameObject npc;
 
 	// Use this for initialization
 	void Start () {
@@ -27,24 +29,34 @@ public class AI : MonoBehaviour {
 
 
     // Update is called once per frame
-    void Update() {
-
-        ctr++;
-        if (ctr % 360 == 0)
+    void Update() 
+{
+        if(Thisgoblin.hp ==0)
         {
-            if(ctr%720 ==0)
-            {
-
-                //SceneManager.LoadScene("level1");
-            }
-            turn = !turn;
-            if (!turn)
-            {
-                Flip("left");
-            }
-            else
-                Flip("right");
+            npc.SetActive(false);
         }
+        var follow = player.transform.position;
+        if(transform.position.x > follow.x)
+        {
+            Flip("right");
+            transform.Translate(-Thisgoblin.ms, 0f, 0f);
+        }
+        else
+        {
+            Flip("left");
+            transform.Translate(Thisgoblin.ms, 0f, 0f);
+
+        }
+        if(transform.position.y > follow.y)
+        {
+            transform.Translate(0f, -Thisgoblin.ms, 0f);
+        }
+        else
+        {
+            transform.Translate(0f, Thisgoblin.ms, 0f);
+        }
+
+
         if (turn)
         {
             transform.Translate(-.04f, 0f, 0f); //left
@@ -58,19 +70,33 @@ public class AI : MonoBehaviour {
 
 
     }
-    public void Flip(string flip)
+    public void Flip(string Methodflip)
     {
+        flip = Methodflip;
         var theScale = transform.localScale;
-        if (flip == "left")
+        if (Methodflip == "left")
         {
             if (theScale.x < -.1f)
                 theScale.x = -theScale.x;
         }
-        if (flip == "right")
+        if (Methodflip == "right")
         {
             if (theScale.x > .1f)
                 theScale.x = -theScale.x;
         }
         transform.localScale = theScale;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == "Rusty Sword")
+        {
+            Thisgoblin.hp--;
+        }
+        if (Thisgoblin.hp == 2)
+        {
+            Thisgoblin.ms = .1f;
+        }
+
     }
 }

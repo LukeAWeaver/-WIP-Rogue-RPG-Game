@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player1Controls : MonoBehaviour
+public class Player2Controls : MonoBehaviour
 {
     private float velocity = 1f;
     public float vlimit;
     public float hlimit;
 
     //public GameObject coin;
-   // public GameObject collisionObject;
+    // public GameObject collisionObject;
     //public GameObject smallObject;
 
 
@@ -65,21 +65,21 @@ public class Player1Controls : MonoBehaviour
 
 
 
-        if (Input.GetKey("right"))
+        if (Input.GetKey("d"))
         {
             Flip("right");
             transform.Translate(velocity, 0f, 0f);
         }
-        if (Input.GetKey("left"))
+        if (Input.GetKey("a"))
         {
             Flip("left");
             transform.Translate(-velocity, 0f, 0f);
         }
-        if (Input.GetKey("up"))
+        if (Input.GetKey("w"))
         {
             transform.Translate(0f, velocity, 0f);
         }
-        if (Input.GetKey("down"))
+        if (Input.GetKey("s"))
         {
             transform.Translate(0f, -velocity, 0f);
         }
