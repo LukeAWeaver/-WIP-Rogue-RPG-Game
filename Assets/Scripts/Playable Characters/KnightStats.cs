@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class KnightStats : MonoBehaviour {
+
     public int health;
     public int energy;
 	// Use this for initialization

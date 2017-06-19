@@ -4,17 +4,20 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class play : MonoBehaviour {
+public class play : MonoBehaviour
+{
     public Button dungeon;
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         Button btn = dungeon.GetComponent<Button>();
         btn.onClick.AddListener(changeScene);
 
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update ()
+    {
   
 	}
     void changeScene()
