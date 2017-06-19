@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class AI : MonoBehaviour {
     bool turn;
-    int ctr;
     public string flip;
     public GameObject player;
     public goblinInterface Thisgoblin;
@@ -16,7 +15,6 @@ public class AI : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         turn = false;
-        ctr = 359;
         /*var original = EditorBuildSettings.scenes;
         var newSettings = new EditorBuildSettingsScene[original.Length + 1];
         System.Array.Copy(original, newSettings, original.Length);

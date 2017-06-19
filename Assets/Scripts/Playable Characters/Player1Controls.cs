@@ -87,6 +87,7 @@ public class Player1Controls : MonoBehaviour
         {
             transform.Translate(0f, -velocity, 0f);
         }
+
     }
     public void Flip(string methodFlip)
     {
