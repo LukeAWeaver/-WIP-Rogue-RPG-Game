@@ -22,7 +22,6 @@ public class play : MonoBehaviour
 	}
     void changeScene()
     {
-        Debug.Log("Changing Scenes");
         SceneManager.LoadScene("TestingScene");
     }
 }

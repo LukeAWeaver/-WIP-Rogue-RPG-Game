@@ -20,18 +20,18 @@ public class weaponFollowPlayer : MonoBehaviour
         }
 
         var pos = player.transform.position;
-        pos.y = pos.y + 15;
+        pos.y = pos.y + 8;
         flip = CheckFlip.flip;
         if (flip == "left")
         {
             transform.rotation = Quaternion.Euler(0, 0, 21); ;
-            pos.x = pos.x - 15;
+            pos.x = pos.x - 25;
             transform.SetPositionAndRotation((pos), transform.rotation);
         }
         else
         {
             transform.rotation = Quaternion.Euler(0, 0, -21); ;
-            pos.x = pos.x + 15;
+            pos.x = pos.x + 20;
             transform.SetPositionAndRotation((pos), transform.rotation);
         }
 

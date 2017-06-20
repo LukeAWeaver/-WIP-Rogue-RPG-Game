@@ -87,7 +87,7 @@ public class AI : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "Rusty Sword")
+        if (collision.gameObject.tag == "1dmg")
         {
             Thisgoblin.hp--;
         }

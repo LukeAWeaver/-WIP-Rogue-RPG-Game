@@ -5,9 +5,9 @@ using UnityEngine;
 public class Player2Controls : MonoBehaviour
 {
     private float velocity = 1f;
-    public float vlimit;
-    public float hlimit;
-
+    public GameObject autoAttack;
+    public string flip;
+    public string previousKey;
     //public GameObject coin;
     // public GameObject collisionObject;
     //public GameObject smallObject;
@@ -16,13 +16,12 @@ public class Player2Controls : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        previousKey = "right";
     }
 
     // Update is called once per frame
     void Update()
     {
-
-
         /* CONTROLLER SUPPORT
         vlimit = Input.GetAxis("Vertical");
         hlimit = Input.GetAxis("Horizontal");
@@ -60,63 +59,59 @@ public class Player2Controls : MonoBehaviour
             transform.Translate(hlimit, 0f, 0f);
 
         }
-
     */
 
-
-
-        if (Input.GetKey("d"))
+        if (Input.GetKey("right"))
         {
-            Flip("right");
+            if (previousKey == "left")
+            {
+                Flip("right");
+            }
             transform.Translate(velocity, 0f, 0f);
+            previousKey = "right";
         }
-        if (Input.GetKey("a"))
+        if (Input.GetKey("left"))
         {
-            Flip("left");
+            if (previousKey == "right")
+            {
+                Flip("left");
+            }
             transform.Translate(-velocity, 0f, 0f);
+            previousKey = "left";
         }
-        if (Input.GetKey("w"))
+        if (Input.GetKey("up"))
         {
             transform.Translate(0f, velocity, 0f);
         }
-        if (Input.GetKey("s"))
+        if (Input.GetKey("down"))
         {
             transform.Translate(0f, -velocity, 0f);
         }
+
     }
-    public void Flip(string flip)
+    public void Flip(string methodFlip)
     {
+        var pos = transform.position;
+        flip = methodFlip;
         var theScale = transform.localScale;
         if (flip == "right")
         {
             if (theScale.x < -.1f)
                 theScale.x = -theScale.x;
+            pos.x = pos.x - 2f;
+            transform.SetPositionAndRotation((pos), transform.rotation);
         }
         if (flip == "left")
         {
             if (theScale.x > .1f)
                 theScale.x = -theScale.x;
+            pos.x = pos.x + 2f;
+            transform.SetPositionAndRotation((pos), transform.rotation);
         }
         transform.localScale = theScale;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        /*
-        if (collision.gameObject.name == "16kg")
-        {
-            collisionObject.SetActive(false);
-            smallObject.SetActive(true);
-            velocity = .1f;
-            Debug.Log(collision.gameObject.name + " detected!");
-        }
-        if (collision.gameObject.name == "16g")
-        {
-            smallObject.SetActive(true);
-        }
-        */
 
-    }
 
 
 }
