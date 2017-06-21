@@ -17,7 +17,7 @@ Platform assembly: E:\GitHub\2-D-Battler-Game\test_Data\Managed\UnityEngine.Netw
 Loading E:\GitHub\2-D-Battler-Game\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: E:\GitHub\2-D-Battler-Game\test_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
 Loading E:\GitHub\2-D-Battler-Game\test_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
-- Completed reload, in  0.030 seconds
+- Completed reload, in  0.131 seconds
 Platform assembly: E:\GitHub\2-D-Battler-Game\test_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: E:\GitHub\2-D-Battler-Game\test_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 120Hz; virtual: 1920x1080 at 0,0
@@ -25,81 +25,55 @@ desktop: 1920x1080 120Hz; virtual: 1920x1080 at 0,0
 <RI> Input initialized.
 <RI> Initialized touch support.
 WARNING: Shader Unsupported: 'InfiniteGrass/Ground' - Pass '' has no vertex shader
-UnloadTime: 0.921595 ms
+UnloadTime: 32.357353 ms
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 4.380592 ms
+UnloadTime: 5.082330 ms
 
 Unloading 10 unused Assets to reduce memory usage. Loaded Objects now: 2117.
-Total: 2.544026 ms (FindLiveObjects: 0.128300 ms CreateObjectMapping: 0.028310 ms MarkObjects: 0.404779 ms  DeleteObjects: 1.981732 ms)
+Total: 2.664797 ms (FindLiveObjects: 0.161429 ms CreateObjectMapping: 0.032828 ms MarkObjects: 0.444534 ms  DeleteObjects: 2.025402 ms)
 
 Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
 WARNING: Shader Unsupported: 'InfiniteGrass/Ground' - Pass '' has no vertex shader
-UnloadTime: 1.361311 ms
+UnloadTime: 1.327881 ms
 
 Unloading 94 unused Assets to reduce memory usage. Loaded Objects now: 330.
-Total: 2.982838 ms (FindLiveObjects: 0.026804 ms CreateObjectMapping: 0.022588 ms MarkObjects: 0.201185 ms  DeleteObjects: 2.731357 ms)
-
-Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.339424 ms
-
-Unloading 8 unused Assets to reduce memory usage. Loaded Objects now: 2117.
-Total: 2.153101 ms (FindLiveObjects: 0.097580 ms CreateObjectMapping: 0.022588 ms MarkObjects: 0.351471 ms  DeleteObjects: 1.681159 ms)
-
-Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
-WARNING: Shader Unsupported: 'InfiniteGrass/Ground' - Pass '' has no vertex shader
-UnloadTime: 1.536294 ms
-
-Unloading 94 unused Assets to reduce memory usage. Loaded Objects now: 330.
-Total: 2.829239 ms (FindLiveObjects: 0.025901 ms CreateObjectMapping: 0.014155 ms MarkObjects: 0.156008 ms  DeleteObjects: 2.632873 ms)
-
-Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.319245 ms
-
-Unloading 8 unused Assets to reduce memory usage. Loaded Objects now: 2117.
-Total: 2.319651 ms (FindLiveObjects: 0.104507 ms CreateObjectMapping: 0.024997 ms MarkObjects: 0.383697 ms  DeleteObjects: 1.805846 ms)
-
-Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
-WARNING: Shader Unsupported: 'InfiniteGrass/Ground' - Pass '' has no vertex shader
-UnloadTime: 1.500454 ms
-
-Unloading 94 unused Assets to reduce memory usage. Loaded Objects now: 330.
-Total: 3.209021 ms (FindLiveObjects: 0.023491 ms CreateObjectMapping: 0.013854 ms MarkObjects: 0.169260 ms  DeleteObjects: 3.002113 ms)
+Total: 2.875921 ms (FindLiveObjects: 0.034032 ms CreateObjectMapping: 0.017166 ms MarkObjects: 0.167453 ms  DeleteObjects: 2.656063 ms)
 
 Changing Scenes
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.488204 ms
+UnloadTime: 0.321956 ms
 
 Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 359.
-Total: 0.255998 ms (FindLiveObjects: 0.026202 ms CreateObjectMapping: 0.018070 ms MarkObjects: 0.200281 ms  DeleteObjects: 0.010842 ms)
+Total: 0.228893 ms (FindLiveObjects: 0.030117 ms CreateObjectMapping: 0.012649 ms MarkObjects: 0.177392 ms  DeleteObjects: 0.007830 ms)
 
 Changing Scenes
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.387010 ms
+UnloadTime: 0.432788 ms
 
 Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 333.
-Total: 1.976913 ms (FindLiveObjects: 0.024395 ms CreateObjectMapping: 0.017166 ms MarkObjects: 0.179199 ms  DeleteObjects: 1.755549 ms)
+Total: 1.931135 ms (FindLiveObjects: 0.021383 ms CreateObjectMapping: 0.014757 ms MarkObjects: 0.161429 ms  DeleteObjects: 1.733263 ms)
 
 Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.382191 ms
+UnloadTime: 0.444534 ms
 
 Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 2121.
-Total: 0.615300 ms (FindLiveObjects: 0.100592 ms CreateObjectMapping: 0.025901 ms MarkObjects: 0.383998 ms  DeleteObjects: 0.103905 ms)
+Total: 0.628552 ms (FindLiveObjects: 0.114446 ms CreateObjectMapping: 0.026804 ms MarkObjects: 0.400864 ms  DeleteObjects: 0.086136 ms)
 
 Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
 WARNING: Shader Unsupported: 'InfiniteGrass/Ground' - Pass '' has no vertex shader
-UnloadTime: 1.387212 ms
+UnloadTime: 1.577856 ms
 
 Unloading 94 unused Assets to reduce memory usage. Loaded Objects now: 333.
-Total: 2.578661 ms (FindLiveObjects: 0.024395 ms CreateObjectMapping: 0.018371 ms MarkObjects: 0.163839 ms  DeleteObjects: 2.371453 ms)
+Total: 4.479378 ms (FindLiveObjects: 0.035538 ms CreateObjectMapping: 0.021383 ms MarkObjects: 0.183716 ms  DeleteObjects: 4.238437 ms)
 
 Setting up 4 worker threads for Enlighten.
-  Thread -> id: b6ec -> priority: 1 
-  Thread -> id: b77c -> priority: 1 
-  Thread -> id: b6f0 -> priority: 1 
-  Thread -> id: b380 -> priority: 1 
+  Thread -> id: b544 -> priority: 1 
+  Thread -> id: b504 -> priority: 1 
+  Thread -> id: 1b64 -> priority: 1 
+  Thread -> id: ab6c -> priority: 1 
