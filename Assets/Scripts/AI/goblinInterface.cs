@@ -10,7 +10,7 @@ public class goblinInterface : MonoBehaviour {
 	void Start () {
         hp = 3;
         energy = 100;
-        ms = .3f;
+        ms = .5f;
 	}
 	
 	// Update is called once per frame
