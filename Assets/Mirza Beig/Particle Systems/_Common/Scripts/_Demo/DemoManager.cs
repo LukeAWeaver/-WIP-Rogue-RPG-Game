@@ -296,7 +296,10 @@ namespace MirzaBeig
                     postEffectsCamera.gameObject.SetActive(value);
 
                     UICamera.hdr = value;
+#pragma warning disable CS0618 // Type or member is obsolete
                     mainCamera.hdr = value;
+#pragma warning restore CS0618 // Type or member is obsolete
+
 
                     if (value)
                     {

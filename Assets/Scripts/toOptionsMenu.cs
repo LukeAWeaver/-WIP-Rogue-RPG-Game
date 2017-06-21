@@ -12,7 +12,6 @@ public class toOptionsMenu : MonoBehaviour
     {
         Button btn = dungeon.GetComponent<Button>();
         btn.onClick.AddListener(changeScene);
-
     }
 
     // Update is called once per frame
