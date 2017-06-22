@@ -11,7 +11,7 @@ public class RandomMonsterSpawner : MonoBehaviour {
     void Start () {
         InvokeRepeating("SpawnRandom", spawnDelay, spawnTime);
     }
-
+    //U PULLED!
     public void SpawnRandom()
     {
         int enemyIndex = Random.Range(0, RandomMonsters.Length);
