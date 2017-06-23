@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player1Controls : MonoBehaviour
 {
-    private float velocity = 1f;
+    private float velocity = .07f;
     public GameObject autoAttack;
     public string flip;
     public char previousKey;
@@ -96,16 +96,16 @@ public class Player1Controls : MonoBehaviour
         var theScale = transform.localScale;
         if (flip == "right")
         {
-            if (theScale.x < -.1f)
+            if (theScale.x < 0)
                 theScale.x = -theScale.x;
-                 pos.x = pos.x - 2f;
+                 pos.x = pos.x - .1f;
                 transform.SetPositionAndRotation((pos), transform.rotation);
         }
         if (flip == "left")
         {
-            if (theScale.x > .1f)
+            if (theScale.x > 0)
                 theScale.x = -theScale.x;
-                pos.x = pos.x + 2f;
+                pos.x = pos.x + .1f;
                 transform.SetPositionAndRotation((pos), transform.rotation);
         }
         transform.localScale = theScale;
