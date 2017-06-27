@@ -22,6 +22,6 @@ public class play : MonoBehaviour
 	}
     void changeScene()
     {
-        SceneManager.LoadScene("TestingScene");
+        SceneManager.LoadScene("OverWorld");
     }
 }

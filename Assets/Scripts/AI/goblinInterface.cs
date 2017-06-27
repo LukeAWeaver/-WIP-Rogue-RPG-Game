@@ -9,13 +9,15 @@ public class goblinInterface : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         hp = 3;
-        energy = 100;
-        ms = .5f;
+        ms = .015f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+        if(hp==1)
+        {
+            ms = 0.005f;
+        }
 	}
 
 }

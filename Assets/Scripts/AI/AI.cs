@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 
 public class AI : MonoBehaviour {
-    bool turn;
     public string flip;
     public GameObject player;
     public goblinInterface Thisgoblin;
@@ -14,14 +13,6 @@ public class AI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        turn = false;
-        /*var original = EditorBuildSettings.scenes;
-        var newSettings = new EditorBuildSettingsScene[original.Length + 1];
-        System.Array.Copy(original, newSettings, original.Length);
-        var sceneToAdd = new EditorBuildSettingsScene("Assets/level1", false);
-        newSettings[newSettings.Length - 1] = sceneToAdd;
-        EditorBuildSettings.scenes = newSettings;
-        */
     }
 
 
@@ -33,19 +24,19 @@ public class AI : MonoBehaviour {
         {
             npc.SetActive(false);
         }
-        var follow = player.transform.position;
-        if(transform.position.x > follow.x)
+        var target = player.transform.position;
+        if(transform.position.x > target.x)
         {
             Flip("right");
             transform.Translate(-Thisgoblin.ms, 0f, 0f);
         }
-        else
+        else if (transform.position.x < target.x)
         {
             Flip("left");
             transform.Translate(Thisgoblin.ms, 0f, 0f);
 
         }
-        if(transform.position.y > follow.y)
+        if(transform.position.y > target.y)
         {
             transform.Translate(0f, -Thisgoblin.ms, 0f);
         }
@@ -55,15 +46,7 @@ public class AI : MonoBehaviour {
         }
 
 
-        if (turn)
-        {
-            transform.Translate(-.04f, 0f, 0f); //left
-        }
-        else
-        {
-            transform.Translate(.04f, 0f, 0f); //right
 
-        }
 
 
 
@@ -74,12 +57,12 @@ public class AI : MonoBehaviour {
         var theScale = transform.localScale;
         if (Methodflip == "left")
         {
-            if (theScale.x < -.1f)
+            if (theScale.x < 0f)
                 theScale.x = -theScale.x;
         }
         if (Methodflip == "right")
         {
-            if (theScale.x > .1f)
+            if (theScale.x > 0f)
                 theScale.x = -theScale.x;
         }
         transform.localScale = theScale;
@@ -87,14 +70,7 @@ public class AI : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "1dmg")
-        {
-            Thisgoblin.hp--;
-        }
-        if (Thisgoblin.hp == 2)
-        {
-            Thisgoblin.ms = .1f;
-        }
+
 
     }
 }

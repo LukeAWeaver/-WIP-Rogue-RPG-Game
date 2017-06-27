@@ -8,20 +8,23 @@ public class Player1Controls : MonoBehaviour
     public GameObject autoAttack;
     public string flip;
     public char previousKey;
+    Animator walk;
     //public GameObject coin;
-   // public GameObject collisionObject;
+    // public GameObject collisionObject;
     //public GameObject smallObject;
 
 
     // Use this for initialization
     void Start()
     {
+        walk = GetComponent<Animator>();
         previousKey = 'd';
     }
 
     // Update is called once per frame
     void Update()
     {
+        walk.SetBool("walking", false);
         /* CONTROLLER SUPPORT
         vlimit = Input.GetAxis("Vertical");
         hlimit = Input.GetAxis("Horizontal");
@@ -63,6 +66,8 @@ public class Player1Controls : MonoBehaviour
 
         if (Input.GetKey("d"))
         {
+            walk.SetBool("walking", true);
+            walk.Play("walk");
             if (previousKey == 'a')
             {
                 Flip("right");
@@ -72,6 +77,8 @@ public class Player1Controls : MonoBehaviour
         }
         if (Input.GetKey("a"))
         {
+            walk.SetBool("walking", true);
+            walk.Play("walk");
             if (previousKey == 'd')
             {
                 Flip("left");
@@ -81,10 +88,14 @@ public class Player1Controls : MonoBehaviour
         }
         if (Input.GetKey("w"))
         {
+            walk.SetBool("walking", true);
+            walk.Play("walk");
             transform.Translate(0f, velocity, 0f);
         }
         if (Input.GetKey("s"))
         {
+            walk.SetBool("walking", true);
+            walk.Play("walk");
             transform.Translate(0f, -velocity, 0f);
         }
 
