@@ -3,18 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordSwing : MonoBehaviour {
-    Animator swing;
-	// Use this for initialization
-	void Start () {
-        swing = GetComponent<Animator>();
+public class E_ClubSwing : MonoBehaviour
+{
+   // Animator swing;
+    //GameObject weapon;
+    // Use this for initialization
+    void Start()
+    {
+       // swing = GetComponent<Animator>();
         //InvokeRepeating("CheckAction", 0f, 0.3f);
     }
 
     // Update is called once per frame
-    void Update ()
+    void Update()
     {
-        if (Input.GetMouseButton(0))
+      /*  if (Input.GetMouseButton(0))
         {
             GetComponent<Collider2D>().enabled = true;
             swing.SetInteger("state", 1);
@@ -26,13 +29,13 @@ public class SwordSwing : MonoBehaviour {
             new WaitForSeconds(2);
             swing.SetInteger("state", 0);
 
-        }
+        }*/
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "goblin")
+        if (collision.gameObject.name == "Knight_Player")
         {
-            collision.gameObject.GetComponent<AI>().Thisgoblin.hp--; //im a genius
+            collision.gameObject.GetComponent<KnightStats>().health--; //im a genius
         }
     }
 }

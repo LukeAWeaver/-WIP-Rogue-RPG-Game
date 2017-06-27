@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class hp : MonoBehaviour {
     public Sprite[] hpLeft;
+    public GameObject player;
     public SpriteRenderer currentHp;
+    public KnightStats stats;
 	// Use this for initialization
 	void Start () {
-        currentHp.sprite = hpLeft[0];
+        stats = player.GetComponent<KnightStats>();
+        //currentHp.sprite = hpLeft[12];
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        currentHp.sprite = hpLeft[2];
+        currentHp.sprite = hpLeft[stats.health];
 
     }
 }

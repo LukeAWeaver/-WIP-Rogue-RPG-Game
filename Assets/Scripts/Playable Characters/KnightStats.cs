@@ -8,7 +8,7 @@ public class KnightStats : MonoBehaviour {
     public int energy;
 	// Use this for initialization
 	void Start () {
-        health = 10;
+        health = 12;
         energy = 100;
         InvokeRepeating("EnergyRegen", 1, 1);
 
@@ -34,6 +34,7 @@ public class KnightStats : MonoBehaviour {
         }
         if (collision.gameObject.tag == "npcSword")
         {
+            Debug.Log("hp lost");
             health--;
         }
 
