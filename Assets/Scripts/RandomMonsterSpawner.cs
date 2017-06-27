@@ -16,7 +16,7 @@ public class RandomMonsterSpawner : MonoBehaviour {
         int enemyIndex = Random.Range(0, RandomMonsters.Length);
         var ThisEnemy = Instantiate(RandomMonsters[enemyIndex], transform.position, transform.rotation);
         ThisEnemy.SetActive(true);
-        if(ThisEnemy.gameObject.name == "Goblin_Small(Clone)")
+       /* if(ThisEnemy.gameObject.name == "Goblin_Small(Clone)")
         {
             Instantiate(Knife);
             this.Knife.GetComponent<weaponFollowNPC>().npc = ThisEnemy;
@@ -29,7 +29,7 @@ public class RandomMonsterSpawner : MonoBehaviour {
             this.Knife.GetComponent<weaponFollowNPC>().npc = ThisEnemy;
             this.Knife.GetComponent<weaponFollowNPC>().CheckFlip = ThisEnemy.GetComponent<AI>();
             this.Knife.SetActive(true);
-        }
+        }*/
 
     }
     // Update is called once per frame
