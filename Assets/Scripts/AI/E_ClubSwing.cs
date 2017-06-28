@@ -34,6 +34,9 @@ public class E_ClubSwing : MonoBehaviour
 
             collision.gameObject.GetComponent<KnightStats>().tempHP = collision.gameObject.GetComponent<KnightStats>().health;
         }
+        else
+        { 
+}
     }
     private void OnCollisionExit2D(Collision2D collision)
     {

@@ -12,7 +12,6 @@ public class hp : MonoBehaviour
 	void Start ()
     {
         stats = player.GetComponent<KnightStats>();
-        //currentHp.sprite = hpLeft[12];
 	}
 	
 	// Update is called once per frame
