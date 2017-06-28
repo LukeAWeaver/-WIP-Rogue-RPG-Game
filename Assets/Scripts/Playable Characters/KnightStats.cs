@@ -32,17 +32,16 @@ public class KnightStats : MonoBehaviour {
     {
         if (isRecovering)
         {
-            if(timer < 45)
+            if(timer < 30)
             {
                 if(timer%6 == 0)
                 {
-                    this.gameObject.SetActive(false);
+                    GetComponent<SpriteRenderer>().color = Color.gray;
                 }
                 else
                 {
-                    this.gameObject.SetActive(true);
+                    GetComponent<SpriteRenderer>().color = Color.white;
                 }
-                Debug.Log(timer);
                 timer++;
             }
             else
