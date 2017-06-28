@@ -32,7 +32,7 @@ public class KnightStats : MonoBehaviour {
     {
         if (isRecovering)
         {
-            if(timer < 60)
+            if(timer < 45)
             {
                 if(timer%6 == 0)
                 {

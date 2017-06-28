@@ -26,9 +26,9 @@ public class AI : MonoBehaviour {
     {
         var target = player.transform.position;
         var gp = Thisgoblin.transform.position;
-        range = Mathf.Sqrt((target.x - gp.x)* (target.x - gp.x) * (target.y - gp.y)* (target.y - gp.y));
+        range = Mathf.Sqrt((target.x - gp.x)* (target.x - gp.x) + (target.y - gp.y)* (target.y - gp.y));
 
-        if( range < 2 )
+        if( range < 3.5 )
         {
             inSight = true;
         }
