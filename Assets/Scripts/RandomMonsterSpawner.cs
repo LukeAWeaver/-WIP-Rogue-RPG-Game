@@ -7,15 +7,22 @@ public class RandomMonsterSpawner : MonoBehaviour {
     public GameObject Knife;
     public float spawnDelay = .1f;
     public float spawnTime = 1f;
+    public int limit;
     // Use this for initialization
     void Start () {
+        limit = 0;
         InvokeRepeating("SpawnRandom", spawnDelay, spawnTime);
     }
     public void SpawnRandom()
     {
-        int enemyIndex = Random.Range(0, RandomMonsters.Length);
-        var ThisEnemy = Instantiate(RandomMonsters[enemyIndex], transform.position, transform.rotation);
-        ThisEnemy.SetActive(true);
+        if (limit < 5)
+        {
+
+            int enemyIndex = Random.Range(0, RandomMonsters.Length);
+            var ThisEnemy = Instantiate(RandomMonsters[enemyIndex], transform.position, transform.rotation);
+            ThisEnemy.SetActive(true);
+            limit++;
+        }
        /* if(ThisEnemy.gameObject.name == "Goblin_Small(Clone)")
         {
             Instantiate(Knife);
