@@ -34,6 +34,14 @@ public class KnightStats : MonoBehaviour {
         {
             if(timer < 60)
             {
+                if(timer%6 == 0)
+                {
+                    this.gameObject.SetActive(false);
+                }
+                else
+                {
+                    this.gameObject.SetActive(true);
+                }
                 Debug.Log(timer);
                 timer++;
             }
