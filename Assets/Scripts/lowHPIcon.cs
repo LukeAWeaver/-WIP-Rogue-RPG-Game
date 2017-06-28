@@ -15,7 +15,7 @@ public class lowHPIcon : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        if (stats.health < 4)
+        if (stats.health < 5)
         {
             currentState.sprite = states[1];
         }

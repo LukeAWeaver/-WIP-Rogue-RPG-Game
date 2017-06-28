@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RandomMonsterSpawner : MonoBehaviour {
     public GameObject[] RandomMonsters;
-    public GameObject hp;
     public float spawnDelay = .1f;
     public float spawnTime = 1f;
     public int limit;

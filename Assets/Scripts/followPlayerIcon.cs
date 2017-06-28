@@ -15,8 +15,8 @@ public class followPlayerIcon : MonoBehaviour
     void Update()
     {
         var pos = player.transform.position;
-        pos.x = pos.x - 10f;
-        pos.y = pos.y + 5f;
+        pos.x = pos.x - 8.5f;
+        pos.y = pos.y + 3.8f;
         transform.SetPositionAndRotation((pos), transform.rotation);
     }
 }
