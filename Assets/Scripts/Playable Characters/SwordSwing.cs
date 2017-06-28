@@ -8,7 +8,6 @@ public class SwordSwing : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         swing = GetComponent<Animator>();
-        //InvokeRepeating("CheckAction", 0f, 0.3f);
     }
 
     // Update is called once per frame
