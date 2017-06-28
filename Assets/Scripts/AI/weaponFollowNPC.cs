@@ -28,13 +28,13 @@ public class weaponFollowNPC : MonoBehaviour
         direction = CheckFlip.flip;
         if (direction== "right")
         {
-            transform.rotation = Quaternion.Euler(0, 0, 21); ;
+            transform.rotation = Quaternion.Euler(0, 0, 21);
             pos.x = pos.x - 15;
             transform.SetPositionAndRotation((pos), transform.rotation);
         }
         else
         {
-            transform.rotation = Quaternion.Euler(0, 0, -21); ;
+            transform.rotation = Quaternion.Euler(0, 0, -21);
             pos.x = pos.x + 15;
             transform.SetPositionAndRotation((pos), transform.rotation);
         }

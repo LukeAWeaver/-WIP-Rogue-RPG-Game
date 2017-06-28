@@ -18,7 +18,11 @@ public class E_hp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(stats.hp >-1)
         currentHp.sprite = hpLeft[stats.hp];
-
+        if(stats.hp<1)
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 }

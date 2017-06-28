@@ -13,13 +13,14 @@ public class SwordSwing : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             GetComponent<Collider2D>().enabled = true;
             swing.SetInteger("state", 1);
 
         }
-        else if (!Input.GetMouseButtonUp(0))
+
+        else if (Input.GetMouseButtonUp(0))
         {
             GetComponent<Collider2D>().enabled = false;
             new WaitForSeconds(2);
@@ -27,6 +28,7 @@ public class SwordSwing : MonoBehaviour {
 
         }
     }
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.name == "goblin")

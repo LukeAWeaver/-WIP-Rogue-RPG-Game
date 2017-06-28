@@ -57,7 +57,7 @@ public class AI : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if(Thisgoblin.hp ==0)
+        if(Thisgoblin.hp <=0)
         {
             npc.SetActive(false);
         }
