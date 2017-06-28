@@ -37,6 +37,14 @@ public class AI : MonoBehaviour {
             if (counter % 60 ==0)
             {
                 xVelocity = Random.Range(-0.03f, 0.03f);
+                if(xVelocity <0)
+                {
+                    Flip("right");
+                }
+                else
+                {
+                    Flip("left");
+                }
                 yVelocity = Random.Range(-0.03f, 0.03f);
             }
             transform.Translate(xVelocity, yVelocity, 0f);
