@@ -1,0 +1,43 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class bowScript : MonoBehaviour
+{
+    public GameObject arrow;
+    Animator swing;
+    public float range;
+    public GameObject player;
+    public int counter;
+
+
+    // Use this for initialization
+    void Start()
+    {
+        swing = GetComponent<Animator>();
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        var target = player.transform.position;
+        range = Mathf.Sqrt((target.x - transform.position.x) * (target.x - transform.position.x) + (target.y - transform.position.y) * (target.y - transform.position.y));
+        if (range < 5)
+        {
+            counter++;
+            swing.SetBool("inRange", true);
+            if (counter % 180 == 0)
+            {
+                ShootArrow();
+            }
+        }
+        else
+            swing.SetBool("inRange", false);
+    }
+    public void ShootArrow()
+    {
+        var ThisEnemy = Instantiate(arrow, transform.position, transform.rotation);
+    }
+}

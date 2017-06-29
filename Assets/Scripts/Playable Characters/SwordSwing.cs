@@ -35,13 +35,28 @@ public class SwordSwing : MonoBehaviour {
             swing.SetInteger("state", 0);
 
         }
+        else if(Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d") || Input.GetKey("w"))
+        {
+            swing.SetInteger("state", 2);
+        }
+        else if (Input.GetKeyUp("a") || Input.GetKeyUp("s") || Input.GetKeyUp("d") || Input.GetKeyUp("w"))
+        {
+            swing.SetInteger("state", 0);
+        }
+        else
+            swing.SetInteger("state", 0);
+
     }
-    
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.name == "goblin")
         {
             collision.gameObject.GetComponent<AI>().Thisgoblin.hp--; //im a genius
+        }
+        if (collision.gameObject.name == "goblinBow")
+        {
+            collision.gameObject.GetComponent<archerAI>().Thisgoblin.hp--; //im a genius
         }
     }
 }
