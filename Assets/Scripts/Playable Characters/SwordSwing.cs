@@ -5,9 +5,15 @@ using UnityEngine;
 
 public class SwordSwing : MonoBehaviour {
     Animator swing;
-	// Use this for initialization
-	void Start () {
+    public AudioClip swinging;
+    private AudioSource source;
+
+    // Use this for initialization
+    void Start () {
         swing = GetComponent<Animator>();
+        source = GetComponent<AudioSource>();
+
+
     }
 
     // Update is called once per frame
@@ -17,6 +23,8 @@ public class SwordSwing : MonoBehaviour {
         {
             GetComponent<Collider2D>().enabled = true;
             swing.SetInteger("state", 1);
+            source.clip = swinging;
+                source.Play();
 
         }
 
