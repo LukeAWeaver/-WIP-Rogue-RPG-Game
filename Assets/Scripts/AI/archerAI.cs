@@ -63,6 +63,7 @@ public class archerAI : MonoBehaviour
         if (Thisgoblin.hp <= 0)
         {
             npc.SetActive(false);
+            player.GetComponent<KnightStats>().exp++;
         }
         var target = player.transform.position;
         if (inSight)

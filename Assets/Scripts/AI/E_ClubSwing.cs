@@ -20,8 +20,10 @@ public class E_ClubSwing : MonoBehaviour
  
     private void OnCollisionStay2D(Collision2D collision)
     {
+
         if (collision.gameObject.name == "Knight_Player")
         {
+
             swing.SetBool("inProx", true);
             if (collision.gameObject.GetComponent<KnightStats>().isRecovering)
             {
@@ -29,6 +31,7 @@ public class E_ClubSwing : MonoBehaviour
             }
             else
             {
+                CombatTextManager.Instance.CreateText(collision.transform.position);
                 collision.gameObject.GetComponent<KnightStats>().health--; //im a genius
                 collision.gameObject.GetComponent<KnightStats>().isRecovering = true; //im a genius
             }
@@ -37,7 +40,7 @@ public class E_ClubSwing : MonoBehaviour
         }
         else
         { 
-}
+        }
     }
     private void OnCollisionExit2D(Collision2D collision)
     {

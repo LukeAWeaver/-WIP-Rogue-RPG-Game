@@ -59,6 +59,7 @@ public class AI : MonoBehaviour {
     void Update() {
         if(Thisgoblin.hp <=0)
         {
+            player.GetComponent<KnightStats>().exp++; //im a genius
             npc.SetActive(false);
         }
         var target = player.transform.position;

@@ -7,15 +7,19 @@ public class KnightStats : MonoBehaviour {
     public int health;
     public int tempHP;
     public int energy;
+    public int exp;
+    public int level;
     public float timer;
     public bool isRecovering;
 	// Use this for initialization
 	void Start () {
+        exp = 0;
         isRecovering = false;
         timer = 0;
-        health = 12;
-        tempHP = 12;
+        health = 6;
+        tempHP = 6;
         energy = 100;
+        level = 1;
         InvokeRepeating("resetHP", 0, .03f);
     }
 
@@ -25,6 +29,11 @@ public class KnightStats : MonoBehaviour {
         if(health <1)
         {
             this.gameObject.SetActive(false);
+        }
+        if(exp>9)
+        {
+            level++;
+            exp = 0;
         }
 	}
 

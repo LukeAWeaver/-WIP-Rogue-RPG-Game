@@ -61,8 +61,8 @@ public class arrowScript : MonoBehaviour {
             }
         else
         {
-
-            collision.GetComponent<KnightStats>().health--; //im a genius
+                CombatTextManager.Instance.CreateText(collision.transform.position);
+                collision.GetComponent<KnightStats>().health--; //im a genius
             collision.gameObject.GetComponent<KnightStats>().isRecovering = true; //im a genius
             this.gameObject.SetActive(false);
         }
