@@ -52,10 +52,14 @@ public class SwordSwing : MonoBehaviour {
     {
         if (collision.gameObject.name == "goblin")
         {
+            CombatTextManager.Instance.CreateText(collision.transform.position);
+
             collision.gameObject.GetComponent<AI>().Thisgoblin.hp--; //im a genius
         }
         if (collision.gameObject.name == "goblinBow")
         {
+            CombatTextManager.Instance.CreateText(collision.transform.position);
+
             collision.gameObject.GetComponent<archerAI>().Thisgoblin.hp--; //im a genius
         }
     }

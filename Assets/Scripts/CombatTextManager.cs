@@ -21,10 +21,11 @@ public class CombatTextManager : MonoBehaviour {
     }
     public void CreateText(Vector3 position)
     {
-        position.y = position.y + 1f;
-        position.x = position.x + Random.Range(-.5f, .5f);
-       GameObject src =  Instantiate(text, position,Quaternion.identity);
+
+       GameObject src =  Instantiate(text, position, Quaternion.identity);
         src.transform.SetParent(canvasTransform);
+        instance.transform.position = new Vector2(this.transform.position.x + Random.Range(-5f, 5f), this.transform.position.y + Random.Range(-.2f, .2f));
         src.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class followPlayerIcon : MonoBehaviour
+public class followPlayerGold : MonoBehaviour
 {
     public GameObject camera;
     // Use this for initialization
@@ -15,8 +15,8 @@ public class followPlayerIcon : MonoBehaviour
     void Update()
     {
         var pos = camera.transform.position;
-        pos.x = pos.x - 8.5f;
-        pos.y = pos.y + 3.8f;
+        pos.x = pos.x + 8f;
+        pos.y = pos.y + 5f;
         pos.z = pos.z + 1f;
         transform.SetPositionAndRotation((pos), transform.rotation);
     }
