@@ -6,6 +6,7 @@ using UnityEngine;
 public class SwordSwing : MonoBehaviour {
     Animator swing;
     public AudioClip swinging;
+    public AudioClip hittingWood;
     private AudioSource source;
 
     // Use this for initialization
@@ -19,8 +20,9 @@ public class SwordSwing : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && GetComponentInParent<KnightStats>().energy > 0)
         {
+            GetComponentInParent<KnightStats>().energy --;
             GetComponent<Collider2D>().enabled = true;
             swing.SetInteger("state", 1);
             source.clip = swinging;
@@ -45,7 +47,6 @@ public class SwordSwing : MonoBehaviour {
         }
         else
             swing.SetInteger("state", 0);
-
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -56,6 +57,11 @@ public class SwordSwing : MonoBehaviour {
 
             collision.gameObject.GetComponent<AI>().Thisgoblin.hp--; //im a genius
         }
+       // if(collision.gameObject.name == "club")
+       // {
+       //     source.clip = hittingWood;
+       //     source.Play();
+       // }
         if (collision.gameObject.name == "goblinBow")
         {
             CombatTextManager.Instance.CreateText(collision.transform.position);

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class goldScript : MonoBehaviour
+public class energy : MonoBehaviour
 {
     public GameObject player;
-
+    private int toint;
     Text text;
     // Use this for initialization
     void Start()
@@ -17,6 +17,7 @@ public class goldScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = player.GetComponent<KnightStats>().gold.ToString();
+        toint = (int)player.GetComponent<KnightStats>().energy;
+        text.text ="Energy:  " + toint.ToString();
     }
 }

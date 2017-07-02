@@ -17,7 +17,33 @@ public class GoldScript2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentGold.sprite = gold[2];
+        if(stats.gold == 0)
+        {
+            currentGold.sprite = gold[0];
+        }
+        else if (stats.gold < 3)
+        {
+            currentGold.sprite = gold[1];
+
+        }
+        else if (stats.gold < 6)
+        {
+            currentGold.sprite = gold[2];
+
+        }
+        else if (stats.gold < 21)
+        {
+            currentGold.sprite = gold[3];
+        }
+        else if (stats.gold <26)
+        {
+            currentGold.sprite = gold[4];
+
+        }
+        else if(stats.gold < 35)
+        {
+            currentGold.sprite = gold[5];
+        }
 
     }
 }

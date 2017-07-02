@@ -6,9 +6,12 @@ using UnityEngine;
 public class E_ClubSwing : MonoBehaviour
 {
     Animator swing;
+    public AudioClip thud;
+    private AudioSource source;
     // Use this for initialization
     void Start()
     {
+        source = GetComponent<AudioSource>();
         swing = GetComponent<Animator>();
     }
 
@@ -34,6 +37,8 @@ public class E_ClubSwing : MonoBehaviour
                 CombatTextManager.Instance.CreateText(collision.transform.position);
                 collision.gameObject.GetComponent<KnightStats>().health--; //im a genius
                 collision.gameObject.GetComponent<KnightStats>().isRecovering = true; //im a genius
+                source.clip = thud;
+                source.Play();
             }
 
             collision.gameObject.GetComponent<KnightStats>().tempHP = collision.gameObject.GetComponent<KnightStats>().health;

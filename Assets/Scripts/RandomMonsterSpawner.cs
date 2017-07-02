@@ -14,11 +14,13 @@ public class RandomMonsterSpawner : MonoBehaviour {
     }
     public void SpawnRandom()
     {
-
+        if (limit < 3)
+        {
             int enemyIndex = Random.Range(0, RandomMonsters.Length);
             var ThisEnemy = Instantiate(RandomMonsters[enemyIndex], transform.position, transform.rotation);
             ThisEnemy.SetActive(true);
             limit++;
+        }
         /*
         if(ThisEnemy.gameObject.name == "goblinClub(Clone)")
         {

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Player1Controls : MonoBehaviour
 {
-    private float velocity = .07f;
+    private float velocity = .05f;
+    private bool isMoving;
+    private bool isRunning;
     public GameObject autoAttack;
     public string flip;
     public char previousKey;
@@ -17,6 +19,7 @@ public class Player1Controls : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        isMoving = false;
         walk = GetComponent<Animator>();
         previousKey = 'd';
     }
@@ -63,42 +66,61 @@ public class Player1Controls : MonoBehaviour
 
         }
     */
-
-        if (Input.GetKey("d"))
+        if (gameObject.GetComponent<KnightStats>().energy > 0)
         {
-            walk.SetBool("walking", true);
-            walk.Play("walk");
-            if (previousKey == 'a')
+            if(Input.GetKey("left shift"))
             {
-                Flip("right");
+                isRunning = true;
+                velocity = 0.05f;
             }
-            transform.Translate(velocity, 0f, 0f);
-            previousKey = 'd';
-        }
-        if (Input.GetKey("a"))
-        {
-            walk.SetBool("walking", true);
-            walk.Play("walk");
-            if (previousKey == 'd')
+            else
             {
-                Flip("left");
+                velocity = 0.02f;
             }
-            transform.Translate(-velocity, 0f, 0f);
-            previousKey = 'a';
+            isMoving = false;
+            if (Input.GetKey("d"))
+            {
+                isMoving = true;
+                walk.SetBool("walking", true);
+                walk.Play("walk");
+                if (previousKey == 'a')
+                {
+                    Flip("right");
+                }
+                transform.Translate(velocity, 0f, 0f);
+                previousKey = 'd';
+            }
+            if (Input.GetKey("a"))
+            {
+                isMoving = true;
+                walk.SetBool("walking", true);
+                walk.Play("walk");
+                if (previousKey == 'd')
+                {
+                    Flip("left");
+                }
+                transform.Translate(-velocity, 0f, 0f);
+                previousKey = 'a';
+            }
+            if (Input.GetKey("w"))
+            {
+                isMoving = true;
+                walk.SetBool("walking", true);
+                walk.Play("walk");
+                transform.Translate(0f, velocity, 0f);
+            }
+            if (Input.GetKey("s"))
+            {
+                isMoving = true;
+                walk.SetBool("walking", true);
+                walk.Play("walk");
+                transform.Translate(0f, -velocity, 0f);
+            }
+            if (isMoving && isRunning && Input.GetKey("left shift"))
+            {
+                gameObject.GetComponent<KnightStats>().energy = gameObject.GetComponent<KnightStats>().energy - .1f;
+            }
         }
-        if (Input.GetKey("w"))
-        {
-            walk.SetBool("walking", true);
-            walk.Play("walk");
-            transform.Translate(0f, velocity, 0f);
-        }
-        if (Input.GetKey("s"))
-        {
-            walk.SetBool("walking", true);
-            walk.Play("walk");
-            transform.Translate(0f, -velocity, 0f);
-        }
-
     }
     public void Flip(string methodFlip)
     {

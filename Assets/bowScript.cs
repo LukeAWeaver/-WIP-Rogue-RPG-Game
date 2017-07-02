@@ -10,11 +10,14 @@ public class bowScript : MonoBehaviour
     public float range;
     public GameObject player;
     public int counter;
+    public AudioClip arrowShot;
+    private AudioSource source;
 
 
     // Use this for initialization
     void Start()
     {
+        source = GetComponent<AudioSource>();
         swing = GetComponent<Animator>();
 
     }
@@ -39,5 +42,7 @@ public class bowScript : MonoBehaviour
     public void ShootArrow()
     {
         var ThisEnemy = Instantiate(arrow, transform.position, transform.rotation);
+        source.clip = arrowShot;
+        source.Play();
     }
 }
