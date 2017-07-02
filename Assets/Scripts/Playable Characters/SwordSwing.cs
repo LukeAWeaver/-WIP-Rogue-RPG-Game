@@ -35,15 +35,10 @@ public class SwordSwing : MonoBehaviour {
             GetComponent<Collider2D>().enabled = false;
             new WaitForSeconds(2);
             swing.SetInteger("state", 0);
-
         }
-        else if(Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d") || Input.GetKey("w"))
+        else if (!(Input.GetKey("a") && Input.GetKey("d")) && (Input.GetKey("a") || Input.GetKey("d") || Input.GetKey("w") || Input.GetKey("s")) && !(Input.GetKey("s") && Input.GetKey("w")))
         {
             swing.SetInteger("state", 2);
-        }
-        else if (Input.GetKeyUp("a") || Input.GetKeyUp("s") || Input.GetKeyUp("d") || Input.GetKeyUp("w"))
-        {
-            swing.SetInteger("state", 0);
         }
         else
             swing.SetInteger("state", 0);
@@ -69,4 +64,5 @@ public class SwordSwing : MonoBehaviour {
             collision.gameObject.GetComponent<archerAI>().Thisgoblin.hp--; //im a genius
         }
     }
+
 }

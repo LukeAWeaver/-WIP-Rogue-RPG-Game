@@ -15,8 +15,8 @@ public class followPlayerGold : MonoBehaviour
     void Update()
     {
         var pos = camera.transform.position;
-        pos.x = pos.x + 8f;
-        pos.y = pos.y + 5f;
+        pos.x = pos.x + 7.6f;
+        pos.y = pos.y + 4.6f;
         pos.z = pos.z + 1f;
         transform.SetPositionAndRotation((pos), transform.rotation);
     }

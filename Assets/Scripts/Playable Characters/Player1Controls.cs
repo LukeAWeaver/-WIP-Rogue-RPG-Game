@@ -75,15 +75,14 @@ public class Player1Controls : MonoBehaviour
             }
             else
             {
+                walk.SetBool("shift", false);
                 velocity = 0.02f;
             }
             isMoving = false;
             if (Input.GetKey("d"))
             {
-                isMoving = true;
-                walk.SetBool("walking", true);
-                walk.Play("walk");
-                if (previousKey == 'a')
+                notMoving();
+                    if (previousKey == 'a')
                 {
                     Flip("right");
                 }
@@ -92,9 +91,8 @@ public class Player1Controls : MonoBehaviour
             }
             if (Input.GetKey("a"))
             {
-                isMoving = true;
-                walk.SetBool("walking", true);
-                walk.Play("walk");
+
+                notMoving();
                 if (previousKey == 'd')
                 {
                     Flip("left");
@@ -104,22 +102,30 @@ public class Player1Controls : MonoBehaviour
             }
             if (Input.GetKey("w"))
             {
-                isMoving = true;
-                walk.SetBool("walking", true);
-                walk.Play("walk");
+                notMoving();
+
                 transform.Translate(0f, velocity, 0f);
             }
             if (Input.GetKey("s"))
             {
-                isMoving = true;
-                walk.SetBool("walking", true);
-                walk.Play("walk");
+
+                notMoving();
                 transform.Translate(0f, -velocity, 0f);
             }
             if (isMoving && isRunning && Input.GetKey("left shift"))
             {
+                walk.SetBool("shift", true);
                 gameObject.GetComponent<KnightStats>().energy = gameObject.GetComponent<KnightStats>().energy - .1f;
             }
+        }
+    }
+    public void notMoving()
+    {
+        if (!(Input.GetKey("a") && Input.GetKey("d")) && (Input.GetKey("a") || Input.GetKey("d") || Input.GetKey("w") || Input.GetKey("s")) && !(Input.GetKey("s") && Input.GetKey("w")))
+        {
+                            isMoving = true;
+            walk.SetBool("walking", true);
+
         }
     }
     public void Flip(string methodFlip)
