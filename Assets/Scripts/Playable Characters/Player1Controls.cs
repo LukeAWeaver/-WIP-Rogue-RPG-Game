@@ -84,7 +84,7 @@ public class Player1Controls : MonoBehaviour
                 notMoving();
                     if (previousKey == 'a')
                 {
-                    Flip("right");
+                    Flip("left");
                 }
                 transform.Translate(velocity, 0f, 0f);
                 previousKey = 'd';
@@ -95,7 +95,7 @@ public class Player1Controls : MonoBehaviour
                 notMoving();
                 if (previousKey == 'd')
                 {
-                    Flip("left");
+                    Flip("right");
                 }
                 transform.Translate(-velocity, 0f, 0f);
                 previousKey = 'a';
@@ -133,14 +133,14 @@ public class Player1Controls : MonoBehaviour
         var pos = transform.position;
         flip = methodFlip;
         var theScale = transform.localScale;
-        if (flip == "right")
+        if (flip == "left")
         {
             if (theScale.x < 0)
                 theScale.x = -theScale.x;
                  pos.x = pos.x - .1f;
                 transform.SetPositionAndRotation((pos), transform.rotation);
         }
-        if (flip == "left")
+        if (flip == "right")
         {
             if (theScale.x > 0)
                 theScale.x = -theScale.x;
