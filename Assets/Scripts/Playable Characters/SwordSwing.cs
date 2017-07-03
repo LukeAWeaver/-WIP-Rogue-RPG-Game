@@ -82,25 +82,11 @@ public class SwordSwing : MonoBehaviour {
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "goblin")
+        if (collision.gameObject.GetComponent<MonsterInterface>() != null)
         {
             CombatTextManager.Instance.CreateText(collision.transform.position);
 
-            collision.gameObject.GetComponent<AI>().Thisgoblin.hp--;
-        }
-        // if(collision.gameObject.name == "club")
-        // {
-        //     source.clip = hittingWood;
-        //     source.Play();
-        // }
-        if (collision.gameObject.name == "goblinBow")
-        {
-            CombatTextManager.Instance.CreateText(collision.transform.position);
-
-            collision.gameObject.GetComponent<archerAI>().Thisgoblin.hp--;
-        }
-       
+            collision.gameObject.GetComponent<MonsterInterface>().hp--;
+        }       
     }
-
-
 }

@@ -8,8 +8,7 @@ public class goblinInterface : MonoBehaviour {
     public float ms;
 	// Use this for initialization
 	void Start () {
-        hp = 3;
-        ms = .023f;
+
 	}
 	
 	// Update is called once per frame

@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class AI : MonoBehaviour {
     public string flip;
     public GameObject player;
-    public goblinInterface Thisgoblin;
+    public MonsterInterface Thisgoblin;
     public GameObject npc;
     public bool inSight;
     public float range;
@@ -20,6 +20,8 @@ public class AI : MonoBehaviour {
     void Start () {
         counter = 0;
         InvokeRepeating("movement", 0, .03f);
+        Thisgoblin.hp = 3;
+        Thisgoblin.ms = .023f;
     }
 
     void movement ()

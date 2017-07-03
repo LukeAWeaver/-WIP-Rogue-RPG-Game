@@ -9,7 +9,7 @@ public class archerAI : MonoBehaviour
 {
     public string flip;
     public GameObject player;
-    public goblinInterface Thisgoblin;
+    public MonsterInterface Thisgoblin;
     public GameObject npc;
     public bool inSight;
     public float range;
@@ -22,6 +22,8 @@ public class archerAI : MonoBehaviour
     {
         counter = 0;
         InvokeRepeating("movement", 0, .03f);
+        Thisgoblin.hp = 3;
+        Thisgoblin.ms = .023f;
     }
 
     void movement()

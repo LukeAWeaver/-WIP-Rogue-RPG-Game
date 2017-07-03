@@ -39,8 +39,9 @@ public class ability3Script : MonoBehaviour {
                 swing.SetBool("ability3", true);
                 test++;
             }
-            else if (test == 1 && swing.GetCurrentAnimatorStateInfo(0).IsName("ability3Release"))
+            else if (test == 1 && swing.GetCurrentAnimatorStateInfo(0).IsName("ability3Release") && knight.GetComponent<KnightStats>().energy >=10)
             {
+            knight.GetComponent<KnightStats>().energy = knight.GetComponent<KnightStats>().energy - 10;
                 swing.SetBool("ability3", false);
                 test = 2;
 
@@ -48,4 +49,18 @@ public class ability3Script : MonoBehaviour {
             }
 
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<MonsterInterface>() != null)
+        {
+            if(collision.gameObject.GetComponent<MonsterInterface>().hp>1)
+            collision.gameObject.GetComponent<MonsterInterface>().hp = collision.gameObject.GetComponent<MonsterInterface>().hp - 2;
+            else
+            {
+                collision.gameObject.GetComponent<MonsterInterface>().hp--;
+            }
+        }
+    }
+
 }

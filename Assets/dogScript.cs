@@ -7,15 +7,14 @@ public class dogScript : MonoBehaviour {
     public AudioClip bark;
     public AudioClip whimper;
     private AudioSource source;
-    public int hp;
-    public float velocity;
+    public MonsterInterface Thisdog;
     private float sniff;
     public float damage;
     public bool insight;
     // Use this for initialization
     void Start () {
-        hp = 4;
-        velocity = .5f;
+        Thisdog.hp = 4;
+        Thisdog.ms= .5f;
         damage = 2;
         source = GetComponent<AudioSource>();
         actions = GetComponent<Animator>();
@@ -24,7 +23,7 @@ public class dogScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         sniff = Random.Range(-5f, 5f);
-        if(hp==0)
+        if(Thisdog.hp==0)
         {
             this.gameObject.SetActive(false);
         }
@@ -44,7 +43,7 @@ public class dogScript : MonoBehaviour {
     {
         if(collision.gameObject.name == "PlayerWoodenSword")
         {
-            hp--;
+            Thisdog.hp--;
             source.clip = whimper;
             source.Play();
         }
