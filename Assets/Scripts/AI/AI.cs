@@ -5,7 +5,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class AI : MonoBehaviour {
+public class AI : MonoBehaviour
+{
     public string flip;
     public GameObject player;
     public MonsterInterface Thisgoblin;
@@ -15,15 +16,20 @@ public class AI : MonoBehaviour {
     public int counter;
     public float xVelocity;
     public float yVelocity;
-
+    private float x;
+    private bool isFlippingLeft;
+    private bool isFlippingRight;
     // Use this for initialization
     void Start () {
         counter = 0;
         InvokeRepeating("movement", 0, .03f);
         Thisgoblin.hp = 3;
         Thisgoblin.ms = .023f;
+        x = Mathf.Abs(transform.localScale.x);
+        isFlippingRight = false;
+        isFlippingLeft = false;
     }
-
+    
     void movement ()
     {
         var target = player.transform.position;
@@ -41,11 +47,11 @@ public class AI : MonoBehaviour {
                 xVelocity = Random.Range(-0.03f, 0.03f);
                 if(xVelocity <0)
                 {
-                    Flip("right");
+                    Flip("left");
                 }
                 else
                 {
-                    Flip("left");
+                    Flip("right");
                 }
                 yVelocity = Random.Range(-0.03f, 0.03f);
             }
@@ -55,10 +61,9 @@ public class AI : MonoBehaviour {
         }
     }
 
-
-
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         if(Thisgoblin.hp <=0)
         {
             player.GetComponent<KnightStats>().exp++; //im a genius
@@ -69,12 +74,12 @@ public class AI : MonoBehaviour {
         {
             if (transform.position.x > target.x)
             {
-                Flip("right");
+                Flip("left");
                 transform.Translate(-Thisgoblin.ms, 0f, 0f);
             }
             else if (transform.position.x < target.x)
             {
-                Flip("left");
+                Flip("right");
                 transform.Translate(Thisgoblin.ms, 0f, 0f);
             }
             if (transform.position.y > target.y)
@@ -86,22 +91,29 @@ public class AI : MonoBehaviour {
                 transform.Translate(0f, Thisgoblin.ms, 0f);
             }
         }
+    }
 
-
-
-
+    public void FlippingLeft(bool flip)
+    {
 
     }
+    public void FlippingRight(bool flip)
+    {
+
+    }
+
     public void Flip(string Methodflip)
     {
         flip = Methodflip;
         var theScale = transform.localScale;
-        if (Methodflip == "left")
+        var temp = transform.localScale;
+        temp.x = x;
+        if (Methodflip == "right")
         {
             if (theScale.x < 0f)
                 theScale.x = -theScale.x;
         }
-        if (Methodflip == "right")
+        if (Methodflip == "left")
         {
             if (theScale.x > 0f)
                 theScale.x = -theScale.x;
@@ -109,9 +121,5 @@ public class AI : MonoBehaviour {
         transform.localScale = theScale;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
 
-
-    }
 }
