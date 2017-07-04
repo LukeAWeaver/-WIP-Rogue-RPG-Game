@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player1Controls : MonoBehaviour
 {
-    private float velocity = .05f;
+    public float velocity = .05f;
     private bool isMoving;
     private bool isRunning;
     public GameObject autoAttack;

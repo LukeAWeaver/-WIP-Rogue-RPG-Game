@@ -7,8 +7,11 @@ public class ability3Script : MonoBehaviour {
     public GameObject knight;
     Animator swing;
     public int test;
+    private bool direction;
+    private float speed;
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         test = 0;
         //  else
         //  {
@@ -19,15 +22,19 @@ public class ability3Script : MonoBehaviour {
         var theScale = transform.localScale;
         if (knight.transform.localScale.x < 0f)
         {
-            offset.x = offset.x - 1f;
+            offset.x = offset.x - .01f;
             theScale.x = -theScale.x;
+            direction = false;
         }
         else
         {
-            offset.x = offset.x + 1f;
+            offset.x = offset.x + .01f;
+            direction = true;
         }
+        offset.y = offset.y + .5f;
         transform.localScale = theScale;
         transform.position = offset;
+        speed = knight.GetComponent<Player1Controls>().velocity;
     }
 
     // Update is called once per frame
@@ -38,16 +45,20 @@ public class ability3Script : MonoBehaviour {
                 gameObject.GetComponent<Collider2D>().enabled = true;
                 swing.SetBool("ability3", true);
                 test++;
-            }
-            else if (test == 1 && swing.GetCurrentAnimatorStateInfo(0).IsName("ability3Release") && knight.GetComponent<KnightStats>().energy >=10)
-            {
             knight.GetComponent<KnightStats>().energy = knight.GetComponent<KnightStats>().energy - 10;
+        }
+        else if (test == 1 && swing.GetCurrentAnimatorStateInfo(0).IsName("ability3Release") && knight.GetComponent<KnightStats>().energy >=10)
+            {
                 swing.SetBool("ability3", false);
                 test = 2;
-
-                gameObject.GetComponent<Collider2D>().enabled = false;
-            }
-
+            gameObject.GetComponent<Collider2D>().enabled = false;
+        }
+        if (!direction)
+            transform.Translate(-speed, 0f, 0f);
+        else if (direction)
+        {
+            transform.Translate(speed, 0f, 0f);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

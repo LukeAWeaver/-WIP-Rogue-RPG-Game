@@ -9,6 +9,7 @@ public class SwordSwing : MonoBehaviour {
     public AudioClip ability3;
     public AudioClip hittingWood;
     public GameObject ab3;
+    public GameObject player;
     private AudioSource source;
     public int test;
 
@@ -23,7 +24,7 @@ public class SwordSwing : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        if(Input.GetKey("3"))
+        if(Input.GetKey("3") && player.GetComponent<KnightStats>().energy>=10)
         {
             // swing.Play("Ability3");
             if (swing.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
