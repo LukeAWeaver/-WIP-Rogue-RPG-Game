@@ -28,6 +28,6 @@ public class randomTiles : MonoBehaviour {
         if (rng == 4)
             rotation = 270;
         sprite.sprite = sprites[tileIndex];
-        sprite.transform.SetPositionAndRotation(transform.position, Quaternion.Euler(0, 0, rotation));
+        sprite.transform.SetPositionAndRotation(transform.position, Quaternion.Euler(-90, 0, rotation));
     }
 }

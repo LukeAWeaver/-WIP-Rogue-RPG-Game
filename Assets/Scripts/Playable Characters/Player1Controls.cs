@@ -37,7 +37,7 @@ public class Player1Controls : MonoBehaviour
             {
                 if (previousKey == 'a')
                 {
-                    Flip("left");
+                    Flip("right");
                 }
                 transform.Translate(velocity, 0f, 0f);
                 previousKey = 'd';
@@ -46,18 +46,18 @@ public class Player1Controls : MonoBehaviour
             {
                 if (previousKey == 'd')
                 {
-                    Flip("right");
+                    Flip("left");
                 }
                 transform.Translate(-velocity, 0f, 0f);
                 previousKey = 'a';
             }
             if (Input.GetKey("w"))
             {
-                transform.Translate(0f, velocity, 0f);
+                transform.Translate(0f, 0f, velocity);
             }
             if (Input.GetKey("s"))
             {
-                transform.Translate(0f, -velocity, 0f);
+                transform.Translate(0f, 0f,-velocity);
             }
             if (isMoving && isRunning && Input.GetKey("left shift"))
             {
@@ -93,9 +93,12 @@ public class Player1Controls : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftControl) && gameObject.GetComponent<KnightStats>().energy >=20)
         {
+            if (!walk.GetCurrentAnimatorStateInfo(0).IsName("roll"))
+            {
+                gameObject.GetComponent<KnightStats>().energy = gameObject.GetComponent<KnightStats>().energy - 20;
+            }
             walk.SetBool("roll", true);
             velocity = 0.1f;
-            gameObject.GetComponent<KnightStats>().energy = gameObject.GetComponent<KnightStats>().energy - 20;
         }
         if (walk.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !walk.IsInTransition(0))
         {
@@ -107,21 +110,31 @@ public class Player1Controls : MonoBehaviour
         var pos = transform.position;
         flip = methodFlip;
         var theScale = transform.localScale;
-        if (flip == "left")
+        var rotation = transform.localRotation;
+        if (flip == "right")
         {
             if (theScale.x < 0)
                 theScale.x = -theScale.x;
                  pos.x = pos.x - .1f;
-                transform.SetPositionAndRotation((pos), transform.rotation);
+          //  if (rotation != Quaternion.Euler(0f, 0f, 0f) || rotation.y > -180f)
+           // {
+            //    rotation.y = -180f;
+           // }
+            transform.SetPositionAndRotation((pos), rotation);
         }
-        if (flip == "right")
+        if (flip == "left")
         {
             if (theScale.x > 0)
                 theScale.x = -theScale.x;
                 pos.x = pos.x + .1f;
-                transform.SetPositionAndRotation((pos), transform.rotation);
+           // if (rotation != Quaternion.Euler(0f, -180f, 0f) || rotation.y < 0f)
+           // {
+           //     rotation.y = 0f;
+           // }
+            transform.SetPositionAndRotation((pos), rotation);
         }
         transform.localScale = theScale;
+        transform.localRotation = rotation;
     }
 
 }

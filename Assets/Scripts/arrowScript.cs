@@ -5,12 +5,12 @@ using UnityEngine;
 public class arrowScript : MonoBehaviour {
     public GameObject player;
     float x;
-    float y;
+    float z;
     float x2;
     int distance;
-    float y2;
+    float z2;
     float xdiff;
-    float ydiff;
+    float zdiff;
     // Use this for initialization
     void start() {
 
@@ -20,21 +20,21 @@ public class arrowScript : MonoBehaviour {
     void Update() {
         if (distance < 120)
         {
-            if (x2 > x && y2 < y)
+            if (x2 > x && z2 < z)
             {
-                transform.Translate(-xdiff, ydiff, 0f);
+                transform.Translate(-xdiff, 0f, zdiff);
             }
-            if (x2 > x && y2 > y)
+            if (x2 > x && z2 > z)
             {
-                transform.Translate(-xdiff, -ydiff, 0f);
+                transform.Translate(-xdiff, 0f, -zdiff);
             }
-            if (x2 < x && y2 < y)
+            if (x2 < x && z2 < z)
             {
-                transform.Translate(xdiff, ydiff, 0f);
+                transform.Translate(xdiff, 0f, zdiff);
             }
-            if(x2 < x && y2 > y)
+            if(x2 < x && z2 > z)
             {
-                transform.Translate(xdiff, -ydiff, 0f);
+                transform.Translate(xdiff, 0f, -zdiff);
             }
             distance++;
         }
@@ -43,11 +43,11 @@ public class arrowScript : MonoBehaviour {
     public void Awake()
     {
         x = player.transform.position.x;
-        y = player.transform.position.y;
+        z = player.transform.position.z;
         x2 = transform.position.x;
-        y2 = transform.position.y;
+        z2 = transform.position.z;
         xdiff = (x - x2) * (x - x2)/100;
-        ydiff = (y - y2) * (y - y2)/100;
+        zdiff = (z - z2) * (z - z2)/100;
         distance = 0;
 
     }

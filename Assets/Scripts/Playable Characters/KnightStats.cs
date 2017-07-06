@@ -12,7 +12,7 @@ public class KnightStats : MonoBehaviour {
     public int gold;
     public float timer;
     public bool isRecovering;
-    public float resting;
+    private float resting;
 	// Use this for initialization
 	void Start () {
         resting = 3;

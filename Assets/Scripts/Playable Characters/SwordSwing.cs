@@ -61,16 +61,17 @@ public class SwordSwing : MonoBehaviour {
         else if (Input.GetMouseButtonDown(0) && GetComponentInParent<KnightStats>().energy > 0)
         {
             GetComponentInParent<KnightStats>().energy --;
-            GetComponent<Collider2D>().enabled = true;
+            GetComponent<Collider>().enabled = true;
             swing.SetInteger("state", 1);
             source.clip = swinging;
+            if (swing.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !swing.IsInTransition(0))
                 source.Play();
 
         }
 
         else if (Input.GetMouseButtonUp(0))
         {
-            GetComponent<Collider2D>().enabled = false;
+            GetComponent<Collider>().enabled = false;
             new WaitForSeconds(2);
             swing.SetInteger("state", 0);
         }
@@ -81,13 +82,20 @@ public class SwordSwing : MonoBehaviour {
         else
             swing.SetInteger("state", 0);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
+
         if (collision.gameObject.GetComponent<MonsterInterface>() != null)
         {
             CombatTextManager.Instance.CreateText(collision.transform.position);
 
             collision.gameObject.GetComponent<MonsterInterface>().hp--;
-        }       
+            gameObject.GetComponent<Rigidbody>().AddForce(Vector3.left * 10);
+
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+
     }
 }

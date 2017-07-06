@@ -24,7 +24,7 @@ public class AI : MonoBehaviour
         counter = 0;
         InvokeRepeating("movement", 0, .03f);
         Thisgoblin.hp = 3;
-        Thisgoblin.ms = .023f;
+        Thisgoblin.ms = .025f;
         x = Mathf.Abs(transform.localScale.x);
         isFlippingRight = false;
         isFlippingLeft = false;
@@ -34,7 +34,7 @@ public class AI : MonoBehaviour
     {
         var target = player.transform.position;
         var gp = Thisgoblin.transform.position;
-        range = Mathf.Sqrt((target.x - gp.x)* (target.x - gp.x) + (target.y - gp.y)* (target.y - gp.y));
+        range = Mathf.Sqrt((target.x - gp.x)* (target.x - gp.x) + (target.z - gp.z)* (target.z - gp.z));
 
         if( range < 3.5 )
         {
@@ -44,7 +44,7 @@ public class AI : MonoBehaviour
         {
             if (counter % 60 ==0)
             {
-                xVelocity = Random.Range(-0.03f, 0.03f);
+                xVelocity = Random.Range(-0.02f, 0.02f);
                 if(xVelocity <0)
                 {
                     Flip("left");
@@ -53,9 +53,9 @@ public class AI : MonoBehaviour
                 {
                     Flip("right");
                 }
-                yVelocity = Random.Range(-0.03f, 0.03f);
+                yVelocity = Random.Range(-0.02f, 0.02f);
             }
-            transform.Translate(xVelocity, yVelocity, 0f);
+            transform.Translate(xVelocity, 0f, yVelocity);
             inSight = false;
             counter++;
         }
@@ -68,6 +68,10 @@ public class AI : MonoBehaviour
         {
             player.GetComponent<KnightStats>().exp++; //im a genius
             npc.SetActive(false);
+        }
+        if(Thisgoblin.hp == 1)
+        {
+            Thisgoblin.ms = .01f;
         }
         var target = player.transform.position;
         if (inSight)
@@ -82,13 +86,13 @@ public class AI : MonoBehaviour
                 Flip("right");
                 transform.Translate(Thisgoblin.ms, 0f, 0f);
             }
-            if (transform.position.y > target.y)
+            if (transform.position.z > target.z)
             {
-                transform.Translate(0f, -Thisgoblin.ms, 0f);
+                transform.Translate(0f, 0f, -Thisgoblin.ms);
             }
             else
             {
-                transform.Translate(0f, Thisgoblin.ms, 0f);
+                transform.Translate(0f, 0f, Thisgoblin.ms);
             }
         }
     }
@@ -120,6 +124,4 @@ public class AI : MonoBehaviour
         }
         transform.localScale = theScale;
     }
-
-
 }

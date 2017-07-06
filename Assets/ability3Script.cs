@@ -42,7 +42,7 @@ public class ability3Script : MonoBehaviour {
 
             if (test == 0 && swing.GetCurrentAnimatorStateInfo(0).IsName("default"))
             {
-                gameObject.GetComponent<Collider2D>().enabled = true;
+                gameObject.GetComponent<Collider>().enabled = true;
                 swing.SetBool("ability3", true);
                 test++;
             knight.GetComponent<KnightStats>().energy = knight.GetComponent<KnightStats>().energy - 10;
@@ -51,7 +51,7 @@ public class ability3Script : MonoBehaviour {
             {
                 swing.SetBool("ability3", false);
                 test = 2;
-            gameObject.GetComponent<Collider2D>().enabled = false;
+            gameObject.GetComponent<Collider>().enabled = false;
         }
         if (!direction)
             transform.Translate(-speed, 0f, 0f);
@@ -61,7 +61,7 @@ public class ability3Script : MonoBehaviour {
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.GetComponent<MonsterInterface>() != null)
         {

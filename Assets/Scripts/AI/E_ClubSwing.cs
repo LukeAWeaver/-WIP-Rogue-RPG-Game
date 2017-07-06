@@ -21,9 +21,8 @@ public class E_ClubSwing : MonoBehaviour
     
     }
  
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionStay(Collision collision)
     {
-
         if (collision.gameObject.name == "Knight_Player")
         {
 
@@ -47,7 +46,7 @@ public class E_ClubSwing : MonoBehaviour
         { 
         }
     }
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnCollisionExit(Collision collision)
     {
         swing.SetBool("inProx", false);
 

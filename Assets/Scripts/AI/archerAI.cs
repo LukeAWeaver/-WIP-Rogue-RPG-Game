@@ -51,7 +51,7 @@ public class archerAI : MonoBehaviour
                 }
                 yVelocity = Random.Range(-0.03f, 0.03f);
             }
-            transform.Translate(xVelocity, yVelocity, 0f);
+            transform.Translate(xVelocity,0f, yVelocity);
             inSight = false;
             counter++;
         }
@@ -80,13 +80,13 @@ public class archerAI : MonoBehaviour
                 Flip("left");
                 transform.Translate(0.0001f, 0f, 0f);
             }
-            if (transform.position.y > target.y)
+            if (transform.position.z > target.z)
             {
-                transform.Translate(0f, -0.0001f, 0f);
+                transform.Translate(0f, 0f, -0.0001f);
             }
             else
             {
-                transform.Translate(0f, 0.0001f, 0f);
+                transform.Translate(0f, 0f,0.0001f);
             }
         }
 

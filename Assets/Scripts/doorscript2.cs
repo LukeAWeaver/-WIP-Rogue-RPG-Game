@@ -19,13 +19,13 @@ public class doorscript2 : MonoBehaviour {
     void Update () {
 		
 	}
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
         source.clip = doorOpen;
         source.Play();
         sprite.sprite = sprites[1];
     }
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit(Collider collision)
     {
         source.clip = doorClose;
         source.Play();

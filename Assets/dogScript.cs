@@ -37,7 +37,7 @@ public class dogScript : MonoBehaviour {
         }
         var target = player.transform.position;
         var dogPosition = Thisdog.transform.position;
-        range = Mathf.Sqrt((target.x - dogPosition.x) * (target.x - dogPosition.x) + (target.y - dogPosition.y) * (target.y - dogPosition.y));
+        range = Mathf.Sqrt((target.x - dogPosition.x) * (target.x - dogPosition.x) + (target.z - dogPosition.z) * (target.z - dogPosition.z));
         if (range <7)
         {
             insight = true;
@@ -55,13 +55,13 @@ public class dogScript : MonoBehaviour {
                 Flip("right");
                 transform.Translate(Thisdog.ms, 0f, 0f);
             }
-            if (transform.position.y > target.y)
+            if (transform.position.z > target.z)
             {
-                transform.Translate(0f, -Thisdog.ms, 0f);
+                transform.Translate(0f, 0f, -Thisdog.ms);
             }
             else
             {
-                transform.Translate(0f, Thisdog.ms, 0f);
+                transform.Translate(0f, 0f, Thisdog.ms);
             }
         }
         else if (sniff > -.01f && sniff < .01f)
@@ -94,11 +94,10 @@ public class dogScript : MonoBehaviour {
         }
         transform.localScale = theScale;
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.name == "PlayerWoodenSword")
         {
-            Thisdog.hp--;
             source.clip = whimper;
             source.Play();
         }
@@ -113,8 +112,8 @@ public class dogScript : MonoBehaviour {
             else
             {
                 CombatTextManager.Instance.CreateText(collision.transform.position);
-                collision.gameObject.GetComponent<KnightStats>().health--; //im a genius
-                collision.gameObject.GetComponent<KnightStats>().isRecovering = true; //im a genius
+                collision.gameObject.GetComponent<KnightStats>().health--; 
+                collision.gameObject.GetComponent<KnightStats>().isRecovering = true; 
                 source.clip = bark;
                 source.Play();
             }

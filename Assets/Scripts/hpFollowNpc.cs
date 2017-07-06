@@ -18,6 +18,7 @@ public class hpFollowNpc : MonoBehaviour
     {
         var pos = player.transform.position;
         pos.y = pos.y + .75f;
+        pos.x = pos.x + .75f;
         transform.SetPositionAndRotation((pos), transform.rotation);
     }
 }

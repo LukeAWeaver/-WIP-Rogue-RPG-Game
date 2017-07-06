@@ -26,7 +26,7 @@ public class bowScript : MonoBehaviour
     void Update()
     {
         var target = player.transform.position;
-        range = Mathf.Sqrt((target.x - transform.position.x) * (target.x - transform.position.x) + (target.y - transform.position.y) * (target.y - transform.position.y));
+        range = Mathf.Sqrt((target.x - transform.position.x) * (target.x - transform.position.x) + (target.z - transform.position.z) * (target.z - transform.position.z));
         if (range < 5)
         {
             counter++;
