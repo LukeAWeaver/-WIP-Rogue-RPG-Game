@@ -27,7 +27,6 @@ public class doorScript : MonoBehaviour {
     }
     private void OnTriggerEnter(Collider collision)
     {
-        Debug.Log("test");
         overlap = true;
 
     }
