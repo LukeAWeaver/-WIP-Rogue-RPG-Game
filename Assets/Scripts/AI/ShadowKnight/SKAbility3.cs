@@ -14,10 +14,6 @@ public class SKAbility3: MonoBehaviour
     void Start()
     {
         test = 0;
-        //  else
-        //  {
-        //      transform.localScale = -trans
-        //  }
         var offset = knight.transform.position;
         swing = GetComponent<Animator>();
         var theScale = transform.localScale;
@@ -56,23 +52,20 @@ public class SKAbility3: MonoBehaviour
             transform.Translate(speed, 0f, 0f);
         }
     }
+
     private void OnTriggerStay(Collider collision)
     {
         if (collision.gameObject.name == "Knight_Player")
         {
 
             swing.SetBool("inProx", true);
-            if (collision.gameObject.GetComponent<KnightStats>().isRecovering)
-            {
-
-            }
-            else
+            if (!collision.gameObject.GetComponent<KnightStats>().isRecovering)
             {
                 CombatTextManager.Instance.CreateText(collision.transform.position);
-                collision.gameObject.GetComponent<KnightStats>().health--; //im a genius
-                collision.gameObject.GetComponent<KnightStats>().isRecovering = true; //im a genius
-
+                collision.gameObject.GetComponent<KnightStats>().health = collision.gameObject.GetComponent<KnightStats>().health - 2;
+                collision.gameObject.GetComponent<KnightStats>().isRecovering = true;
             }
+
 
             collision.gameObject.GetComponent<KnightStats>().tempHP = collision.gameObject.GetComponent<KnightStats>().health;
         }
