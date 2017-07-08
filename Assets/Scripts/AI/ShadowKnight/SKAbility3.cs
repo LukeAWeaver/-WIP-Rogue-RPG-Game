@@ -48,12 +48,7 @@ public class SKAbility3: MonoBehaviour
             swing.SetBool("ability3", true);
             test++;
         }
-        else if (test == 1 && swing.GetCurrentAnimatorStateInfo(0).IsName("ability3Release") && knight.GetComponent<KnightStats>().energy >= 10)
-        {
-            swing.SetBool("ability3", false);
-            test = 2;
-            gameObject.GetComponent<Collider>().enabled = false;
-        }
+
         if (!direction)
             transform.Translate(-speed, 0f, 0f);
         else if (direction)
@@ -61,20 +56,30 @@ public class SKAbility3: MonoBehaviour
             transform.Translate(speed, 0f, 0f);
         }
     }
-
-    private void OnTriggerEnter(Collider collision)
+    private void OnTriggerStay(Collider collision)
     {
-        if (collision.gameObject.GetComponent<KnightStats>() != null)
+        if (collision.gameObject.name == "Knight_Player")
         {
-            CombatTextManager.Instance.CreateText(collision.transform.position);
 
-            collision.gameObject.GetComponent<KnightStats>().health--;
+            swing.SetBool("inProx", true);
+            if (collision.gameObject.GetComponent<KnightStats>().isRecovering)
+            {
 
+            }
+            else
+            {
+                CombatTextManager.Instance.CreateText(collision.transform.position);
+                collision.gameObject.GetComponent<KnightStats>().health--; //im a genius
+                collision.gameObject.GetComponent<KnightStats>().isRecovering = true; //im a genius
+
+            }
+
+            collision.gameObject.GetComponent<KnightStats>().tempHP = collision.gameObject.GetComponent<KnightStats>().health;
         }
         else
-            {
-                collision.gameObject.GetComponent<KnightStats>().health--;
-            }
+        {
+        }
     }
+
 
 }

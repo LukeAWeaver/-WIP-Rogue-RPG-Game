@@ -1,0 +1,31 @@
+TODO:
+Village:
+	-Add mountains in background
+	-Villager sprites
+	-Villager dialog boxes
+	-Dialog box SFX
+	-Gold spending system
+	-Fix cave layering
+
+Player:
+	-Player Jump
+	-Player Ability 1,2, and 4
+	-Add paper flip
+	
+AI:
+	-Dogs should circle player and randomly charge in
+	-AI should have mob mentality, if a mob sees the player nearby mobs of the same type should be attracted to the player too
+	-Fix Archer Arrows
+	-Knockback (this shouldn't be difficult since we are using unity's physics engine) *important so sprites don't overlap*
+	-Shadow Knight AI (he should have the same abilities as the player) *classic Zelda ripoff*
+	
+Terrain:
+	-Terrain player can jump on (small hills or small cliffs)
+	-Hole leading to lower more difficult floor (new scene)
+	-doors leading to other rooms (the easiest way to handle the rooms would be to load a new scene)
+
+MISC:
+	-Delete clone objects (arrows, damage text, etc) *Use the destroy command*
+	-stop ability3 animation from running at start *no idea how to fix that*
+	-Save player stats and items after loading new scene *easy, I'll just google it*
+	-Fade out after scenes *we already have the script, it's attached to the fade panel on the main camera*
