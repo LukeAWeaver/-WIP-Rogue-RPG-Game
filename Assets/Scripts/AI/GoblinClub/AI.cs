@@ -17,8 +17,8 @@ public class AI : MonoBehaviour
     public float xVelocity;
     public float yVelocity;
     private float x;
-    private bool isFlippingLeft;
-    private bool isFlippingRight;
+    bool isFlippingLeft;
+    bool isFlippingRight;
     // Use this for initialization
     void Start () {
         counter = 0;
@@ -47,11 +47,13 @@ public class AI : MonoBehaviour
                 xVelocity = Random.Range(-0.02f, 0.02f);
                 if(xVelocity <0)
                 {
-                    Flip("left");
+                    isFlippingLeft = true;
+                    isFlippingRight = false;
                 }
                 else
                 {
-                    Flip("right");
+                    isFlippingLeft = false;
+                    isFlippingRight = true;
                 }
                 yVelocity = Random.Range(-0.02f, 0.02f);
             }
@@ -78,12 +80,14 @@ public class AI : MonoBehaviour
         {
             if (transform.position.x > target.x)
             {
-                Flip("left");
+                isFlippingLeft = true;
+                isFlippingRight = false;
                 transform.Translate(-Thisgoblin.ms, 0f, 0f);
             }
             else if (transform.position.x < target.x)
             {
-                Flip("right");
+                isFlippingLeft = false;
+                isFlippingRight = true;
                 transform.Translate(Thisgoblin.ms, 0f, 0f);
             }
             if (transform.position.z > target.z)
@@ -95,33 +99,42 @@ public class AI : MonoBehaviour
                 transform.Translate(0f, 0f, Thisgoblin.ms);
             }
         }
+        CheckFlipping();
     }
 
-    public void FlippingLeft(bool flip)
-    {
 
-    }
-    public void FlippingRight(bool flip)
+    public void CheckFlipping()
     {
-
-    }
-
-    public void Flip(string Methodflip)
-    {
-        flip = Methodflip;
-        var theScale = transform.localScale;
-        var temp = transform.localScale;
-        temp.x = x;
-        if (Methodflip == "right")
+        //FLIPPING LEFT
+        if (isFlippingLeft && transform.localScale.x > -.40f)
         {
-            if (theScale.x < 0f)
-                theScale.x = -theScale.x;
+            float rotationSpeed = 5.0f;
+            Vector3 rot = transform.localScale;
+            rot.x = rot.x + -rotationSpeed * Time.deltaTime;
+            transform.localScale = rot;
+
         }
-        if (Methodflip == "left")
+        else if (isFlippingLeft && transform.localScale.x <= -.41f)
         {
-            if (theScale.x > 0f)
-                theScale.x = -theScale.x;
+            Vector3 rot = transform.localScale;
+            rot.x = -.41f;
+            transform.localScale = rot;
         }
-        transform.localScale = theScale;
+        //FLIPPING RIGHT
+        if (isFlippingRight && transform.localScale.x < .40f)
+        {
+            float rotationSpeed = 5.0f;
+            Vector3 rot = transform.localScale;
+            rot.x = rot.x + rotationSpeed * Time.deltaTime;
+            transform.localScale = rot;
+
+        }
+        else if (isFlippingRight && transform.localScale.x >= .41f)
+        {
+            Vector3 rot = transform.localScale;
+            rot.x = .41f;
+            transform.localScale = rot;
+        }
     }
+
 }

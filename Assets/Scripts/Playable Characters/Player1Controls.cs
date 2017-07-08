@@ -8,8 +8,9 @@ public class Player1Controls : MonoBehaviour
     private bool isMoving;
     private bool isRunning;
     public GameObject autoAttack;
-    public string flip;
     public char previousKey;
+    bool isFlippingLeft;
+    bool isFlippingRight;
     Animator walk;
 
     // Use this for initialization
@@ -27,20 +28,23 @@ public class Player1Controls : MonoBehaviour
 
 
         walk.SetBool("walking", false);
-        
+
         if (gameObject.GetComponent<KnightStats>().energy > 0)
         {
             CheckWalking();
             CheckRunning();
-            if(!isRunning)
+            if (!isRunning)
             {
                 CheckRoll();
             }
+            //BASIC INPUT
             if (Input.GetKey("d"))
             {
+
                 if (previousKey == 'a')
                 {
-                    Flip("right");
+                    isFlippingLeft = false;
+                    isFlippingRight = true;
                 }
                 transform.Translate(velocity, 0f, 0f);
                 previousKey = 'd';
@@ -49,7 +53,8 @@ public class Player1Controls : MonoBehaviour
             {
                 if (previousKey == 'd')
                 {
-                    Flip("left");
+                    isFlippingLeft = true;
+                    isFlippingRight = false;
                 }
                 transform.Translate(-velocity, 0f, 0f);
                 previousKey = 'a';
@@ -60,7 +65,7 @@ public class Player1Controls : MonoBehaviour
             }
             if (Input.GetKey("s"))
             {
-                transform.Translate(0f, 0f,-velocity);
+                transform.Translate(0f, 0f, -velocity);
             }
             if (isMoving && isRunning && Input.GetKey("left shift"))
             {
@@ -68,10 +73,13 @@ public class Player1Controls : MonoBehaviour
                 gameObject.GetComponent<KnightStats>().energy = gameObject.GetComponent<KnightStats>().energy - .05f;
             }
         }
+        CheckFlipping();
+
+
     }
     public void CheckRunning()
     {
-        if (Input.GetKey("left shift") && (Input.GetKey("a") || Input.GetKey("d") || Input.GetKey("w") || Input.GetKey("s")) )
+        if (Input.GetKey("left shift") && (Input.GetKey("a") || Input.GetKey("d") || Input.GetKey("w") || Input.GetKey("s")))
         {
             isRunning = true;
             velocity = 0.05f;
@@ -88,13 +96,13 @@ public class Player1Controls : MonoBehaviour
         {
             isMoving = true;
             walk.SetBool("walking", true);
-            if(walk.GetBool("roll") == false)
-            velocity = 0.02f;
+            if (walk.GetBool("roll") == false)
+                velocity = 0.02f;
         }
     }
     public void CheckRoll()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl) && gameObject.GetComponent<KnightStats>().energy >=20)
+        if (Input.GetKeyDown(KeyCode.LeftControl) && gameObject.GetComponent<KnightStats>().energy >= 20)
         {
             if (!walk.GetCurrentAnimatorStateInfo(0).IsName("roll"))
             {
@@ -108,38 +116,39 @@ public class Player1Controls : MonoBehaviour
             walk.SetBool("roll", false);
         }
     }
-    public void Flip(string methodFlip)
+    public void CheckFlipping()
     {
-        var pos = transform.position;
-        flip = methodFlip;
-        var theScale = transform.localScale;
-        var rotation = transform.localRotation;
-        if (flip == "right")
+        //FLIPPING LEFT
+        if (isFlippingLeft && transform.localScale.x > -.40f)
         {
-            if (theScale.x < 0)
-                theScale.x = -theScale.x;
-                 pos.x = pos.x - .1f;
-          //  if (rotation != Quaternion.Euler(0f, 0f, 0f) || rotation.y > -180f)
-           // {
-            //    rotation.y = -180f;
-           // }
-            transform.SetPositionAndRotation((pos), rotation);
-        }
-        if (flip == "left")
-        {
-            if (theScale.x > 0)
-                theScale.x = -theScale.x;
-                pos.x = pos.x + .1f;
-           // if (rotation != Quaternion.Euler(0f, -180f, 0f) || rotation.y < 0f)
-           // {
-           //     rotation.y = 0f;
-           // }
-            transform.SetPositionAndRotation((pos), rotation);
-        }
-        transform.localScale = theScale;
-        transform.localRotation = rotation;
-    }
+            float rotationSpeed = 5.0f;
+            Vector3 rot = transform.localScale;
+            rot.x = rot.x + -rotationSpeed * Time.deltaTime;
+            transform.localScale = rot;
 
+        }
+        else if (isFlippingLeft && transform.localScale.x <= -.41f)
+        {
+            Vector3 rot = transform.localScale;
+            rot.x = -.41f;
+            transform.localScale = rot;
+        }
+        //FLIPPING RIGHT
+        if (isFlippingRight && transform.localScale.x < .40f)
+        {
+            float rotationSpeed = 5.0f;
+            Vector3 rot = transform.localScale;
+            rot.x = rot.x + rotationSpeed * Time.deltaTime;
+            transform.localScale = rot;
+
+        }
+        else if (isFlippingRight && transform.localScale.x >= .41f)
+        {
+            Vector3 rot = transform.localScale;
+            rot.x = .41f;
+            transform.localScale = rot;
+        }
+    }
 }
 /* CONTROLLER SUPPORT
         vlimit = Input.GetAxis("Vertical");
