@@ -15,6 +15,7 @@ public class Player1Controls : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+
         isMoving = false;
         walk = GetComponent<Animator>();
         previousKey = 'd';
@@ -23,6 +24,8 @@ public class Player1Controls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
         walk.SetBool("walking", false);
         
         if (gameObject.GetComponent<KnightStats>().energy > 0)
