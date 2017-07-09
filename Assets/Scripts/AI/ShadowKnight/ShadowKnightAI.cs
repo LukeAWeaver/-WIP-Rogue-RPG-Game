@@ -48,11 +48,13 @@ public class ShadowKnightAI : MonoBehaviour
                 xVelocity = Random.Range(-0.02f, 0.02f);
                 if (xVelocity < 0)
                 {
-                    Flip("left");
+                    ShadowKnight.isFlippingLeft = true;
+                    ShadowKnight.isFlippingRight = false;
                 }
                 else
                 {
-                    Flip("right");
+                    ShadowKnight.isFlippingLeft = false;
+                    ShadowKnight.isFlippingRight = true;
                 }
                 yVelocity = Random.Range(-0.02f, 0.02f);
             }
@@ -75,12 +77,14 @@ public class ShadowKnightAI : MonoBehaviour
         {
             if (transform.position.x > target.x)
             {
-                Flip("left");
+                ShadowKnight.isFlippingLeft = true;
+                ShadowKnight.isFlippingRight = false;
                 transform.Translate(-ShadowKnight.ms, 0f, 0f);
             }
             else if (transform.position.x < target.x)
             {
-                Flip("right");
+                ShadowKnight.isFlippingLeft = false;
+                ShadowKnight.isFlippingRight = true;
                 transform.Translate(ShadowKnight.ms, 0f, 0f);
             }
             if (transform.position.z > target.z)
@@ -92,33 +96,6 @@ public class ShadowKnightAI : MonoBehaviour
                 transform.Translate(0f, 0f, ShadowKnight.ms);
             }
         }
-    }
-
-    public void FlippingLeft(bool flip)
-    {
-
-    }
-    public void FlippingRight(bool flip)
-    {
-
-    }
-
-    public void Flip(string Methodflip)
-    {
-        flip = Methodflip;
-        var theScale = transform.localScale;
-        var temp = transform.localScale;
-        temp.x = x;
-        if (Methodflip == "right")
-        {
-            if (theScale.x < 0f)
-                theScale.x = -theScale.x;
-        }
-        if (Methodflip == "left")
-        {
-            if (theScale.x > 0f)
-                theScale.x = -theScale.x;
-        }
-        transform.localScale = theScale;
+        ShadowKnight.CheckFlipping();
     }
 }

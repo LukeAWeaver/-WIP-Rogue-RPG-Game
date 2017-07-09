@@ -19,8 +19,9 @@ public class dogScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        Thisdog.rotationSpeed = 7f;
         Thisdog.hp = 4;
-        Thisdog.ms= .08f;
+        Thisdog.ms= .06f;
         damage = 2;
         source = GetComponent<AudioSource>();
         actions = GetComponent<Animator>();
@@ -47,12 +48,15 @@ public class dogScript : MonoBehaviour {
             actions.SetInteger("state", 2);
             if (transform.position.x > target.x)
             {
-                Flip("left");
+                Thisdog.isFlippingLeft = false;
+                Thisdog.isFlippingRight = true;
                 transform.Translate(-Thisdog.ms, 0f, 0f);
             }
             else if (transform.position.x < target.x)
             {
-                Flip("right");
+                Thisdog.isFlippingLeft = true;
+                Thisdog.isFlippingRight = false;
+
                 transform.Translate(Thisdog.ms, 0f, 0f);
             }
             if (transform.position.z > target.z)
@@ -74,26 +78,9 @@ public class dogScript : MonoBehaviour {
         {
             actions.SetInteger("state", 0);
         }
+        Thisdog.CheckFlipping();
+    }
 
-    }
-    public void Flip(string Methodflip)
-    {
-        flip = Methodflip;
-        var theScale = transform.localScale;
-        var temp = transform.localScale;
-        temp.x = x;
-        if (Methodflip == "left")
-        {
-            if (theScale.x < 0f)
-                theScale.x = -theScale.x;
-        }
-        if (Methodflip == "right")
-        {
-            if (theScale.x > 0f)
-                theScale.x = -theScale.x;
-        }
-        transform.localScale = theScale;
-    }
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.name == "PlayerWoodenSword")
