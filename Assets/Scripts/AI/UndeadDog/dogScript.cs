@@ -84,23 +84,23 @@ public class dogScript : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.name == "PlayerWoodenSword")
+        if(collision.gameObject.tag == "PlayerWoodenSword")
         {
             source.clip = whimper;
             source.Play();
         }
         if (collision.gameObject.name == "Knight_Player")
         {
-
-           // actions.SetInteger("state", 1);
-            if (collision.gameObject.GetComponent<KnightStats>().isRecovering)
+            int changeInHP = PlayerPrefs.GetInt("currentHP") - 1;
+            // actions.SetInteger("state", 1);
+            if (collision.gameObject.GetComponent<KnightStats>() != null && !collision.gameObject.GetComponent<KnightStats>().isRecovering)
             {
 
             }
             else
             {
                 CombatTextManager.Instance.CreateText(collision.transform.position);
-                collision.gameObject.GetComponent<KnightStats>().health--; 
+                PlayerPrefs.SetInt("currentHP", changeInHP);
                 collision.gameObject.GetComponent<KnightStats>().isRecovering = true; 
                 source.clip = bark;
                 source.Play();

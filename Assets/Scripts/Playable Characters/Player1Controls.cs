@@ -5,17 +5,18 @@ using UnityEngine;
 public class Player1Controls : MonoBehaviour
 {
     public float velocity = .05f;
+    public float fallMultiplier = 1.5f;
+    public float lowJumpMultiplier = 1f;
     private bool isMoving;
     private bool isRunning;
     public GameObject autoAttack;
     public char previousKey;
-    bool isFlippingLeft;
-    bool isFlippingRight;
+    public bool isFlippingLeft;
+    public bool isFlippingRight;
     public bool onGround;
     private Rigidbody rb;
     Animator walk;
 
-    // Use this for initialization
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -25,17 +26,25 @@ public class Player1Controls : MonoBehaviour
         onGround = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
-
-        walk.SetBool("walking", false);
+        walk.SetBool("walking", false); // used for animation
+        // BEING JUMPING SCRIPT
         if(Input.GetKeyDown(KeyCode.Space) && gameObject.GetComponent<KnightStats>().energy > 5 && onGround)
         {
             gameObject.GetComponent<KnightStats>().energy = gameObject.GetComponent<KnightStats>().energy - 5;
             rb.velocity = new Vector3(0f, 5f, 0f);
             onGround = false;
         }
+        if(rb.velocity.y <0)
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier) * Time.deltaTime;
+        }
+        else if(rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+        }
+        //END JUMPING SCRIPT
         if (gameObject.GetComponent<KnightStats>().energy > 0)
         {
             CheckWalking();

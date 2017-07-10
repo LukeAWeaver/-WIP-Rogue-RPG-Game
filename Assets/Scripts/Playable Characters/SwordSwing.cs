@@ -18,6 +18,7 @@ public class SwordSwing : MonoBehaviour {
         swing = GetComponent<Animator>();
         source = GetComponent<AudioSource>();
         test = 0;
+        gameObject.GetComponent<BoxCollider>().enabled = false;
 
     }
 
@@ -82,6 +83,7 @@ public class SwordSwing : MonoBehaviour {
         else
             swing.SetInteger("state", 0);
     }
+    //handles collisions
     private void OnTriggerEnter(Collider collision)
     {
 
@@ -90,7 +92,14 @@ public class SwordSwing : MonoBehaviour {
             CombatTextManager.Instance.CreateText(collision.transform.position);
 
             collision.gameObject.GetComponent<MonsterInterface>().hp--;
-            gameObject.GetComponent<Rigidbody>().AddForce(Vector3.left * 10);
+            if (player.GetComponent<Player1Controls>().isFlippingLeft)
+            {
+                collision.GetComponent<Rigidbody>().velocity += new Vector3(-3f, 0f, 0f);
+            }
+            if (player.GetComponent<Player1Controls>().isFlippingRight)
+            {
+                collision.GetComponent<Rigidbody>().velocity += new Vector3(4f, 0f, 0f);
+            }
 
         }
     }

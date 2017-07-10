@@ -7,6 +7,7 @@ public class E_ClubSwing : MonoBehaviour
 {
     Animator swing;
     public AudioClip thud;
+    public GameObject thisGoblin;
     private AudioSource source;
     // Use this for initialization
     void Start()
@@ -20,35 +21,31 @@ public class E_ClubSwing : MonoBehaviour
     {
     
     }
- 
-    private void OnCollisionStay(Collision collision)
+
+    private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.name == "Knight_Player")
+        int changeInHP = PlayerPrefs.GetInt("currentHP") - 1;
+        if (collision.gameObject.GetComponent<KnightStats>() != null && !collision.gameObject.GetComponent<KnightStats>().isRecovering)
         {
-
-            swing.SetBool("inProx", true);
-            if (collision.gameObject.GetComponent<KnightStats>().isRecovering)
+            collision.GetComponent<Rigidbody>().velocity += new Vector3(0f, 2f, 0f);
+            if (thisGoblin.GetComponent<MonsterInterface>().isFlippingLeft)
             {
-
+                collision.GetComponent<Rigidbody>().velocity += new Vector3(-6f, 0f, 0f);
             }
-            else
+            if (thisGoblin.GetComponent<MonsterInterface>().isFlippingRight)
             {
-                CombatTextManager.Instance.CreateText(collision.transform.position);
-                collision.gameObject.GetComponent<KnightStats>().health--; //im a genius
-                collision.gameObject.GetComponent<KnightStats>().isRecovering = true; //im a genius
-                source.clip = thud;
-                source.Play();
+                collision.GetComponent<Rigidbody>().velocity += new Vector3(6f, 0f, 0f);
             }
+            CombatTextManager.Instance.CreateText(collision.transform.position);
+            PlayerPrefs.SetInt("currentHP", changeInHP);
+            collision.gameObject.GetComponent<KnightStats>().isRecovering = true;
+            source.clip = thud;
+            source.Play();
 
-            collision.gameObject.GetComponent<KnightStats>().tempHP = collision.gameObject.GetComponent<KnightStats>().health;
-        }
-        else
-        { 
         }
     }
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
         swing.SetBool("inProx", false);
-
     }
 }

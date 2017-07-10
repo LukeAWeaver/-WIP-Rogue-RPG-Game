@@ -55,14 +55,16 @@ public class arrowScript : MonoBehaviour {
     {
         if (collision.gameObject.name == "Knight_Player")
         {
+            int changeInHP = PlayerPrefs.GetInt("currentHP") - 1;
             if (collision.gameObject.GetComponent<KnightStats>().isRecovering)
             {
 
             }
         else
         {
-                CombatTextManager.Instance.CreateText(collision.transform.position);
-                collision.GetComponent<KnightStats>().health--; //im a genius
+
+            CombatTextManager.Instance.CreateText(collision.transform.position);
+            PlayerPrefs.SetInt("currentHP", changeInHP);
             collision.gameObject.GetComponent<KnightStats>().isRecovering = true; //im a genius
             this.gameObject.SetActive(false);
         }
