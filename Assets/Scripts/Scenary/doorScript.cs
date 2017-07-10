@@ -22,7 +22,7 @@ public class doorScript : MonoBehaviour {
         else
         {
            // gameObject.SetActive(true);
-            sprite.sortingLayerName = "Midground";
+            sprite.sortingLayerName = "Background";
         }
     }
     private void OnTriggerEnter(Collider collision)
