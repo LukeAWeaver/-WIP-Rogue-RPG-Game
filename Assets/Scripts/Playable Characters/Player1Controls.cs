@@ -11,6 +11,7 @@ public class Player1Controls : MonoBehaviour
     public char previousKey;
     bool isFlippingLeft;
     bool isFlippingRight;
+    public bool onGround;
     private Rigidbody rb;
     Animator walk;
 
@@ -21,18 +22,19 @@ public class Player1Controls : MonoBehaviour
         isMoving = false;
         walk = GetComponent<Animator>();
         previousKey = 'd';
+        onGround = true;
     }
 
     // Update is called once per frame
     void Update()
     {
 
-
         walk.SetBool("walking", false);
-        if(Input.GetKeyDown(KeyCode.Space) && gameObject.GetComponent<KnightStats>().energy > 5 && gameObject.transform.position.y <.6f)
+        if(Input.GetKeyDown(KeyCode.Space) && gameObject.GetComponent<KnightStats>().energy > 5 && onGround)
         {
             gameObject.GetComponent<KnightStats>().energy = gameObject.GetComponent<KnightStats>().energy - 5;
             rb.velocity = new Vector3(0f, 5f, 0f);
+            onGround = false;
         }
         if (gameObject.GetComponent<KnightStats>().energy > 0)
         {
@@ -152,6 +154,13 @@ public class Player1Controls : MonoBehaviour
             Vector3 rot = transform.localScale;
             rot.x = .41f;
             transform.localScale = rot;
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Scenery")
+        {
+            onGround = true;
         }
     }
 }

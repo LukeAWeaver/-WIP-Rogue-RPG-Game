@@ -15,6 +15,6 @@ public class hpPotText : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        text.text = "x" + pots.hpPot.ToString();
+        text.text = "x" + PlayerPrefs.GetInt("hpPots").ToString();
     }
 }

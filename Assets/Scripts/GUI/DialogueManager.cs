@@ -4,7 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour {
     public GameObject dBox;
+    public GameObject playerReplyYes;
+    public GameObject playerReplyNo;
     public GameObject guardIcon;
+    public GameObject playerIcon;
+    public GameObject player;
+    public GameObject healthPots;
+    private string npc;
     public Text dtext;
     public bool dialogActive;
 	// Use this for initialization
@@ -12,23 +18,72 @@ public class DialogueManager : MonoBehaviour {
         dialogActive = false;
         dBox.SetActive(false);
         guardIcon.SetActive(false);
-	}
+        playerIcon.SetActive(false);
+        playerReplyNo.SetActive(false);
+        playerReplyYes.SetActive(false);
+    }
 	
 	// Update is called once per frame
 	void Update () {
-		if(dialogActive && Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))
         {
+            dialogActive = false;
+            dBox.SetActive(false);
+            guardIcon.SetActive(false);
+            playerIcon.SetActive(false);
+            playerReplyNo.SetActive(false);
+            playerReplyYes.SetActive(false);
+        }
+		if(dialogActive && Input.GetKeyDown(KeyCode.E))
+        {
+            playerReplyYes.SetActive(false);
+            playerReplyNo.SetActive(false);
+            playerIcon.SetActive(false);
             dBox.SetActive(false);
             dialogActive = false;
             guardIcon.SetActive(false);
+            npc = "None";
         }
-	}
+        //Potion Brewer Interactions
+        if (npc == "PotionBrewer" && dialogActive)
+        {
+            playerIcon.SetActive(true);
+            if(!playerReplyNo.activeInHierarchy)
+            {
+                playerReplyYes.SetActive(true);
+            }
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                playerReplyYes.SetActive(true);
+                playerReplyNo.SetActive(false);
+
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                playerReplyYes.SetActive(false);
+                playerReplyNo.SetActive(true);
+            }
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                if (playerReplyYes.activeInHierarchy && player.GetComponent<KnightStats>().gold>=5)
+                {
+                    healthPots.GetComponent<PlayerPotions>().hpPot++;
+                    player.GetComponent<KnightStats>().gold = player.GetComponent<KnightStats>().gold - 5;
+                }
+                playerIcon.SetActive(false);
+                playerReplyNo.SetActive(false);
+                playerReplyYes.SetActive(false);
+                dBox.SetActive(false);
+                npc = "None";
+                Debug.Log(PlayerPrefs.GetInt("hpPots"));
+            }
+        }
+    }
     public void ShowBox(string dialogue,string npc)
     {
         dialogActive = true;
         dBox.SetActive(true);
         dtext.text = dialogue;
-        guardIcon.SetActive(true);
         if(npc == "guard")
         {
             guardIcon.SetActive(true);
@@ -36,6 +91,8 @@ public class DialogueManager : MonoBehaviour {
         if(npc == "PotionBrewer")
         {
             guardIcon.SetActive(false);
+            this.npc = npc;
         }
     }
+
 }

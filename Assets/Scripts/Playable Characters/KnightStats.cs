@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class KnightStats : MonoBehaviour {
 
@@ -8,6 +9,7 @@ public class KnightStats : MonoBehaviour {
     public int tempHP;
     public float energy;
     public int exp;
+    public int requiredExp;
     public int level;
     public int gold;
     public float timer;
@@ -17,7 +19,8 @@ public class KnightStats : MonoBehaviour {
 	void Start () {
         resting = 3;
         exp = 0;
-        gold = 0;
+        requiredExp = 3;
+        gold = 15;
         isRecovering = false;
         timer = 0;
         health = 6;
@@ -31,13 +34,19 @@ public class KnightStats : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
+        health = PlayerPrefs.GetInt("currentHP");
         if(health <1)
         {
-            this.gameObject.SetActive(false);
+            SceneManager.LoadScene("OverWorld");
         }
-        if(exp>9)
+        else
+        {
+            this.gameObject.SetActive(true);
+        }
+        if(exp>=requiredExp)
         {
             level++;
+            requiredExp = requiredExp + 2;
             exp = 0;
         }
 	}

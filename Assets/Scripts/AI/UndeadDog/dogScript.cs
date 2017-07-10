@@ -35,6 +35,7 @@ public class dogScript : MonoBehaviour {
         if(Thisdog.hp==0)
         {
             this.gameObject.SetActive(false);
+            player.GetComponent<KnightStats>().exp = player.GetComponent<KnightStats>().exp + 2;
         }
         var target = player.transform.position;
         var dogPosition = Thisdog.transform.position;

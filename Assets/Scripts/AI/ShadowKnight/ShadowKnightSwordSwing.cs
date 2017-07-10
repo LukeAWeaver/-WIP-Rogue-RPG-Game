@@ -39,18 +39,14 @@ public class ShadowKnightSwordSwing : MonoBehaviour
     }
     private void OnTriggerEnter(Collider collision)
     {
-
+        int changeInHP = PlayerPrefs.GetInt("currentHP") - 1;
         if (collision.gameObject.GetComponent<KnightStats>() != null)
         {
             CombatTextManager.Instance.CreateText(collision.transform.position);
-
-            collision.gameObject.GetComponent<KnightStats>().health--;
+            PlayerPrefs.SetInt("currentHP", changeInHP);
             gameObject.GetComponent<Rigidbody>().AddForce(Vector3.left * 10);
 
         }
     }
-    private void OnCollisionExit(Collision collision)
-    {
 
-    }
 }

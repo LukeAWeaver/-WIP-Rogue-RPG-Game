@@ -17,6 +17,11 @@ public class goldScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = player.GetComponent<KnightStats>().gold.ToString();
+        if (player.GetComponent<KnightStats>().gold > 0)
+            text.text = player.GetComponent<KnightStats>().gold.ToString();
+        else if (player.GetComponent<KnightStats>().gold == 0)
+        {
+            text.text = "";
+        }
     }
 }

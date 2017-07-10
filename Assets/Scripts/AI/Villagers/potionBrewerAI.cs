@@ -34,7 +34,7 @@ public class potionBrewerAI : MonoBehaviour
     {
         if (other.gameObject.name == "Knight_Player")
         {
-            if (Input.GetKeyUp(KeyCode.Space))
+            if (Input.GetKeyUp(KeyCode.E))
             {
                 dManager.ShowBox(randomlyChosenDialogue, npc);
             }

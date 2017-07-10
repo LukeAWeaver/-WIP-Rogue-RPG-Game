@@ -13,6 +13,6 @@ public class exp : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        text.text = "EXP: " + player.GetComponent<KnightStats>().exp.ToString() + "/10";
+        text.text = "EXP: " + player.GetComponent<KnightStats>().exp.ToString() + "/" + player.GetComponent<KnightStats>().requiredExp.ToString();
 	}
 }
