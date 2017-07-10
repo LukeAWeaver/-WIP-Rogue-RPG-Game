@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class hp : MonoBehaviour
 {
     public Sprite[] hpLeft;
     public GameObject player;
-    public SpriteRenderer currentHp;
+    //public SpriteRenderer currentHp;
     public KnightStats stats;
 	// Use this for initialization
 	void Start ()
@@ -17,7 +18,7 @@ public class hp : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        currentHp.sprite = hpLeft[stats.health];
+        gameObject.GetComponent<Image>().sprite = hpLeft[stats.health];
 
     }
 }

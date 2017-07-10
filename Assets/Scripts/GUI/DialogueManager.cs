@@ -23,15 +23,19 @@ public class DialogueManager : MonoBehaviour {
             guardIcon.SetActive(false);
         }
 	}
-    public void ShowBox(string dialogue,string name)
+    public void ShowBox(string dialogue,string npc)
     {
         dialogActive = true;
         dBox.SetActive(true);
         dtext.text = dialogue;
         guardIcon.SetActive(true);
-        if(name == "guard")
+        if(npc == "guard")
         {
             guardIcon.SetActive(true);
+        }
+        if(npc == "PotionBrewer")
+        {
+            guardIcon.SetActive(false);
         }
     }
 }

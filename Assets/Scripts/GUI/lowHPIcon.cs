@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class lowHPIcon : MonoBehaviour {
     public Sprite[] states;
     public GameObject player;
-    public SpriteRenderer currentState;
+   // public SpriteRenderer currentState;
     public KnightStats stats;
     // Use this for initialization
     void Start () {
@@ -15,13 +16,14 @@ public class lowHPIcon : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
+
         if (stats.health < 5)
         {
-            currentState.sprite = states[1];
+            gameObject.GetComponent<Image>().sprite = states[1];
         }
         else
         {
-            currentState.sprite = states[0];
+            gameObject.GetComponent<Image>().sprite = states[0];
         }
     }
 }

@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GoldScript2 : MonoBehaviour
 {
     public Sprite[] gold;
     public GameObject player;
-    public SpriteRenderer currentGold;
+    //public SpriteRenderer currentGold;
     public KnightStats stats;
     // Use this for initialization
     void Start()
@@ -19,30 +20,30 @@ public class GoldScript2 : MonoBehaviour
     {
         if(stats.gold == 0)
         {
-            currentGold.sprite = gold[0];
+            gameObject.GetComponent<Image>().sprite = gold[0];
         }
         else if (stats.gold < 3)
         {
-            currentGold.sprite = gold[1];
+            gameObject.GetComponent<Image>().sprite = gold[1];
 
         }
         else if (stats.gold < 6)
         {
-            currentGold.sprite = gold[2];
+            gameObject.GetComponent<Image>().sprite = gold[2];
 
         }
         else if (stats.gold < 21)
         {
-            currentGold.sprite = gold[3];
+            gameObject.GetComponent<Image>().sprite = gold[3];
         }
         else if (stats.gold <26)
         {
-            currentGold.sprite = gold[4];
+            gameObject.GetComponent<Image>().sprite = gold[4];
 
         }
-        else if(stats.gold < 35)
+        else if(stats.gold >=26)
         {
-            currentGold.sprite = gold[5];
+            gameObject.GetComponent<Image>().sprite = gold[5];
         }
 
     }
