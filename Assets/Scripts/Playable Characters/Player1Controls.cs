@@ -11,12 +11,13 @@ public class Player1Controls : MonoBehaviour
     public char previousKey;
     bool isFlippingLeft;
     bool isFlippingRight;
+    private Rigidbody rb;
     Animator walk;
 
     // Use this for initialization
     void Start()
     {
-
+        rb = GetComponent<Rigidbody>();
         isMoving = false;
         walk = GetComponent<Animator>();
         previousKey = 'd';
@@ -28,7 +29,11 @@ public class Player1Controls : MonoBehaviour
 
 
         walk.SetBool("walking", false);
-
+        if(Input.GetKeyDown(KeyCode.Space) && gameObject.GetComponent<KnightStats>().energy > 5 && gameObject.transform.position.y <.6f)
+        {
+            gameObject.GetComponent<KnightStats>().energy = gameObject.GetComponent<KnightStats>().energy - 5;
+            rb.velocity = new Vector3(0f, 5f, 0f);
+        }
         if (gameObject.GetComponent<KnightStats>().energy > 0)
         {
             CheckWalking();
