@@ -13,7 +13,7 @@ public class chestScript : MonoBehaviour
     private AudioSource source;
     void Start()
     {
-        goldAmount = 2;
+        goldAmount = 25;
         sprite.sprite = sprites[0];
         sprite = GetComponent<SpriteRenderer>();
         source = GetComponent<AudioSource>();

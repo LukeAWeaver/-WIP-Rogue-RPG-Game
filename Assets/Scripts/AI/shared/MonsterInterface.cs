@@ -9,6 +9,7 @@ public class MonsterInterface : MonoBehaviour
     public float ms;
     public bool isFlippingLeft;
     public bool isFlippingRight;
+    public GameObject reward;
     public float rotationSpeed;
     // Use this for initialization
     void Start()
@@ -21,7 +22,10 @@ public class MonsterInterface : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(hp == 0)
+        {
+            Instantiate(reward, transform.position, transform.rotation);
+        }
     }
     public void CheckFlipping()
     {
