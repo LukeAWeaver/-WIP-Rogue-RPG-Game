@@ -167,7 +167,7 @@ public class Player1Controls : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Scenery")
+        if(collision.gameObject.tag == "Scenery" || collision.gameObject.tag == "npc" )
         {
             onGround = true;
         }
