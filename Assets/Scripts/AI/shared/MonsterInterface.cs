@@ -11,6 +11,7 @@ public class MonsterInterface : MonoBehaviour
     public bool isFlippingRight;
     public GameObject reward;
     public float rotationSpeed;
+    public int coinAmount;
     // Use this for initialization
     void Start()
     {
@@ -24,7 +25,8 @@ public class MonsterInterface : MonoBehaviour
     {
         if(hp == 0)
         {
-            Instantiate(reward, transform.position, transform.rotation);
+            var gold = Instantiate(reward, transform.position, transform.rotation);
+            gold.transform.localScale = gold.transform.localScale * .4f;
         }
     }
     public void CheckFlipping()

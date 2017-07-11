@@ -20,9 +20,9 @@ public class KnightStats : MonoBehaviour {
         resting = 3;
         exp = 0;
         requiredExp = 3;
-        gold = 15;
         isRecovering = false;
         timer = 0;
+        gold = PlayerPrefs.GetInt("gold");
         health = 6;
         tempHP = 6;
         energy = 100;
@@ -34,6 +34,7 @@ public class KnightStats : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
+        PlayerPrefs.SetInt("gold", gold);
         health = PlayerPrefs.GetInt("currentHP");
         if(health <1)
         {
