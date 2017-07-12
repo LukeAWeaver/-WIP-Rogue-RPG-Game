@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class KnightStats : MonoBehaviour {
 
@@ -13,20 +14,22 @@ public class KnightStats : MonoBehaviour {
     public int level;
     public int gold;
     public float timer;
+    public float expbarValue;
     public bool isRecovering;
     private float resting;
+    public Slider expBar;
 	// Use this for initialization
 	void Start () {
         resting = 3;
         exp = 0;
-        requiredExp = 3;
         isRecovering = false;
         timer = 0;
         gold = PlayerPrefs.GetInt("gold");
+        level = PlayerPrefs.GetInt("level");
+        requiredExp = level + 3;
         health = 6;
         tempHP = 6;
         energy = 100;
-        level = 1;
         InvokeRepeating("resetHP", 0, .03f);
         InvokeRepeating("EnergyRegen", 0, .25f);
     }
@@ -34,7 +37,10 @@ public class KnightStats : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
+        expbarValue = (float)exp / (float)requiredExp;
+        expBar.value = expbarValue;
         PlayerPrefs.SetInt("gold", gold);
+        PlayerPrefs.SetInt("level", level);
         health = PlayerPrefs.GetInt("currentHP");
         if(health <1)
         {
@@ -47,7 +53,7 @@ public class KnightStats : MonoBehaviour {
         if(exp>=requiredExp)
         {
             level++;
-            requiredExp = requiredExp + 2;
+            requiredExp = requiredExp + level;
             exp = 0;
         }
 	}
@@ -100,10 +106,5 @@ public class KnightStats : MonoBehaviour {
      
             
         }
-    }
-
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
     }
 }
