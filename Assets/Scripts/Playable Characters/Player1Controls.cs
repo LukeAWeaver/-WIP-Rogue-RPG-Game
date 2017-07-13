@@ -5,8 +5,8 @@ using UnityEngine;
 public class Player1Controls : MonoBehaviour
 {
     public float velocity = .05f;
-    public float fallMultiplier = 1.5f;
-    public float lowJumpMultiplier = 1f;
+    private float fallMultiplier = 1.5f;
+    private float lowJumpMultiplier = 2.22f;
     private bool isMoving;
     private bool isRunning;
     public GameObject autoAttack;
