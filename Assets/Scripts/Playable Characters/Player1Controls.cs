@@ -32,6 +32,7 @@ public class Player1Controls : MonoBehaviour
         // BEING JUMPING SCRIPT
         if(Input.GetKeyDown(KeyCode.Space) && gameObject.GetComponent<KnightStats>().energy > 5 && onGround)
         {
+            walk.SetBool("jump", true);
             gameObject.GetComponent<KnightStats>().energy = gameObject.GetComponent<KnightStats>().energy - 5;
             rb.velocity = new Vector3(0f, 5f, 0f);
             onGround = false;
@@ -170,6 +171,7 @@ public class Player1Controls : MonoBehaviour
         if(collision.gameObject.tag == "Scenery" || collision.gameObject.tag == "npc" )
         {
             onGround = true;
+            walk.SetBool("jump", false);
         }
     }
 }
