@@ -62,11 +62,11 @@ public class KnightStats : MonoBehaviour {
             requiredExp = requiredExp + level;
             exp = 0;
         }
-        if(weapon[0].activeInHierarchy)
+        if(weapon[1].activeInHierarchy)
         {
             AD = 1*Ab1;
         }
-        else if(weapon[1].activeInHierarchy)
+        else if(weapon[2].activeInHierarchy)
         {
           AD = 2*Ab1;
         }
@@ -102,7 +102,7 @@ public class KnightStats : MonoBehaviour {
         {
             if(timer < 30)
             {
-                if(timer%6 == 0)
+                if(timer%12 == 0 || timer % 12 == 1 || timer % 12 == 2 || timer % 12 == 3)
                 {
                     GetComponent<SpriteRenderer>().color = Color.gray;
                 }

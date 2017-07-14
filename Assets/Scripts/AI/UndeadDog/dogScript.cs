@@ -20,7 +20,7 @@ public class dogScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
         Thisdog.rotationSpeed = 7f;
-        Thisdog.hp = 4;
+        Thisdog.hp = 6;
         Thisdog.ms= .06f;
         damage = 2;
         source = GetComponent<AudioSource>();
@@ -32,7 +32,7 @@ public class dogScript : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         sniff = Random.Range(-5f, 5f);
-        if(Thisdog.hp==0)
+        if(Thisdog.hp<=0)
         {
             this.gameObject.SetActive(false);
             player.GetComponent<KnightStats>().exp = player.GetComponent<KnightStats>().exp + 2;

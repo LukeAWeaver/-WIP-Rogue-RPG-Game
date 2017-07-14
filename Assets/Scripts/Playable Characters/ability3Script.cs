@@ -66,11 +66,19 @@ public class ability3Script : MonoBehaviour {
         if (collision.gameObject.GetComponent<MonsterInterface>() != null)
         {
             if(collision.gameObject.GetComponent<MonsterInterface>().hp>1)
-            collision.gameObject.GetComponent<MonsterInterface>().hp = collision.gameObject.GetComponent<MonsterInterface>().hp - 2;
+            collision.gameObject.GetComponent<MonsterInterface>().hp = collision.gameObject.GetComponent<MonsterInterface>().hp - 2 * knight.GetComponent<KnightStats>().AD;
             else
             {
                 collision.gameObject.GetComponent<MonsterInterface>().hp--;
             }
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<MonsterInterface>() != null)
+        {
+            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 
