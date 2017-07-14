@@ -21,7 +21,6 @@ public class E_ClubSwing : MonoBehaviour
     {
     
     }
-
     private void OnTriggerEnter(Collider collision)
     {
         int changeInHP = PlayerPrefs.GetInt("currentHP") - 1;
@@ -30,11 +29,11 @@ public class E_ClubSwing : MonoBehaviour
             collision.GetComponent<Rigidbody>().velocity += new Vector3(0f, 2f, 0f);
             if (thisGoblin.GetComponent<MonsterInterface>().isFlippingLeft)
             {
-                collision.GetComponent<Rigidbody>().velocity += new Vector3(-6f, 0f, 0f);
+                collision.GetComponent<Rigidbody>().velocity += new Vector3(-8f, 0f, 0f);
             }
             if (thisGoblin.GetComponent<MonsterInterface>().isFlippingRight)
             {
-                collision.GetComponent<Rigidbody>().velocity += new Vector3(6f, 0f, 0f);
+                collision.GetComponent<Rigidbody>().velocity += new Vector3(8f, 0f, 0f);
             }
             CombatTextManager.Instance.CreateText(collision.transform.position);
             PlayerPrefs.SetInt("currentHP", changeInHP);

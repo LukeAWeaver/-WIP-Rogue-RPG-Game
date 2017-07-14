@@ -31,6 +31,7 @@ public class coinPickUp : MonoBehaviour
             source.Play();
             collision.gameObject.GetComponent<KnightStats>().gold = collision.gameObject.GetComponent<KnightStats>().gold + goldAmount;
             gameObject.SetActive(false);
+            Destroy(this.gameObject);
         }
 
 

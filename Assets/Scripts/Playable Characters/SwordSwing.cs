@@ -27,7 +27,6 @@ public class SwordSwing : MonoBehaviour {
     {
         if(Input.GetKey("3") && player.GetComponent<KnightStats>().energy>=10)
         {
-            // swing.Play("Ability3");
             if (swing.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
             {
                 source.clip = ability3;
@@ -53,6 +52,7 @@ public class SwordSwing : MonoBehaviour {
             {
                 swing.SetInteger("state", 0);
             }
+
         }
 
 
@@ -94,11 +94,11 @@ public class SwordSwing : MonoBehaviour {
             collision.gameObject.GetComponent<MonsterInterface>().hp = collision.gameObject.GetComponent<MonsterInterface>().hp -player.GetComponent<KnightStats>().AD;
             if (player.GetComponent<Player1Controls>().isFlippingLeft)
             {
-                collision.GetComponent<Rigidbody>().velocity += new Vector3(-3f, 0f, 0f);
+                collision.GetComponent<Rigidbody>().velocity += new Vector3(-player.GetComponent<Player1Controls>().Ab1*10f, 0f, 0f);
             }
             if (player.GetComponent<Player1Controls>().isFlippingRight)
             {
-                collision.GetComponent<Rigidbody>().velocity += new Vector3(4f, 0f, 0f);
+                collision.GetComponent<Rigidbody>().velocity += new Vector3(player.GetComponent<Player1Controls>().Ab1 * 10f, 0f, 0f);
             }
 
         }

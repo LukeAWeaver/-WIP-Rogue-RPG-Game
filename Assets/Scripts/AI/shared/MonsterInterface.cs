@@ -23,10 +23,11 @@ public class MonsterInterface : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(hp == 0)
+        if(hp <= 0)
         {
             var gold = Instantiate(reward, transform.position, transform.rotation);
             gold.transform.localScale = gold.transform.localScale * .4f;
+            Destroy(transform.parent.gameObject);
         }
     }
     public void CheckFlipping()

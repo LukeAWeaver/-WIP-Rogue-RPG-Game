@@ -36,7 +36,7 @@ public class Player1Controls : MonoBehaviour
         {
             walk.SetBool("jump", true);
             gameObject.GetComponent<KnightStats>().energy = gameObject.GetComponent<KnightStats>().energy - 5;
-            rb.velocity = new Vector3(0f, 5f, 0f);
+            rb.velocity = new Vector3(0f, 4f + Ab1, 0f);
             onGround = false;
         }
         if(rb.velocity.y <0)
