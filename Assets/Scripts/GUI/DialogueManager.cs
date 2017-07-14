@@ -7,6 +7,7 @@ public class DialogueManager : MonoBehaviour {
     public GameObject playerReplyYes;
     public GameObject playerReplyNo;
     public GameObject guardIcon;
+    public GameObject BrewerIcon;
     public GameObject playerIcon;
     public GameObject player;
     public GameObject healthPots;
@@ -18,6 +19,7 @@ public class DialogueManager : MonoBehaviour {
         dialogActive = false;
         dBox.SetActive(false);
         guardIcon.SetActive(false);
+        BrewerIcon.SetActive(false);
         playerIcon.SetActive(false);
         playerReplyNo.SetActive(false);
         playerReplyYes.SetActive(false);
@@ -25,11 +27,12 @@ public class DialogueManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))
+        if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A)) //movement disables dialog box
         {
             dialogActive = false;
             dBox.SetActive(false);
             guardIcon.SetActive(false);
+            BrewerIcon.SetActive(false);
             playerIcon.SetActive(false);
             playerReplyNo.SetActive(false);
             playerReplyYes.SetActive(false);
@@ -42,6 +45,7 @@ public class DialogueManager : MonoBehaviour {
             dBox.SetActive(false);
             dialogActive = false;
             guardIcon.SetActive(false);
+            BrewerIcon.SetActive(false);
             npc = "None";
         }
         //Potion Brewer Interactions
@@ -73,6 +77,7 @@ public class DialogueManager : MonoBehaviour {
                 playerIcon.SetActive(false);
                 playerReplyNo.SetActive(false);
                 playerReplyYes.SetActive(false);
+                BrewerIcon.SetActive(false);
                 dBox.SetActive(false);
                 npc = "None";
                 Debug.Log(PlayerPrefs.GetInt("hpPots"));
@@ -91,6 +96,7 @@ public class DialogueManager : MonoBehaviour {
         if(npc == "PotionBrewer")
         {
             guardIcon.SetActive(false);
+            BrewerIcon.SetActive(true);
             this.npc = npc;
         }
     }
