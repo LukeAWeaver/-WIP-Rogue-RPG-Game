@@ -5,8 +5,10 @@ Village:
 	-Dialog box SFX
 
 Player:
-	-Player Ability 1,2, and 4
-	
+	-Player Ability 1,2,and 4.
+	Ability 1 - Offensive/Normal - Hits around player for high damage CD - 5s 
+	Ability 2 - Offensive/Normal - Buffs player damage for short time - 12s
+	Ability 4 - Offensive/Ultimate - Heavy hitting attack, one person. - 30s
 AI:
 	-Dogs should circle player and randomly charge in
 	-AI should have mob mentality, if a mob sees the player nearby mobs of the same type should be attracted to the player too

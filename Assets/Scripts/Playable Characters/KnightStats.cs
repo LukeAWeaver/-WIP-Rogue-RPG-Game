@@ -19,7 +19,13 @@ public class KnightStats : MonoBehaviour {
     private float resting;
     public Slider expBar;
 	// Use this for initialization
-	void Start () {
+  public int AD=0;
+  public GameObject[] weapon;
+  public int Ab1;
+
+	void Start ()
+  {
+        Ab1=1;
         resting = 3;
         exp = 0;
         isRecovering = false;
@@ -56,7 +62,15 @@ public class KnightStats : MonoBehaviour {
             requiredExp = requiredExp + level;
             exp = 0;
         }
-	}
+        if(weapon[0].activeInHierarchy)
+        {
+            AD = 1*Ab1;
+        }
+        else if(weapon[1].activeInHierarchy)
+        {
+          AD = 2*Ab1;
+        }
+      }
     public void EnergyRegen()
     {
         if (energy<100 && Input.anyKey && !Input.GetKey("left shift"))
@@ -80,7 +94,7 @@ public class KnightStats : MonoBehaviour {
         {
             resting = 13;
         }
-        
+
     }
     public void resetHP()
     {
@@ -103,8 +117,8 @@ public class KnightStats : MonoBehaviour {
                 timer = 0;
                 isRecovering = false;
             }
-     
-            
+
+
         }
     }
 }
