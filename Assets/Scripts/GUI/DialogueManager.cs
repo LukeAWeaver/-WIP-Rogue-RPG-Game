@@ -80,7 +80,6 @@ public class DialogueManager : MonoBehaviour {
                 BrewerIcon.SetActive(false);
                 dBox.SetActive(false);
                 npc = "None";
-                Debug.Log(PlayerPrefs.GetInt("hpPots"));
             }
         }
     }
