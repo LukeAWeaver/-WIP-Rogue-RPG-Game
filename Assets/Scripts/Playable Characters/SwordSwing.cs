@@ -11,6 +11,7 @@ public class SwordSwing : MonoBehaviour {
     public GameObject ab3;
     public GameObject player;
     private AudioSource source;
+    private bool AAOnCD;
     public int test;
 
     // Use this for initialization
@@ -19,13 +20,14 @@ public class SwordSwing : MonoBehaviour {
         source = GetComponent<AudioSource>();
         test = 0;
         gameObject.GetComponent<BoxCollider>().enabled = false;
-
+        AAOnCD = false;
     }
 
     // Update is called once per frame
     void Update ()
     {
-        if(Input.GetKey("3") && player.GetComponent<KnightStats>().energy>=10)
+        //ability 3 animation BEGIN
+        if (Input.GetKey("3") && player.GetComponent<KnightStats>().energy>=10)
         {
             if (swing.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
             {
@@ -54,27 +56,10 @@ public class SwordSwing : MonoBehaviour {
             }
 
         }
-
-
-
-
-
-        else if (Input.GetMouseButtonDown(0) && GetComponentInParent<KnightStats>().energy > 0)
+        //ability 3 animation END
+        else if (Input.GetMouseButtonDown(0) && GetComponentInParent<KnightStats>().energy > 0 && !AAOnCD)
         {
-            GetComponentInParent<KnightStats>().energy --;
-            GetComponent<Collider>().enabled = true;
-            swing.SetInteger("state", 1);
-            source.clip = swinging;
-            if (swing.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !swing.IsInTransition(0))
-                source.Play();
-
-        }
-
-        else if (Input.GetMouseButtonUp(0))
-        {
-            GetComponent<Collider>().enabled = false;
-            new WaitForSeconds(2);
-            swing.SetInteger("state", 0);
+            StartCoroutine(AutoAttack());
         }
         else if (!(Input.GetKey("a") && Input.GetKey("d")) && (Input.GetKey("a") || Input.GetKey("d") || Input.GetKey("w") || Input.GetKey("s")) && !(Input.GetKey("s") && Input.GetKey("w")))
         {
@@ -86,7 +71,6 @@ public class SwordSwing : MonoBehaviour {
     //handles collisions
     private void OnTriggerEnter(Collider collision)
     {
-
         if (collision.gameObject.GetComponent<MonsterInterface>() != null)
         {
             CombatTextManager.Instance.CreateText(collision.transform.position);
@@ -100,11 +84,30 @@ public class SwordSwing : MonoBehaviour {
             {
                 collision.GetComponent<Rigidbody>().velocity += new Vector3(player.GetComponent<Player1Controls>().Ab1 * 10f, 0f, 0f);
             }
-
         }
     }
     private void OnCollisionExit(Collision collision)
     {
+
+    }
+    IEnumerator AutoAttack()
+    {
+        AAOnCD = true;
+        GetComponentInParent<KnightStats>().energy--;
+        GetComponent<Collider>().enabled = true;
+        swing.SetInteger("state", 1);
+        source.clip = swinging;
+        if (swing.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !swing.IsInTransition(0))
+        {
+            source.Play();
+        }
+        yield return new WaitForSeconds(.2f);
+        GetComponent<Collider>().enabled = false;
+        swing.SetInteger("state", 0);
+
+        yield return new WaitForSeconds(.4f);
+        AAOnCD = false;
+
 
     }
 }

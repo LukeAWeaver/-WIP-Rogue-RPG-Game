@@ -40,11 +40,13 @@ public class ability3Script : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
-            if (test == 0 && swing.GetCurrentAnimatorStateInfo(0).IsName("default"))
-            {
-                gameObject.GetComponent<Collider>().enabled = true;
-                swing.SetBool("ability3", true);
-                test++;
+        if (test == 0 && swing.GetCurrentAnimatorStateInfo(0).IsName("default"))
+        {
+            if(knight.GetComponentInChildren<ability1Script>().isActive)
+             transform.localScale = new Vector3(1, 1, 1);
+            gameObject.GetComponent<Collider>().enabled = true;
+            swing.SetBool("ability3", true);
+            test++;
             knight.GetComponent<KnightStats>().energy = knight.GetComponent<KnightStats>().energy - 10;
         }
         else if (test == 1 && swing.GetCurrentAnimatorStateInfo(0).IsName("ability3Release") && knight.GetComponent<KnightStats>().energy >=10)
