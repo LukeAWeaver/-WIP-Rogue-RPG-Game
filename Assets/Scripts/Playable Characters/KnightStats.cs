@@ -36,7 +36,7 @@ public class KnightStats : MonoBehaviour {
         requiredExp = level + 3;
         health = 6;
         tempHP = 6;
-        energy = 100;
+        energy = 10000;
         isRecovering = false;
         gold = PlayerPrefs.GetInt("gold");
         level = PlayerPrefs.GetInt("level");
