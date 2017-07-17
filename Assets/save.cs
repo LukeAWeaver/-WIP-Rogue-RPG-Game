@@ -6,7 +6,7 @@ public class save : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        PlayerPrefs.SetInt("currentHP", 4);
+        PlayerPrefs.SetInt("currentHP", 12);
         PlayerPrefs.SetInt("hpPots", 0);
     }
 
