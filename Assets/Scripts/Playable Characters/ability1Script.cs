@@ -35,7 +35,7 @@ public class ability1Script : MonoBehaviour {
       }
       if(!isActive || knight.GetComponent<KnightStats>().energy < 1)
       {
-    isActive = false;
+        isActive = false;
         knight.GetComponent<Player1Controls>().Ab1=1f;
         knight.GetComponent<KnightStats>().Ab1=1;
         knight.GetComponent<SpriteRenderer>().color = Color.white;
