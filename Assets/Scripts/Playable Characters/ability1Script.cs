@@ -25,16 +25,7 @@ public class ability1Script : MonoBehaviour {
             {
                 isActiveToggle = 1;
             }
-        knight.GetComponent<KnightStats>().energy=knight.GetComponent<KnightStats>().energy-.1f;
-      }
-      if(!isActive || knight.GetComponent<KnightStats>().energy < 1)
-      {
-        isActive = false;
-        knight.GetComponent<Player1Controls>().Ab1=1f;
-        knight.GetComponent<KnightStats>().Ab1=1;
-        knight.GetComponent<SpriteRenderer>().color = Color.white;
-            KnightIcon.GetComponent<Image>().color = Color.white;
-            foreach (GameObject weapon in weapons)
+            else if (Input.GetKeyDown("1") && GetComponentInParent<KnightStats>().energy > 0 && isActiveToggle == 1)
             {
                 isActiveToggle = 0;
             }
