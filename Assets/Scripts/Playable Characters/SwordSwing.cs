@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SwordSwing : MonoBehaviour {
     Animator swing;
@@ -10,7 +11,9 @@ public class SwordSwing : MonoBehaviour {
     public AudioClip hittingWood;
     public GameObject ab3;
     public GameObject player;
+    public GameObject ability3Icon;
     private AudioSource source;
+    private bool ab3OnCD;
     private bool AAOnCD;
     public int test;
 
@@ -21,13 +24,14 @@ public class SwordSwing : MonoBehaviour {
         test = 0;
         gameObject.GetComponent<BoxCollider>().enabled = false;
         AAOnCD = false;
+        ab3OnCD = false;
     }
 
     // Update is called once per frame
     void Update ()
     {
         //ability 3 animation BEGIN
-        if (Input.GetKey("3") && player.GetComponent<KnightStats>().energy>=10)
+        if (Input.GetKey("3") && player.GetComponent<KnightStats>().energy>=10 && ab3OnCD == false)
         {
             if (swing.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
             {
@@ -49,6 +53,8 @@ public class SwordSwing : MonoBehaviour {
                 swordSwing.gameObject.GetComponent<ability3Script>().test = 0;
 
                 test++;
+                StartCoroutine(ability3CD());
+
             }
             else if (swing.GetCurrentAnimatorStateInfo(0).IsName("Ability3Hold") && test == 3)
             {
@@ -109,5 +115,14 @@ public class SwordSwing : MonoBehaviour {
         AAOnCD = false;
 
 
+    }
+
+    IEnumerator ability3CD()
+    {
+        ab3OnCD = true;
+        ability3Icon.GetComponent<Image>().color = new Color32(128, 113, 113, 255);
+        yield return new WaitForSeconds(1f);
+        ability3Icon.GetComponent<Image>().color = Color.white;
+        ab3OnCD = false;
     }
 }

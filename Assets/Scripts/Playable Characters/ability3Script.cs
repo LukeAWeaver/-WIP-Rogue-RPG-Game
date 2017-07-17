@@ -13,10 +13,6 @@ public class ability3Script : MonoBehaviour {
     void Start ()
     {
         test = 0;
-        //  else
-        //  {
-        //      transform.localScale = -trans
-        //  }
         var offset = knight.transform.position;
         swing = GetComponent<Animator>();
         var theScale = transform.localScale;
@@ -34,7 +30,7 @@ public class ability3Script : MonoBehaviour {
         offset.y = offset.y + .5f;
         transform.localScale = theScale;
         transform.position = offset;
-        speed = knight.GetComponent<Player1Controls>().velocity;
+        speed = knight.GetComponent<KnightStats>().movementSpeed;
     }
 
     // Update is called once per frame
@@ -42,7 +38,7 @@ public class ability3Script : MonoBehaviour {
 
         if (test == 0 && swing.GetCurrentAnimatorStateInfo(0).IsName("default"))
         {
-            if(knight.GetComponentInChildren<ability1Script>().isActive)
+            if (knight.GetComponentInChildren<ability1Script>().isActiveToggle ==1)
              transform.localScale = new Vector3(1, 1, 1);
             gameObject.GetComponent<Collider>().enabled = true;
             swing.SetBool("ability3", true);

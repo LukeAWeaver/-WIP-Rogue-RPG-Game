@@ -7,14 +7,18 @@ using UnityEngine.UI;
 public class KnightStats : MonoBehaviour {
 
     public int health;
-    public int tempHP;
     public float energy;
+    public float attackSpeed;
+    public int lifeSteal;
+    public float critChance;
+    public float movementSpeed;
+    public int tempHP;
     public int exp;
     public int requiredExp;
     public int level;
     public int gold;
     public float timer;
-    public float expbarValue;
+    public float currentEXP;
     public bool isRecovering;
     private float resting;
     public Slider expBar;
@@ -28,14 +32,17 @@ public class KnightStats : MonoBehaviour {
         Ab1=1;
         resting = 3;
         exp = 0;
-        isRecovering = false;
         timer = 0;
-        gold = PlayerPrefs.GetInt("gold");
-        level = PlayerPrefs.GetInt("level");
         requiredExp = level + 3;
         health = 6;
         tempHP = 6;
         energy = 100;
+        isRecovering = false;
+        gold = PlayerPrefs.GetInt("gold");
+        level = PlayerPrefs.GetInt("level");
+        movementSpeed = PlayerPrefs.GetFloat("ms");
+        critChance = PlayerPrefs.GetFloat("critChance");
+        attackSpeed = PlayerPrefs.GetFloat("atkSpeed");
         InvokeRepeating("resetHP", 0, .03f);
         InvokeRepeating("EnergyRegen", 0, .25f);
     }
@@ -43,19 +50,19 @@ public class KnightStats : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        expbarValue = (float)exp / (float)requiredExp;
-        expBar.value = expbarValue;
+        currentEXP = (float)exp / (float)requiredExp;
+        expBar.value = currentEXP;
         PlayerPrefs.SetInt("gold", gold);
         PlayerPrefs.SetInt("level", level);
+        PlayerPrefs.SetFloat("ms", movementSpeed);
+        PlayerPrefs.SetFloat("critChance", critChance);
+        PlayerPrefs.SetFloat("atkSpeed", attackSpeed);
         health = PlayerPrefs.GetInt("currentHP");
         if(health <1)
         {
             SceneManager.LoadScene("OverWorld");
         }
-        else
-        {
-            this.gameObject.SetActive(true);
-        }
+
         if(exp>=requiredExp)
         {
             level++;
@@ -71,6 +78,8 @@ public class KnightStats : MonoBehaviour {
           AD = 2*Ab1;
         }
       }
+
+    //Regenerating energy algorithm when walking or standing still
     public void EnergyRegen()
     {
         if (energy<100 && Input.anyKey && !Input.GetKey("left shift"))
@@ -96,6 +105,8 @@ public class KnightStats : MonoBehaviour {
         }
 
     }
+
+    //invulnerability code after getting hit
     public void resetHP()
     {
         if (isRecovering)

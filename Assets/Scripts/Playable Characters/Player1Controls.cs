@@ -5,7 +5,6 @@ using UnityEngine;
 public class Player1Controls : MonoBehaviour
 {
     public float Ab1;
-    public float velocity = .05f;
     private float fallMultiplier = 1.5f;
     private float lowJumpMultiplier = 2.22f;
     private bool isMoving;
@@ -65,7 +64,7 @@ public class Player1Controls : MonoBehaviour
                     isFlippingLeft = false;
                     isFlippingRight = true;
                 }
-                transform.Translate(velocity, 0f, 0f);
+                transform.Translate(gameObject.GetComponent<KnightStats>().movementSpeed, 0f, 0f);
                 previousKey = 'd';
             }
             if (Input.GetKey("a"))
@@ -75,16 +74,16 @@ public class Player1Controls : MonoBehaviour
                     isFlippingLeft = true;
                     isFlippingRight = false;
                 }
-                transform.Translate(-velocity, 0f, 0f);
+                transform.Translate(-gameObject.GetComponent<KnightStats>().movementSpeed, 0f, 0f);
                 previousKey = 'a';
             }
             if (Input.GetKey("w"))
             {
-                transform.Translate(0f, 0f, velocity);
+                transform.Translate(0f, 0f, gameObject.GetComponent<KnightStats>().movementSpeed);
             }
             if (Input.GetKey("s"))
             {
-                transform.Translate(0f, 0f, -velocity);
+                transform.Translate(0f, 0f, -gameObject.GetComponent<KnightStats>().movementSpeed);
             }
             if (isMoving && isRunning && Input.GetKey("left shift"))
             {
@@ -101,7 +100,7 @@ public class Player1Controls : MonoBehaviour
         if (Input.GetKey("left shift") && (Input.GetKey("a") || Input.GetKey("d") || Input.GetKey("w") || Input.GetKey("s")))
         {
             isRunning = true;
-            velocity = 0.05f*Ab1;
+            gameObject.GetComponent<KnightStats>().movementSpeed = 0.05f*Ab1;
         }
         else
         {
@@ -116,7 +115,7 @@ public class Player1Controls : MonoBehaviour
             isMoving = true;
             walk.SetBool("walking", true);
             if (walk.GetBool("roll") == false)
-                velocity = 0.02f*Ab1;
+                gameObject.GetComponent<KnightStats>().movementSpeed = 0.02f*Ab1;
         }
     }
     public void CheckRoll()
@@ -128,7 +127,7 @@ public class Player1Controls : MonoBehaviour
                 gameObject.GetComponent<KnightStats>().energy = gameObject.GetComponent<KnightStats>().energy - 20;
             }
             walk.SetBool("roll", true);
-            velocity = 0.1f*Ab1;
+            gameObject.GetComponent<KnightStats>().movementSpeed = 0.1f*Ab1;
         }
         if (walk.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !walk.IsInTransition(0))
         {

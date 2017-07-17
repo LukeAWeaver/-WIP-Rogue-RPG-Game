@@ -34,7 +34,7 @@ public class ability4Script : MonoBehaviour {
         offset.y = offset.y + .5f;
         transform.localScale = theScale;
         transform.position = offset;
-        speed = knight.GetComponent<Player1Controls>().velocity;
+        speed = knight.GetComponent<KnightStats>().movementSpeed;
     }
 
     // Update is called once per frame
