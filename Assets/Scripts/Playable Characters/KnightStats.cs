@@ -16,6 +16,7 @@ public class KnightStats : MonoBehaviour {
     public int exp;
     public int requiredExp;
     public int level;
+    public int SkillPoints;
     public int gold;
     public float timer;
     public float currentEXP;
@@ -40,6 +41,7 @@ public class KnightStats : MonoBehaviour {
         isRecovering = false;
         gold = PlayerPrefs.GetInt("gold");
         level = PlayerPrefs.GetInt("level");
+        SkillPoints = PlayerPrefs.GetInt("SP");
         movementSpeed = PlayerPrefs.GetFloat("ms");
         critChance = PlayerPrefs.GetFloat("critChance");
         attackSpeed = PlayerPrefs.GetFloat("atkSpeed");
@@ -54,6 +56,7 @@ public class KnightStats : MonoBehaviour {
         expBar.value = currentEXP;
         PlayerPrefs.SetInt("gold", gold);
         PlayerPrefs.SetInt("level", level);
+        PlayerPrefs.SetInt("SP", SkillPoints);
         PlayerPrefs.SetFloat("ms", movementSpeed);
         PlayerPrefs.SetFloat("critChance", critChance);
         PlayerPrefs.SetFloat("atkSpeed", attackSpeed);
@@ -66,8 +69,10 @@ public class KnightStats : MonoBehaviour {
         if(exp>=requiredExp)
         {
             level++;
+            SkillPoints++;
             requiredExp = requiredExp + level;
             exp = 0;
+
         }
         if(weapon[1].activeInHierarchy)
         {
@@ -131,5 +136,11 @@ public class KnightStats : MonoBehaviour {
 
 
         }
+    }
+    public void STatkSpeed()
+    {
+        Debug.Log("test");
+        attackSpeed = attackSpeed + .1f;
+        SkillPoints--;
     }
 }

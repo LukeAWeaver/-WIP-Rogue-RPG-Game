@@ -6,19 +6,21 @@ using UnityEngine.UI;
 
 public class SwordSwing : MonoBehaviour {
     Animator swing;
+    private int test;
+    public float atkSpeedMod;
     public AudioClip swinging;
     public AudioClip ability3;
     public AudioClip hittingWood;
     public GameObject ab3;
-    public GameObject player;
     public GameObject ability3Icon;
     private AudioSource source;
+    private GameObject player;
     private bool ab3OnCD;
     private bool AAOnCD;
-    public int test;
 
     // Use this for initialization
     void Start () {
+        player = FindObjectOfType<KnightStats>().gameObject;
         swing = GetComponent<Animator>();
         source = GetComponent<AudioSource>();
         test = 0;
@@ -29,6 +31,14 @@ public class SwordSwing : MonoBehaviour {
 
     void Update ()
     {
+        if(player.GetComponent<KnightStats>().weapon[0].gameObject.activeInHierarchy)
+        {
+            atkSpeedMod = .6f;
+        }
+        else
+        {
+            atkSpeedMod = 0f;
+        }
         //ability 3 animation BEGIN
         if (Input.GetKey("3") && player.GetComponent<KnightStats>().energy>=10 && ab3OnCD == false)
         {
@@ -107,7 +117,7 @@ public class SwordSwing : MonoBehaviour {
         GetComponent<Collider>().enabled = false;
         swing.SetInteger("state", 0);
 
-        yield return new WaitForSeconds(.4f);
+        yield return new WaitForSeconds(PlayerPrefs.GetFloat("atkSpeed") - atkSpeedMod);
         AAOnCD = false;
     }
 
