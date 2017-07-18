@@ -11,6 +11,7 @@ public class energy : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        player = FindObjectOfType<KnightStats>().gameObject;
         text = GetComponent<Text>();
     }
 

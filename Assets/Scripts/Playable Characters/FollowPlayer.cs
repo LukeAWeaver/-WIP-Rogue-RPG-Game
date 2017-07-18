@@ -7,10 +7,10 @@ public class FollowPlayer : MonoBehaviour
     public GameObject player;
 	void Start ()
     {
-		
-	}
-	
-	void Update ()
+        player = FindObjectOfType<KnightStats>().gameObject;
+    }
+
+    void Update ()
     {
         var pos = player.transform.position;
         pos.y = pos.y + 3f;

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ability1Script : MonoBehaviour {
 
-    public GameObject knight;
+    private GameObject knight;
     public Image KnightIcon;
     public GameObject[] weapons;
     public GameObject ability1Icon;
@@ -13,6 +13,7 @@ public class ability1Script : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        knight = FindObjectOfType<KnightStats>().gameObject;
         isActiveToggle = 0;
         onCD = false;
     }

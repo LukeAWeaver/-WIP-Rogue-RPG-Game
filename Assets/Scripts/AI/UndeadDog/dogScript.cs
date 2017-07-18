@@ -19,6 +19,7 @@ public class dogScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        player = FindObjectOfType<KnightStats>().gameObject;
         Thisdog.rotationSpeed = 7f;
         Thisdog.hp = 6;
         Thisdog.ms= .06f;

@@ -9,6 +9,7 @@ public class ability2Script : MonoBehaviour {
 
     void Start ()
     {
+        gameObject.GetComponent<Collider>().enabled = false;
       check = false;
     }
 
@@ -17,7 +18,8 @@ public class ability2Script : MonoBehaviour {
     {
       if(Input.GetKeyDown("2") && GetComponentInParent<KnightStats>().energy > 20)
       {
-        check = !check;
+            gameObject.GetComponent<Collider>().enabled = true;
+            check = !check;
         knight.GetComponent<KnightStats>().energy = knight.GetComponent<KnightStats>().energy - 20;
       }
     }
@@ -35,6 +37,6 @@ public class ability2Script : MonoBehaviour {
 
     private void OnCollisionExit(Collision collision)
     {
-
+        gameObject.GetComponent<Collider>().enabled = false;
     }
-  }
+}

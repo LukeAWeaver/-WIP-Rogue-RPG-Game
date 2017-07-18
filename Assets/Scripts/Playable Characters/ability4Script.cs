@@ -11,6 +11,8 @@ public class ability4Script : MonoBehaviour {
     void Start ()
     {
         check = false;
+        gameObject.GetComponent<Collider>().enabled = false;
+
     }
 
     // Update is called once per frame
@@ -18,9 +20,15 @@ public class ability4Script : MonoBehaviour {
     {
       if(Input.GetKeyDown("4") && GetComponentInParent<KnightStats>().energy > 50)
       {
-        check = !check;
+            gameObject.GetComponent<Collider>().enabled = true;
+            check = !check;
         knight.GetComponent<KnightStats>().energy = knight.GetComponent<KnightStats>().energy - 50;
       }
+      else
+        {
+            gameObject.GetComponent<Collider>().enabled = false;
+
+        }
     }
 
     private void OnTriggerStay(Collider collision)
@@ -46,7 +54,7 @@ public class ability4Script : MonoBehaviour {
 
     private void OnCollisionExit(Collision collision)
     {
-
+      //  gameObject.GetComponent<Collider>().enabled = false;
     }
 
 }

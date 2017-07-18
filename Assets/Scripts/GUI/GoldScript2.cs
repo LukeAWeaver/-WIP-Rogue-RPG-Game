@@ -12,6 +12,7 @@ public class GoldScript2 : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        player = FindObjectOfType<KnightStats>().gameObject;
         stats = player.GetComponent<KnightStats>();
     }
 

@@ -8,28 +8,30 @@ using UnityEngine.SceneManagement;
 public class archerAI : MonoBehaviour
 {
     public string flip;
-    public GameObject player;
-    public MonsterInterface Thisgoblin;
-    public GameObject npc;
+    private GameObject player;
+    public MonsterInterface ThisNPCStats;
+    public GameObject ThisNPC;
     public bool inSight;
     public float range;
     public int counter;
     public float xVelocity;
     public float yVelocity;
 
-    // Use this for initialization
     void Start()
     {
+        player = FindObjectOfType<KnightStats>().gameObject;
+        ThisNPC = gameObject;
+        ThisNPCStats = gameObject.GetComponent<MonsterInterface>();
         counter = 0;
         InvokeRepeating("movement", 0, .03f);
-        Thisgoblin.hp = 3;
-        Thisgoblin.ms = .023f;
+        ThisNPCStats.hp = 3;
+        ThisNPCStats.ms = .023f;
     }
 
     void movement()
     {
         var target = player.transform.position;
-        var gp = Thisgoblin.transform.position;
+        var gp = ThisNPCStats.transform.position;
         range = Mathf.Sqrt((target.x - gp.x) * (target.x - gp.x) + (target.y - gp.y) * (target.y - gp.y));
 
         if (range < 5)
@@ -57,14 +59,11 @@ public class archerAI : MonoBehaviour
         }
     }
 
-
-
-    // Update is called once per frame
     void Update()
     {
-        if (Thisgoblin.hp <= 0)
+        if (ThisNPCStats.hp <= 0)
         {
-            npc.SetActive(false);
+            ThisNPC.SetActive(false);
             player.GetComponent<KnightStats>().exp++;
         }
         var target = player.transform.position;
@@ -89,11 +88,6 @@ public class archerAI : MonoBehaviour
                 transform.Translate(0f, 0f,0.0001f);
             }
         }
-
-
-
-
-
     }
     public void Flip(string Methodflip)
     {
@@ -110,11 +104,5 @@ public class archerAI : MonoBehaviour
                 theScale.x = -theScale.x;
         }
         transform.localScale = theScale;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-
-
     }
 }

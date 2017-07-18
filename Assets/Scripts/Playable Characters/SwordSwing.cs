@@ -27,7 +27,6 @@ public class SwordSwing : MonoBehaviour {
         ab3OnCD = false;
     }
 
-    // Update is called once per frame
     void Update ()
     {
         //ability 3 animation BEGIN
@@ -79,7 +78,7 @@ public class SwordSwing : MonoBehaviour {
     {
         if (collision.gameObject.GetComponent<MonsterInterface>() != null)
         {
-            CombatTextManager.Instance.CreateText(collision.transform.position);
+            //CombatTextManager.Instance.CreateText(collision.transform.position);
 
             collision.gameObject.GetComponent<MonsterInterface>().hp = collision.gameObject.GetComponent<MonsterInterface>().hp -player.GetComponent<KnightStats>().AD;
             if (player.GetComponent<Player1Controls>().isFlippingLeft)
@@ -92,10 +91,7 @@ public class SwordSwing : MonoBehaviour {
             }
         }
     }
-    private void OnCollisionExit(Collision collision)
-    {
 
-    }
     IEnumerator AutoAttack()
     {
         AAOnCD = true;
@@ -113,8 +109,6 @@ public class SwordSwing : MonoBehaviour {
 
         yield return new WaitForSeconds(.4f);
         AAOnCD = false;
-
-
     }
 
     IEnumerator ability3CD()

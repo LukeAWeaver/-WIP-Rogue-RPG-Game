@@ -35,7 +35,7 @@ public class E_ClubSwing : MonoBehaviour
             {
                 collision.GetComponent<Rigidbody>().velocity += new Vector3(8f, 0f, 0f);
             }
-            CombatTextManager.Instance.CreateText(collision.transform.position);
+            //CombatTextManager.Instance.CreateText(collision.transform.position);
             PlayerPrefs.SetInt("currentHP", changeInHP);
             collision.gameObject.GetComponent<KnightStats>().isRecovering = true;
             source.clip = thud;

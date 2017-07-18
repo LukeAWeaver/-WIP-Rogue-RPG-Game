@@ -17,6 +17,7 @@ public class bowScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        player = FindObjectOfType<KnightStats>().gameObject;
         source = GetComponent<AudioSource>();
         swing = GetComponent<Animator>();
 

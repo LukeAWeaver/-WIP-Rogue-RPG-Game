@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class arrowScript : MonoBehaviour {
-    public GameObject player;
+    private GameObject player;
     float x;
     float z;
     float x2;
@@ -11,12 +11,7 @@ public class arrowScript : MonoBehaviour {
     float z2;
     float xdiff;
     float zdiff;
-    // Use this for initialization
-    void start() {
 
-    }
-
-    // Update is called once per frame
     void Update() {
         if (distance < 120)
         {
@@ -42,6 +37,7 @@ public class arrowScript : MonoBehaviour {
     }
     public void Awake()
     {
+        player = FindObjectOfType<KnightStats>().gameObject;
         x = player.transform.position.x;
         z = player.transform.position.z;
         x2 = transform.position.x;

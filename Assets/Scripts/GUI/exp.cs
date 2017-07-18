@@ -8,6 +8,7 @@ public class exp : MonoBehaviour {
     Text text;
 	// Use this for initialization
 	void Start () {
+        player = FindObjectOfType<KnightStats>().gameObject;
         text = GetComponent<Text>();
 	}
 	

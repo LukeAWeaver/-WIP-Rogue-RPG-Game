@@ -12,9 +12,11 @@ public class MonsterInterface : MonoBehaviour
     public GameObject reward;
     public float rotationSpeed;
     public int coinAmount;
+    private GameObject player;
     // Use this for initialization
     void Start()
     {
+        player = FindObjectOfType<KnightStats>().gameObject;
         isFlippingRight = false;
         isFlippingLeft = false;
         rotationSpeed = 5.0f;
