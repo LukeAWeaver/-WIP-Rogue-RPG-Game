@@ -11,7 +11,13 @@ public class arrowScript : MonoBehaviour {
     float z2;
     float xdiff;
     float zdiff;
-
+    private void Start()
+    {
+        if (Time.frameCount > 10)
+        {
+            StartCoroutine(DestroyArrow());
+        }
+    }
     void Update() {
         if (distance < 120)
         {
@@ -62,9 +68,14 @@ public class arrowScript : MonoBehaviour {
             CombatTextManager.Instance.CreateText(collision.transform.position);
             PlayerPrefs.SetInt("currentHP", changeInHP);
             collision.gameObject.GetComponent<KnightStats>().isRecovering = true; //im a genius
-            this.gameObject.SetActive(false);
-        }
+                Destroy(gameObject);
+            }
         collision.gameObject.GetComponent<KnightStats>().tempHP = collision.gameObject.GetComponent<KnightStats>().health;
         }
+    }
+    IEnumerator DestroyArrow()
+    {
+        yield return new WaitForSeconds(5f);
+        Destroy(gameObject);
     }
 }

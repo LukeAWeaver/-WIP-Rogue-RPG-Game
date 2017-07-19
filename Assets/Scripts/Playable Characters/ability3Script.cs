@@ -33,13 +33,19 @@ public class ability3Script : MonoBehaviour
         transform.localScale = theScale;
         transform.position = offset;
         speed = knight.GetComponent<KnightStats>().movementSpeed;
+        if(Time.frameCount>10)
+        {
+            StartCoroutine(destroyA3());
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.frameCount < 60)
-            gameObject.SetActive(false);
+        //if (Time.frameCount < 10)
+        //   gameObject.SetActive(false);
+
+
         if (test == 0 && swing.GetCurrentAnimatorStateInfo(0).IsName("default"))
         {
             gameObject.GetComponent<Collider>().enabled = true;
@@ -81,5 +87,9 @@ public class ability3Script : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    IEnumerator destroyA3()
+    {
+        yield return new WaitForSeconds(2f);
+        Destroy(gameObject);
+    }
 }
