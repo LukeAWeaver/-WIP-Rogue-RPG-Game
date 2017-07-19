@@ -23,12 +23,13 @@ public class KnightStats : MonoBehaviour {
     public bool isRecovering;
     private float resting;
     public Slider expBar;
-	// Use this for initialization
-  public int AD=0;
-  public GameObject[] weapon;
-  public int Ab1;
-
-	void Start ()
+    public int AD=0;
+    public GameObject[] weapon;
+    public int Ab1;
+    public int SPBonusATK;
+    
+    //called when scene loads or when object intantiated 
+    void Start ()
   {
         Ab1=1;
         resting = 3;
@@ -45,6 +46,7 @@ public class KnightStats : MonoBehaviour {
         movementSpeed = PlayerPrefs.GetFloat("ms");
         critChance = PlayerPrefs.GetFloat("critChance");
         attackSpeed = PlayerPrefs.GetFloat("atkSpeed");
+        SPBonusATK = PlayerPrefs.GetInt("SPBonusATK");
         InvokeRepeating("resetHP", 0, .03f);
         InvokeRepeating("EnergyRegen", 0, .25f);
     }
@@ -57,6 +59,7 @@ public class KnightStats : MonoBehaviour {
         PlayerPrefs.SetInt("gold", gold);
         PlayerPrefs.SetInt("level", level);
         PlayerPrefs.SetInt("SP", SkillPoints);
+        PlayerPrefs.SetInt("SPBonusATK", SPBonusATK);
         PlayerPrefs.SetFloat("ms", movementSpeed);
         PlayerPrefs.SetFloat("critChance", critChance);
         PlayerPrefs.SetFloat("atkSpeed", attackSpeed);
@@ -65,22 +68,27 @@ public class KnightStats : MonoBehaviour {
         {
             SceneManager.LoadScene("OverWorld");
         }
-
         if(exp>=requiredExp)
         {
             level++;
             SkillPoints++;
             requiredExp = requiredExp + level;
             exp = 0;
-
         }
-        if(weapon[1].activeInHierarchy)
+        if(weapon[0].activeInHierarchy)
         {
-            AD = 1*Ab1;
+            if (Ab1 == 2)
+                AD = 1 * Ab1 + SPBonusATK;
+            else
+                AD = 1;
         }
         else if(weapon[2].activeInHierarchy)
         {
-          AD = 2*Ab1;
+            if (Ab1 == 2)
+                AD = 2 * Ab1 + SPBonusATK;
+            else
+                AD = 2;
+            
         }
       }
 
@@ -133,14 +141,19 @@ public class KnightStats : MonoBehaviour {
                 timer = 0;
                 isRecovering = false;
             }
-
-
         }
     }
-    public void STatkSpeed()
+    public void SPatkSpeed() //not in use
     {
-        Debug.Log("test");
         attackSpeed = attackSpeed + .1f;
         SkillPoints--;
+    }
+    public void SPA1ATKPWR() //ability1 tier 1
+    {
+        if (SPBonusATK < 6 && SkillPoints>0) //max upgrades is 5
+        {
+            SPBonusATK++;
+            SkillPoints--;
+        }
     }
 }

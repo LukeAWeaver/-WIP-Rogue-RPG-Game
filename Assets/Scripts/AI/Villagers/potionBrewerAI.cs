@@ -36,7 +36,7 @@ public class potionBrewerAI : MonoBehaviour
         {
             if (Input.GetKeyUp(KeyCode.E))
             {
-                dManager.ShowBox(randomlyChosenDialogue, npc);
+                dManager.ShowBox(randomlyChosenDialogue, "PotionBrewer");
             }
         }
     }

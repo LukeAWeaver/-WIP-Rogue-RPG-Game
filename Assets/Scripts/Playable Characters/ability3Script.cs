@@ -38,6 +38,8 @@ public class ability3Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Time.frameCount < 60)
+            gameObject.SetActive(false);
         if (test == 0 && swing.GetCurrentAnimatorStateInfo(0).IsName("default"))
         {
             gameObject.GetComponent<Collider>().enabled = true;

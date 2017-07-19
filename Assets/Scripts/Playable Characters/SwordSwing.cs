@@ -31,7 +31,11 @@ public class SwordSwing : MonoBehaviour {
 
     void Update ()
     {
-        if(player.GetComponent<KnightStats>().weapon[0].gameObject.activeInHierarchy)
+        if (ability3Icon.GetComponent<Image>().fillAmount <1)
+        {
+            ability3Icon.GetComponent<Image>().fillAmount = ability3Icon.GetComponent<Image>().fillAmount + .01f;
+        }
+        if (player.GetComponent<KnightStats>().weapon[0].gameObject.activeInHierarchy)
         {
             atkSpeedMod = .6f;
         }
@@ -63,7 +67,6 @@ public class SwordSwing : MonoBehaviour {
 
                 test++;
                 StartCoroutine(ability3CD());
-
             }
             else if (swing.GetCurrentAnimatorStateInfo(0).IsName("Ability3Hold") && test == 3)
             {
@@ -123,6 +126,7 @@ public class SwordSwing : MonoBehaviour {
 
     IEnumerator ability3CD()
     {
+        ability3Icon.GetComponent<Image>().fillAmount =0;
         ab3OnCD = true;
         ability3Icon.GetComponent<Image>().color = new Color32(128, 113, 113, 255);
         yield return new WaitForSeconds(1f);

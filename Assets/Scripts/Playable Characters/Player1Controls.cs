@@ -10,11 +10,13 @@ public class Player1Controls : MonoBehaviour
     private bool isMoving;
     private bool isRunning;
     public GameObject autoAttack;
+    public GameObject SetSkillTreeActive;
     public char previousKey;
     public bool isFlippingLeft;
     public bool isFlippingRight;
     public bool onGround;
     private Rigidbody rb;
+    private bool STActive;
     Animator walk;
 
     void Start()
@@ -23,12 +25,23 @@ public class Player1Controls : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         isMoving = false;
         walk = GetComponent<Animator>();
+        SetSkillTreeActive = FindObjectOfType<SKIdentifier>().gameObject;
         previousKey = 'd';
         onGround = true;
     }
 
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.K) && !STActive)
+            {
+            SetSkillTreeActive.SetActive(true);
+            STActive = true;
+            }
+        else if (Input.GetKeyDown(KeyCode.K) && STActive)
+        {
+            SetSkillTreeActive.SetActive(false);
+            STActive = false;
+        }
         walk.SetBool("walking", false); // used for animation
         // BEING JUMPING SCRIPT
         if(Input.GetKeyDown(KeyCode.Space) && gameObject.GetComponent<KnightStats>().energy > 5 && onGround)
