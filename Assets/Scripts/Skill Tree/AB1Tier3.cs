@@ -26,7 +26,7 @@ public class AB1Tier3 : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     void SPA1MS() //ability1 tier 2
     {
-        if (player.GetComponent<KnightStats>().SPBonusScale < .25f && player.GetComponent<KnightStats>().SkillPoints > 0) //max upgrades is 5
+        if (player.GetComponent<KnightStats>().SPBonusScale < .15f && player.GetComponent<KnightStats>().SkillPoints > 0) //max upgrades is 3
         {
             player.GetComponent<KnightStats>().SPBonusScale = .05f + player.GetComponent<KnightStats>().SPBonusScale;
             player.GetComponent<KnightStats>().SkillPoints--;

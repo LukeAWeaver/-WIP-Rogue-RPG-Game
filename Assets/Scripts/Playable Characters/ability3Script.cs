@@ -9,9 +9,11 @@ public class ability3Script : MonoBehaviour
     public int test;
     private bool direction;
     private float speed;
+    public int AB3dmg;
     // Use this for initialization
     void Start()
     {
+        AB3dmg = PlayerPrefs.GetInt("AB3dmg");
         test = 0;
         swing = GetComponent<Animator>();
         var offset = knight.transform.position;
@@ -42,6 +44,7 @@ public class ability3Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        PlayerPrefs.SetInt("AB3dmg", AB3dmg);
         //if (Time.frameCount < 10)
         //   gameObject.SetActive(false);
 
@@ -72,7 +75,7 @@ public class ability3Script : MonoBehaviour
         if (collision.gameObject.GetComponent<MonsterInterface>() != null)
         {
             if (collision.gameObject.GetComponent<MonsterInterface>().hp > 1)
-                collision.gameObject.GetComponent<MonsterInterface>().hp = collision.gameObject.GetComponent<MonsterInterface>().hp - 2 * knight.GetComponent<KnightStats>().AD;
+                collision.gameObject.GetComponent<MonsterInterface>().hp = collision.gameObject.GetComponent<MonsterInterface>().hp - 1 - AB3dmg * knight.GetComponent<KnightStats>().AD;
             else
             {
                 collision.gameObject.GetComponent<MonsterInterface>().hp--;
