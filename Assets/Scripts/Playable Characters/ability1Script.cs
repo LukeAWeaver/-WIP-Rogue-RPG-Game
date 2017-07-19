@@ -8,7 +8,6 @@ public class ability1Script : MonoBehaviour {
     public Image KnightIcon;
     public GameObject[] weapons;
     public GameObject ability1Icon;
-    public ParticleSystem aura;
     public int isActiveToggle;
     private bool onCD;
     // Use this for initialization
@@ -21,6 +20,10 @@ public class ability1Script : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
+        if (ability1Icon.GetComponent<Image>().fillAmount < 1)
+        {
+            ability1Icon.GetComponent<Image>().fillAmount = ability1Icon.GetComponent<Image>().fillAmount + .0018f;
+        }
         if (onCD == false)
         {
             if (Input.GetKeyDown("1") && GetComponentInParent<KnightStats>().energy > 0 && isActiveToggle == 0)
@@ -29,47 +32,42 @@ public class ability1Script : MonoBehaviour {
             }
             else if (Input.GetKeyDown("1") && GetComponentInParent<KnightStats>().energy > 0 && isActiveToggle == 1)
             {
-                isActiveToggle = 0;
+                isActiveToggle = 2;
             }
                 if (isActiveToggle ==1 && knight.GetComponent<KnightStats>().energy > 0)
             {
+                knight.transform.parent.localScale= new Vector3(1+knight.GetComponent<KnightStats>().SPBonusScale, 1+ knight.GetComponent<KnightStats>().SPBonusScale, 1+ knight.GetComponent<KnightStats>().SPBonusScale);
                 knight.GetComponent<Player1Controls>().Ab1 = 1.5f;
                 knight.GetComponent<KnightStats>().Ab1 = 2;
                 knight.GetComponent<SpriteRenderer>().color = Color.red;
                 KnightIcon.GetComponent<Image>().color = Color.red;
-                if (aura.isStopped)
-                {
-                    aura.Play();
-                }
                 foreach (GameObject weapon in weapons)
                 {
                     weapon.GetComponent<SpriteRenderer>().color = Color.red;
                 }
                 knight.GetComponent<KnightStats>().energy = knight.GetComponent<KnightStats>().energy - .1f;
             }
-            if (isActiveToggle == 0 || knight.GetComponent<KnightStats>().energy < 1)
+            if (isActiveToggle == 2 || knight.GetComponent<KnightStats>().energy < 1) //code only runs the frame ability1 is turned off
             {
-                isActiveToggle = 0;
+                knight.transform.parent.localScale = new Vector3(1, 1, 1);
                 knight.GetComponent<Player1Controls>().Ab1 = 1f;
                 knight.GetComponent<KnightStats>().Ab1 = 1;
                 knight.GetComponent<SpriteRenderer>().color = Color.white;
                 KnightIcon.GetComponent<Image>().color = Color.white;
-                if (aura.isPlaying)
-                {
-                    aura.Stop();
-                }
                 foreach (GameObject weapon in weapons)
                 {
                     weapon.GetComponent<SpriteRenderer>().color = Color.white;
                 }
-               // StartCoroutine(Ability1onCD)
+                isActiveToggle = 0;
+                StartCoroutine(Ability1onCD());
             }
         }
     }
 
     IEnumerator Ability1onCD()
     {
-        isActiveToggle = 2;
+        ability1Icon.GetComponent<Image>().fillAmount = 0;
+        isActiveToggle = 3;
         ability1Icon.GetComponent<Image>().color = new Color32(128, 113, 113, 255);
         yield return new WaitForSeconds(5f);
         ability1Icon.GetComponent<Image>().color = Color.white;

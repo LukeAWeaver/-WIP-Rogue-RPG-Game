@@ -27,6 +27,8 @@ public class KnightStats : MonoBehaviour {
     public GameObject[] weapon;
     public int Ab1;
     public int SPBonusATK;
+    public float SPBonusMS;
+    public float SPBonusScale;
     
     //called when scene loads or when object intantiated 
     void Start ()
@@ -47,6 +49,8 @@ public class KnightStats : MonoBehaviour {
         critChance = PlayerPrefs.GetFloat("critChance");
         attackSpeed = PlayerPrefs.GetFloat("atkSpeed");
         SPBonusATK = PlayerPrefs.GetInt("SPBonusATK");
+        SPBonusMS = PlayerPrefs.GetFloat("SPBonusMS");
+        SPBonusScale = PlayerPrefs.GetFloat("SPBonusScale");
         InvokeRepeating("resetHP", 0, .03f);
         InvokeRepeating("EnergyRegen", 0, .25f);
     }
@@ -60,6 +64,8 @@ public class KnightStats : MonoBehaviour {
         PlayerPrefs.SetInt("level", level);
         PlayerPrefs.SetInt("SP", SkillPoints);
         PlayerPrefs.SetInt("SPBonusATK", SPBonusATK);
+        PlayerPrefs.SetFloat("SPBonusMS", SPBonusMS);
+        PlayerPrefs.SetFloat("SPBonusScale", SPBonusScale);
         PlayerPrefs.SetFloat("ms", movementSpeed);
         PlayerPrefs.SetFloat("critChance", critChance);
         PlayerPrefs.SetFloat("atkSpeed", attackSpeed);
@@ -90,6 +96,7 @@ public class KnightStats : MonoBehaviour {
                 AD = 2;
             
         }
+
       }
 
     //Regenerating energy algorithm when walking or standing still
@@ -143,17 +150,6 @@ public class KnightStats : MonoBehaviour {
             }
         }
     }
-    public void SPatkSpeed() //not in use
-    {
-        attackSpeed = attackSpeed + .1f;
-        SkillPoints--;
-    }
-    public void SPA1ATKPWR() //ability1 tier 1
-    {
-        if (SPBonusATK < 6 && SkillPoints>0) //max upgrades is 5
-        {
-            SPBonusATK++;
-            SkillPoints--;
-        }
-    }
+
+
 }

@@ -113,7 +113,10 @@ public class Player1Controls : MonoBehaviour
         if (Input.GetKey("left shift") && (Input.GetKey("a") || Input.GetKey("d") || Input.GetKey("w") || Input.GetKey("s")))
         {
             isRunning = true;
-            gameObject.GetComponent<KnightStats>().movementSpeed = 0.05f*Ab1;
+            if (Ab1 == 1.5f)
+                gameObject.GetComponent<KnightStats>().movementSpeed = 0.05f * Ab1 + gameObject.GetComponent<KnightStats>().SPBonusMS;
+            else
+                gameObject.GetComponent<KnightStats>().movementSpeed = 0.05f;
         }
         else
         {
@@ -128,7 +131,12 @@ public class Player1Controls : MonoBehaviour
             isMoving = true;
             walk.SetBool("walking", true);
             if (walk.GetBool("roll") == false)
-                gameObject.GetComponent<KnightStats>().movementSpeed = 0.02f*Ab1;
+            {
+                if (Ab1 == 1.5f)
+                    gameObject.GetComponent<KnightStats>().movementSpeed = 0.02f * Ab1 + gameObject.GetComponent<KnightStats>().SPBonusMS;
+                else
+                    gameObject.GetComponent<KnightStats>().movementSpeed = 0.02f;
+            }
         }
     }
     public void CheckRoll()
@@ -140,7 +148,10 @@ public class Player1Controls : MonoBehaviour
                 gameObject.GetComponent<KnightStats>().energy = gameObject.GetComponent<KnightStats>().energy - 20;
             }
             walk.SetBool("roll", true);
-            gameObject.GetComponent<KnightStats>().movementSpeed = 0.1f*Ab1;
+            if (Ab1 == 1.5f)
+                gameObject.GetComponent<KnightStats>().movementSpeed = 0.1f * Ab1 + gameObject.GetComponent<KnightStats>().SPBonusMS;
+            else
+                gameObject.GetComponent<KnightStats>().movementSpeed = 0.1f;
         }
         if (walk.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !walk.IsInTransition(0))
         {
