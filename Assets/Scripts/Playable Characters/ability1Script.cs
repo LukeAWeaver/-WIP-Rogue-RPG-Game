@@ -8,6 +8,7 @@ public class ability1Script : MonoBehaviour {
     public Image KnightIcon;
     public GameObject[] weapons;
     public GameObject ability1Icon;
+    public ParticleSystem aura;
     public int isActiveToggle;
     private bool onCD;
     // Use this for initialization
@@ -36,6 +37,10 @@ public class ability1Script : MonoBehaviour {
                 knight.GetComponent<KnightStats>().Ab1 = 2;
                 knight.GetComponent<SpriteRenderer>().color = Color.red;
                 KnightIcon.GetComponent<Image>().color = Color.red;
+                if (aura.isStopped)
+                {
+                    aura.Play();
+                }
                 foreach (GameObject weapon in weapons)
                 {
                     weapon.GetComponent<SpriteRenderer>().color = Color.red;
@@ -49,6 +54,10 @@ public class ability1Script : MonoBehaviour {
                 knight.GetComponent<KnightStats>().Ab1 = 1;
                 knight.GetComponent<SpriteRenderer>().color = Color.white;
                 KnightIcon.GetComponent<Image>().color = Color.white;
+                if (aura.isPlaying)
+                {
+                    aura.Stop();
+                }
                 foreach (GameObject weapon in weapons)
                 {
                     weapon.GetComponent<SpriteRenderer>().color = Color.white;
