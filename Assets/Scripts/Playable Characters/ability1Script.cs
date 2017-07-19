@@ -31,13 +31,14 @@ public class ability1Script : MonoBehaviour {
             {
                 isActiveToggle = 1;
             }
-            else if (Input.GetKeyDown("1") && GetComponentInParent<KnightStats>().energy > 0 && isActiveToggle == 1)
+            else if (Input.GetKeyDown("1") && GetComponentInParent<KnightStats>().energy > 0 && isActiveToggle == 4)
             {
                 isActiveToggle = 2;
             }
-                if (isActiveToggle ==1 && knight.GetComponent<KnightStats>().energy > 0)
+            if (isActiveToggle ==1 && knight.GetComponent<KnightStats>().energy > 0)
             {
-                knight.transform.parent.localScale= new Vector3(1+knight.GetComponent<KnightStats>().SPBonusScale, 1+ knight.GetComponent<KnightStats>().SPBonusScale, 1+ knight.GetComponent<KnightStats>().SPBonusScale);
+                isActiveToggle = 4; //code only runs the frame ability1 is turned on
+                knight.transform.localScale= new Vector3(.41f+knight.GetComponent<KnightStats>().SPBonusScale, .41f+ knight.GetComponent<KnightStats>().SPBonusScale, .41f+ knight.GetComponent<KnightStats>().SPBonusScale);
                 knight.GetComponent<Player1Controls>().Ab1 = 1.5f;
                 knight.GetComponent<KnightStats>().Ab1 = 2;
                 knight.GetComponent<SpriteRenderer>().color = Color.red;
@@ -54,7 +55,7 @@ public class ability1Script : MonoBehaviour {
             }
             if (isActiveToggle == 2 || knight.GetComponent<KnightStats>().energy < 1) //code only runs the frame ability1 is turned off
             {
-                knight.transform.parent.localScale = new Vector3(1, 1, 1);
+                knight.transform.localScale = new Vector3(.41f, .41f, .41f);
                 knight.GetComponent<Player1Controls>().Ab1 = 1f;
                 knight.GetComponent<KnightStats>().Ab1 = 1;
                 knight.GetComponent<SpriteRenderer>().color = Color.white;

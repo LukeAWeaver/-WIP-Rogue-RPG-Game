@@ -160,35 +160,71 @@ public class Player1Controls : MonoBehaviour
     }
     public void CheckFlipping()
     {
-        //FLIPPING LEFT
-        if (isFlippingLeft && transform.localScale.x > -.40f)
+        if (Ab1 == 1.5f) //ability1 active
         {
-            float rotationSpeed = 5.0f;
-            Vector3 rot = transform.localScale;
-            rot.x = rot.x + -rotationSpeed * Time.deltaTime;
-            transform.localScale = rot;
+            //FLIPPING LEFT
+            if (isFlippingLeft && transform.localScale.x > -.40f - gameObject.GetComponent<KnightStats>().SPBonusScale)
+            {
+                float rotationSpeed = 5.0f;
+                Vector3 rot = transform.localScale;
+                rot.x = rot.x + -rotationSpeed * Time.deltaTime;
+                transform.localScale = rot;
 
-        }
-        else if (isFlippingLeft && transform.localScale.x <= -.41f)
-        {
-            Vector3 rot = transform.localScale;
-            rot.x = -.41f;
-            transform.localScale = rot;
-        }
-        //FLIPPING RIGHT
-        if (isFlippingRight && transform.localScale.x < .40f)
-        {
-            float rotationSpeed = 5.0f;
-            Vector3 rot = transform.localScale;
-            rot.x = rot.x + rotationSpeed * Time.deltaTime;
-            transform.localScale = rot;
+            }
+            else if (isFlippingLeft && transform.localScale.x <= -.41f - gameObject.GetComponent<KnightStats>().SPBonusScale)
+            {
+                Vector3 rot = transform.localScale;
+                rot.x = -.41f - gameObject.GetComponent<KnightStats>().SPBonusScale;
+                transform.localScale = rot;
+            }
+            //FLIPPING RIGHT
+            if (isFlippingRight && transform.localScale.x < .40f + gameObject.GetComponent<KnightStats>().SPBonusScale)
+            {
+                float rotationSpeed = 5.0f;
+                Vector3 rot = transform.localScale;
+                rot.x = rot.x + rotationSpeed * Time.deltaTime;
+                transform.localScale = rot;
 
+            }
+            else if (isFlippingRight && transform.localScale.x >= .41f + gameObject.GetComponent<KnightStats>().SPBonusScale)
+            {
+                Vector3 rot = transform.localScale;
+                rot.x = .41f + gameObject.GetComponent<KnightStats>().SPBonusScale;
+                transform.localScale = rot;
+            }
         }
-        else if (isFlippingRight && transform.localScale.x >= .41f)
+        else
         {
-            Vector3 rot = transform.localScale;
-            rot.x = .41f;
-            transform.localScale = rot;
+            //FLIPPING LEFT
+            if (isFlippingLeft && transform.localScale.x > -.40f)
+            {
+                float rotationSpeed = 5.0f;
+                Vector3 rot = transform.localScale;
+                rot.x = rot.x + -rotationSpeed * Time.deltaTime;
+                transform.localScale = rot;
+
+            }
+            else if (isFlippingLeft && transform.localScale.x <= -.41f)
+            {
+                Vector3 rot = transform.localScale;
+                rot.x = -.41f;
+                transform.localScale = rot;
+            }
+            //FLIPPING RIGHT
+            if (isFlippingRight && transform.localScale.x < .40f)
+            {
+                float rotationSpeed = 5.0f;
+                Vector3 rot = transform.localScale;
+                rot.x = rot.x + rotationSpeed * Time.deltaTime;
+                transform.localScale = rot;
+
+            }
+            else if (isFlippingRight && transform.localScale.x >= .41f)
+            {
+                Vector3 rot = transform.localScale;
+                rot.x = .41f;
+                transform.localScale = rot;
+            }
         }
     }
     private void OnCollisionEnter(Collision collision)
