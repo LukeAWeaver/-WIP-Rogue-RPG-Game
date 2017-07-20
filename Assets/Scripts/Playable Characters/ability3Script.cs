@@ -95,7 +95,7 @@ public class ability3Script : MonoBehaviour
     }
     IEnumerator destroyA3()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
         Destroy(gameObject);
     }
 }
