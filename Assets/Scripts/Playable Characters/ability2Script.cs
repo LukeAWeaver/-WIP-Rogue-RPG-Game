@@ -29,9 +29,34 @@ public class ability2Script : MonoBehaviour {
 
       if(check && knight.GetComponent<KnightStats>().energy >20 && collision.gameObject.GetComponent<MonsterInterface>() != null)
       {
-            collision.gameObject.GetComponent<MonsterInterface>().hp = collision.gameObject.GetComponent<MonsterInterface>().hp -knight.GetComponent<KnightStats>().AD;
-            collision.GetComponent<Rigidbody>().velocity += new Vector3(-knight.GetComponent<Player1Controls>().Ab1*20f, 0f, 0f);
-            check = false;
+        //Top
+        if(collision.gameObject.transform.position.z < knight.transform.position.z)
+        {
+          collision.gameObject.GetComponent<MonsterInterface>().hp = collision.gameObject.GetComponent<MonsterInterface>().hp -knight.GetComponent<KnightStats>().AD;
+          collision.GetComponent<Rigidbody>().velocity += new Vector3(-knight.GetComponent<Player1Controls>().Ab1*0f, 0f, 20f);
+          check = false;
+        }
+        //Bottom
+        if(collision.gameObject.transform.position.z > knight.transform.position.z)
+        {
+          collision.gameObject.GetComponent<MonsterInterface>().hp = collision.gameObject.GetComponent<MonsterInterface>().hp -knight.GetComponent<KnightStats>().AD;
+          collision.GetComponent<Rigidbody>().velocity += new Vector3(knight.GetComponent<Player1Controls>().Ab1*0f, 0f, 20f);
+          check = false;
+        }
+        //Left
+        if(collision.gameObject.transform.position.x < knight.transform.position.x)
+        {
+          collision.gameObject.GetComponent<MonsterInterface>().hp = collision.gameObject.GetComponent<MonsterInterface>().hp -knight.GetComponent<KnightStats>().AD;
+          collision.GetComponent<Rigidbody>().velocity += new Vector3(-knight.GetComponent<Player1Controls>().Ab1*20f, 0f, 0f);
+          check = false;
+        }
+        //Right
+        if(collision.gameObject.transform.position.x > knight.transform.position.x)
+        {
+          collision.gameObject.GetComponent<MonsterInterface>().hp = collision.gameObject.GetComponent<MonsterInterface>().hp -knight.GetComponent<KnightStats>().AD;
+          collision.GetComponent<Rigidbody>().velocity += new Vector3(knight.GetComponent<Player1Controls>().Ab1*20f, 0f, 0f);
+          check = false;
+        }
       }
     }
 
