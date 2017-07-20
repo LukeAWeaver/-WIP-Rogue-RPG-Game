@@ -8,12 +8,14 @@ public class ability3Script : MonoBehaviour
     Animator swing;
     public int test;
     private bool direction;
-    private float speed;
+    public float speed;
     public int AB3dmg;
+    public float AB3Speed;
     // Use this for initialization
     void Start()
     {
         AB3dmg = PlayerPrefs.GetInt("AB3dmg");
+        AB3Speed = PlayerPrefs.GetFloat("AB3Speed");
         test = 0;
         swing = GetComponent<Animator>();
         var offset = knight.transform.position;
@@ -34,7 +36,7 @@ public class ability3Script : MonoBehaviour
         offset.y = offset.y + .5f;
         transform.localScale = theScale;
         transform.position = offset;
-        speed = knight.GetComponent<KnightStats>().movementSpeed;
+        speed = knight.GetComponent<KnightStats>().movementSpeed + AB3Speed;
         if(Time.frameCount>10)
         {
             StartCoroutine(destroyA3());
@@ -45,6 +47,7 @@ public class ability3Script : MonoBehaviour
     void Update()
     {
         PlayerPrefs.SetInt("AB3dmg", AB3dmg);
+        PlayerPrefs.SetFloat("AB3Speed", AB3Speed);
         //if (Time.frameCount < 10)
         //   gameObject.SetActive(false);
 
