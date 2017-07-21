@@ -9,8 +9,9 @@ public class ability2Script : MonoBehaviour {
     public ParticleSystem wave;
     void Start ()
     {
+        wave.Stop();
 
-      gameObject.GetComponent<Collider>().enabled = false;
+        gameObject.GetComponent<Collider>().enabled = false;
       check = false;
     }
 
@@ -67,7 +68,20 @@ public class ability2Script : MonoBehaviour {
                 collision.GetComponent<Rigidbody>().velocity = new Vector3(15f, 0f, 0f);
             }
         }
-
       }
+      else if(collision.gameObject.tag=="InteractableScenery")
+        {
+            collision.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, -15f);
+            //Left
+            if (collision.gameObject.transform.position.x < knight.transform.position.x)
+            {
+                collision.GetComponent<Rigidbody>().velocity = new Vector3(-15f, 0f, 0f);
+            }
+            //Right
+            else if (collision.gameObject.transform.position.x > knight.transform.position.x)
+            {
+                collision.GetComponent<Rigidbody>().velocity = new Vector3(15f, 0f, 0f);
+            }
+        }
     }
 }
