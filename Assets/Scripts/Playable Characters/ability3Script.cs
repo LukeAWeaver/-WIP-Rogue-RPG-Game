@@ -52,8 +52,6 @@ public class ability3Script : MonoBehaviour
 
         PlayerPrefs.SetInt("AB3dmg", AB3dmg);
         PlayerPrefs.SetFloat("AB3Speed", AB3Speed);
-        //if (Time.frameCount < 10)
-        //   gameObject.SetActive(false);
 
 
         if (test == 0 && swing.GetCurrentAnimatorStateInfo(0).IsName("default"))
