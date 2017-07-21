@@ -13,6 +13,8 @@ public class ability3Script : MonoBehaviour
     public float AB3Speed;
     public float AB3duration;
     public int AB3Ultimate;
+    public AudioClip sfx;
+    private AudioSource source;
     // Use this for initialization
     void Start()
     {
@@ -20,6 +22,9 @@ public class ability3Script : MonoBehaviour
         AB3Speed = PlayerPrefs.GetFloat("AB3Speed");
         AB3duration = PlayerPrefs.GetFloat("AB3duration");
         AB3Ultimate = PlayerPrefs.GetInt("AB3Ultimate");
+        source = GetComponent<AudioSource>();
+        source.clip = sfx;
+        source.Play();
         test = 0;
         swing = GetComponent<Animator>();
         var offset = knight.transform.position;

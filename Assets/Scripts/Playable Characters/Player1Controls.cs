@@ -18,10 +18,15 @@ public class Player1Controls : MonoBehaviour
     private Rigidbody rb;
     private bool STActive;
     Animator walk;
+    public AudioClip jump;
+    private AudioSource source;
+
+
 
     void Start()
     {
-        Ab1=1;
+        source = GetComponent<AudioSource>();
+        Ab1 = 1;
         rb = GetComponent<Rigidbody>();
         isMoving = false;
         walk = GetComponent<Animator>();
@@ -46,6 +51,8 @@ public class Player1Controls : MonoBehaviour
         // BEING JUMPING SCRIPT
         if(Input.GetKeyDown(KeyCode.Space) && gameObject.GetComponent<KnightStats>().energy > 5 && onGround)
         {
+            source.clip = jump;
+            source.Play();
             walk.SetBool("jump", true);
             gameObject.GetComponent<KnightStats>().energy = gameObject.GetComponent<KnightStats>().energy - 5;
             rb.velocity = new Vector3(0f, 4f + Ab1, 0f);

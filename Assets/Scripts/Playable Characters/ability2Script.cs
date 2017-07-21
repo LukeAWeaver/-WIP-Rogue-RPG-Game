@@ -7,10 +7,11 @@ public class ability2Script : MonoBehaviour {
     public GameObject knight;
     bool check;
     public ParticleSystem wave;
+    public AudioClip sfx;
+    private AudioSource source;
     void Start ()
     {
         wave.Stop();
-
         gameObject.GetComponent<Collider>().enabled = false;
       check = false;
     }
@@ -24,7 +25,10 @@ public class ability2Script : MonoBehaviour {
             check = !check;
             knight.GetComponent<KnightStats>().energy = knight.GetComponent<KnightStats>().energy - 20;
             wave.Play();
-      }
+            source = GetComponent<AudioSource>();
+            source.clip = sfx;
+            source.Play();
+        }
       else if(Input.GetKeyUp("2"))
       {
         gameObject.GetComponent<Collider>().enabled = false;
