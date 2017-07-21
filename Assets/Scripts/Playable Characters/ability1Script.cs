@@ -44,9 +44,9 @@ public class ability1Script : MonoBehaviour {
                 knight.GetComponent<SpriteRenderer>().color = Color.red;
                 KnightIcon.GetComponent<Image>().color = Color.red;
                 if (aura.isStopped)
-               {
+                {
                    aura.Play();
-              }
+                }
                 foreach (GameObject weapon in weapons)
                 {
                     weapon.GetComponent<SpriteRenderer>().color = Color.red;

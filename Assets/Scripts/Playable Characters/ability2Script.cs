@@ -6,9 +6,10 @@ public class ability2Script : MonoBehaviour {
 
     public GameObject knight;
     bool check;
-
+    public ParticleSystem wave;
     void Start ()
     {
+
       gameObject.GetComponent<Collider>().enabled = false;
       check = false;
     }
@@ -21,10 +22,12 @@ public class ability2Script : MonoBehaviour {
             gameObject.GetComponent<Collider>().enabled = true;
             check = !check;
             knight.GetComponent<KnightStats>().energy = knight.GetComponent<KnightStats>().energy - 20;
+            wave.Play();
       }
       else if(Input.GetKeyUp("2"))
       {
         gameObject.GetComponent<Collider>().enabled = false;
+        wave.Stop();
       }
     }
 
@@ -67,5 +70,4 @@ public class ability2Script : MonoBehaviour {
 
       }
     }
-
 }
