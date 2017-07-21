@@ -11,11 +11,13 @@ public class ability3Script : MonoBehaviour
     public float speed;
     public int AB3dmg;
     public float AB3Speed;
+    public float duration;
     // Use this for initialization
     void Start()
     {
         AB3dmg = PlayerPrefs.GetInt("AB3dmg");
         AB3Speed = PlayerPrefs.GetFloat("AB3Speed");
+        duration = PlayerPrefs.GetFloat("duration");
         test = 0;
         swing = GetComponent<Animator>();
         var offset = knight.transform.position;
@@ -46,6 +48,8 @@ public class ability3Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        swing.speed = 2.5f - duration;
+
         PlayerPrefs.SetInt("AB3dmg", AB3dmg);
         PlayerPrefs.SetFloat("AB3Speed", AB3Speed);
         //if (Time.frameCount < 10)
@@ -95,7 +99,7 @@ public class ability3Script : MonoBehaviour
     }
     IEnumerator destroyA3()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f + duration);
         Destroy(gameObject);
     }
 }
