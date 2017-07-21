@@ -29,6 +29,10 @@ public class KnightStats : MonoBehaviour {
     public int SPBonusATK;
     public float SPBonusMS;
     public float SPBonusScale;
+    public int AB2BonusATK;
+    public float AB2KB;
+    public float AB2Radius;
+    public int AB2Ultimate;
     
     //called when scene loads or when object intantiated 
     void Start ()
@@ -51,6 +55,10 @@ public class KnightStats : MonoBehaviour {
         SPBonusATK = PlayerPrefs.GetInt("SPBonusATK");
         SPBonusMS = PlayerPrefs.GetFloat("SPBonusMS");
         SPBonusScale = PlayerPrefs.GetFloat("SPBonusScale");
+        AB2BonusATK = PlayerPrefs.GetInt("AB2BonusATK");
+        AB2KB = PlayerPrefs.GetFloat("AB2KB");
+        AB2Radius = PlayerPrefs.GetFloat("AB2Radius");
+        AB2Ultimate = PlayerPrefs.GetInt("AB2Ultimate");
         InvokeRepeating("resetHP", 0, .03f);
         InvokeRepeating("EnergyRegen", 0, .25f);
     }
@@ -69,6 +77,10 @@ public class KnightStats : MonoBehaviour {
         PlayerPrefs.SetFloat("ms", movementSpeed);
         PlayerPrefs.SetFloat("critChance", critChance);
         PlayerPrefs.SetFloat("atkSpeed", attackSpeed);
+        PlayerPrefs.SetInt("AB2BonusATK", AB2BonusATK);
+        PlayerPrefs.SetFloat("AB2KB", AB2KB);
+        PlayerPrefs.SetFloat("AB2Radius", AB2Radius);
+        PlayerPrefs.SetInt("AB2Ultimate", AB2Ultimate);
         health = PlayerPrefs.GetInt("currentHP");
         if(health <1)
         {

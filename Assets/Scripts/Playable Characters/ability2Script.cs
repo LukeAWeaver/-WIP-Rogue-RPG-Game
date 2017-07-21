@@ -9,6 +9,7 @@ public class ability2Script : MonoBehaviour {
     public ParticleSystem wave;
     public AudioClip sfx;
     private AudioSource source;
+    int currentHP;
     void Start ()
     {
         wave.Stop();
@@ -19,7 +20,9 @@ public class ability2Script : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-      if(Input.GetKeyDown("2") && GetComponentInParent<KnightStats>().energy > 20)
+        wave.transform.localScale = new Vector3(1.5f + knight.GetComponent<KnightStats>().AB2Radius, 1.5f + knight.GetComponent<KnightStats>().AB2Radius, 1);
+
+        if (Input.GetKeyDown("2") && GetComponentInParent<KnightStats>().energy > 20)
       {
             gameObject.GetComponent<Collider>().enabled = true;
             check = !check;
@@ -28,6 +31,23 @@ public class ability2Script : MonoBehaviour {
             source = GetComponent<AudioSource>();
             source.clip = sfx;
             source.Play();
+            if (knight.GetComponent<KnightStats>().AB2Ultimate == 1) //ultimate unlocked
+            {
+                if (PlayerPrefs.GetInt("currentHP") == 11)
+                {
+                    currentHP = PlayerPrefs.GetInt("currentHP") + 1;
+                }
+                else if (PlayerPrefs.GetInt("currentHP") == 12)
+                {
+                    currentHP = PlayerPrefs.GetInt("currentHP");
+                }
+                else
+                {
+                    currentHP = PlayerPrefs.GetInt("currentHP") + 2;
+                }
+                PlayerPrefs.SetInt("currentHP", currentHP);
+
+            }
         }
       else if(Input.GetKeyUp("2"))
       {
@@ -41,50 +61,50 @@ public class ability2Script : MonoBehaviour {
       if(check && knight.GetComponent<KnightStats>().energy >20 && collision.gameObject.GetComponent<MonsterInterface>() != null)
       {
         check = false;
-        collision.gameObject.GetComponent<MonsterInterface>().hp = collision.gameObject.GetComponent<MonsterInterface>().hp -knight.GetComponent<KnightStats>().AD;
+        collision.gameObject.GetComponent<MonsterInterface>().hp = collision.gameObject.GetComponent<MonsterInterface>().hp - 1 - knight.GetComponent<KnightStats>().AB2BonusATK;
         //Top
         if(collision.gameObject.transform.position.z > knight.transform.position.z)
         {
-            collision.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 15f);
+            collision.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 10f + knight.GetComponent<KnightStats>().AB2KB);
             //Left
             if(collision.gameObject.transform.position.x < knight.transform.position.x)
             {
-                collision.GetComponent<Rigidbody>().velocity = new Vector3(-15f, 0f, 0f);
+                collision.GetComponent<Rigidbody>().velocity = new Vector3(-10f - knight.GetComponent<KnightStats>().AB2KB, 0f, 0f);
             }
             //Right
             else if(collision.gameObject.transform.position.x > knight.transform.position.x)
             {
-                collision.GetComponent<Rigidbody>().velocity = new Vector3(15f, 0f, 0f);
+                collision.GetComponent<Rigidbody>().velocity = new Vector3(10f + knight.GetComponent<KnightStats>().AB2KB, 0f, 0f);
             }
         }
         //Bottom
        else if(collision.gameObject.transform.position.z < knight.transform.position.z)
         {
-            collision.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, -15f);
+            collision.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, -10f - knight.GetComponent<KnightStats>().AB2KB);
             //Left
             if(collision.gameObject.transform.position.x < knight.transform.position.x)
             {
-                collision.GetComponent<Rigidbody>().velocity = new Vector3(-15f, 0f, 0f);
+                collision.GetComponent<Rigidbody>().velocity = new Vector3(-10f - knight.GetComponent<KnightStats>().AB2KB, 0f, 0f);
             }
             //Right
             else if(collision.gameObject.transform.position.x > knight.transform.position.x)
             {
-                collision.GetComponent<Rigidbody>().velocity = new Vector3(15f, 0f, 0f);
+                collision.GetComponent<Rigidbody>().velocity = new Vector3(10f + knight.GetComponent<KnightStats>().AB2KB, 0f, 0f);
             }
         }
       }
       else if(collision.gameObject.tag=="InteractableScenery")
         {
-            collision.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, -15f);
+            collision.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, -10f - knight.GetComponent<KnightStats>().AB2KB);
             //Left
             if (collision.gameObject.transform.position.x < knight.transform.position.x)
             {
-                collision.GetComponent<Rigidbody>().velocity = new Vector3(-15f, 0f, 0f);
+                collision.GetComponent<Rigidbody>().velocity = new Vector3(-10f - knight.GetComponent<KnightStats>().AB2KB, 0f, 0f);
             }
             //Right
             else if (collision.gameObject.transform.position.x > knight.transform.position.x)
             {
-                collision.GetComponent<Rigidbody>().velocity = new Vector3(15f, 0f, 0f);
+                collision.GetComponent<Rigidbody>().velocity = new Vector3(10f + knight.GetComponent<KnightStats>().AB2KB, 0f, 0f);
             }
         }
     }
