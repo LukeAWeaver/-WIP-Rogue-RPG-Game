@@ -13,8 +13,8 @@ public class freehand : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        swing = GetComponent<Animator>();        test = 0;
-        gameObject.GetComponent<BoxCollider>().enabled = false;
+        swing = GetComponent<Animator>();
+        test = 0;
         AAOnCD = false;
     }
 
@@ -37,11 +37,9 @@ public class freehand : MonoBehaviour
     {
         AAOnCD = true;
         GetComponentInParent<KnightStats>().energy--;
-        GetComponent<Collider>().enabled = true;
         swing.SetInteger("state", 1);
 
         yield return new WaitForSeconds(.2f);
-        GetComponent<Collider>().enabled = false;
         swing.SetInteger("state", 0);
 
         yield return new WaitForSeconds(.4f);
