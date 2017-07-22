@@ -14,6 +14,7 @@ public class ability1Script : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        aura.Stop();
         knight = FindObjectOfType<KnightStats>().gameObject;
         isActiveToggle = 0;
         onCD = false;

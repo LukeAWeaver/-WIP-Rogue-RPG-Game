@@ -63,34 +63,21 @@ public class ability2Script : MonoBehaviour {
         check = false;
         collision.gameObject.GetComponent<MonsterInterface>().hp = collision.gameObject.GetComponent<MonsterInterface>().hp - 1 - knight.GetComponent<KnightStats>().AB2BonusATK;
         //Top
-        if(collision.gameObject.transform.position.z > knight.transform.position.z)
+        if(collision.gameObject.transform.position.z > knight.transform.position.z && collision.gameObject.transform.position.x < knight.transform.position.x)
         {
-            collision.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 10f + knight.GetComponent<KnightStats>().AB2KB);
-            //Left
-            if(collision.gameObject.transform.position.x < knight.transform.position.x)
-            {
-                collision.GetComponent<Rigidbody>().velocity = new Vector3(-10f - knight.GetComponent<KnightStats>().AB2KB, 0f, 0f);
-            }
-            //Right
-            else if(collision.gameObject.transform.position.x > knight.transform.position.x)
-            {
-                collision.GetComponent<Rigidbody>().velocity = new Vector3(10f + knight.GetComponent<KnightStats>().AB2KB, 0f, 0f);
-            }
+            collision.GetComponent<Rigidbody>().velocity = new Vector3(-12f - knight.GetComponent<KnightStats>().AB2KB, 0f, 12f + knight.GetComponent<KnightStats>().AB2KB);
         }
-        //Bottom
-       else if(collision.gameObject.transform.position.z < knight.transform.position.z)
+        else if(collision.gameObject.transform.position.z > knight.transform.position.z && collision.gameObject.transform.position.x > knight.transform.position.x)
         {
-            collision.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, -10f - knight.GetComponent<KnightStats>().AB2KB);
-            //Left
-            if(collision.gameObject.transform.position.x < knight.transform.position.x)
-            {
-                collision.GetComponent<Rigidbody>().velocity = new Vector3(-10f - knight.GetComponent<KnightStats>().AB2KB, 0f, 0f);
-            }
-            //Right
-            else if(collision.gameObject.transform.position.x > knight.transform.position.x)
-            {
-                collision.GetComponent<Rigidbody>().velocity = new Vector3(10f + knight.GetComponent<KnightStats>().AB2KB, 0f, 0f);
-            }
+            collision.GetComponent<Rigidbody>().velocity = new Vector3(12f + knight.GetComponent<KnightStats>().AB2KB, 0f, 12f + knight.GetComponent<KnightStats>().AB2KB);
+        }
+       else if(collision.gameObject.transform.position.z < knight.transform.position.z && collision.gameObject.transform.position.x < knight.transform.position.x)
+        {
+            collision.GetComponent<Rigidbody>().velocity = new Vector3(-12f - knight.GetComponent<KnightStats>().AB2KB, 0f, -12f - knight.GetComponent<KnightStats>().AB2KB);
+        }
+        else if(collision.gameObject.transform.position.z < knight.transform.position.z && collision.gameObject.transform.position.x > knight.transform.position.x)
+        {
+            collision.GetComponent<Rigidbody>().velocity = new Vector3(12f + knight.GetComponent<KnightStats>().AB2KB, 0f, -12f - knight.GetComponent<KnightStats>().AB2KB);
         }
       }
       else if(collision.gameObject.tag=="InteractableScenery")
