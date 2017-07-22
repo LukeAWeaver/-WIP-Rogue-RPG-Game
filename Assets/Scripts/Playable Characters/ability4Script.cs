@@ -6,14 +6,16 @@ public class ability4Script : MonoBehaviour {
 
   public GameObject knight;
   bool check;
-  public ParticleSystem effect;
+  public ParticleSystem effectLeft;
+  public ParticleSystem effectRight;
 
     // Use this for initialization
     void Start ()
     {
         check = false;
         gameObject.GetComponent<Collider>().enabled = false;
-        effect.Stop();
+        effectLeft.Stop();
+        effectRight.Stop();
     }
 
     // Update is called once per frame
@@ -25,10 +27,11 @@ public class ability4Script : MonoBehaviour {
             check = !check;
         knight.GetComponent<KnightStats>().energy = knight.GetComponent<KnightStats>().energy - 50;
       }
-      else
+      else if(Input.GetKeyUp("2"))
         {
             gameObject.GetComponent<Collider>().enabled = false;
-
+            effectLeft.Stop();
+            effectRight.Stop();
         }
     }
 
@@ -44,21 +47,16 @@ public class ability4Script : MonoBehaviour {
               Debug.Log("1");
 
                 collision.GetComponent<Rigidbody>().velocity += new Vector3(-knight.GetComponent<Player1Controls>().Ab1*30f, 0f, 0f);
-                effect.Play();
+                effectLeft.Play();
             }
             if (knight.GetComponent<Player1Controls>().isFlippingRight)
             {
                 Debug.Log("2");
                 collision.GetComponent<Rigidbody>().velocity += new Vector3(knight.GetComponent<Player1Controls>().Ab1 * 30f, 0f, 0f);
-                effect.Play();
+                effectRight.Play();
             }
       }
     }
 
-    private void OnCollisionExit(Collision collision)
-    {
-      //  gameObject.GetComponent<Collider>().enabled = false;
-      effect.Stop();
-    }
-
+  
 }
