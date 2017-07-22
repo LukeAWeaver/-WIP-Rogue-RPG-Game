@@ -6,13 +6,14 @@ public class ability4Script : MonoBehaviour {
 
   public GameObject knight;
   bool check;
+  public ParticleSystem effect;
 
     // Use this for initialization
     void Start ()
     {
         check = false;
         gameObject.GetComponent<Collider>().enabled = false;
-
+        effect.Stop();
     }
 
     // Update is called once per frame
@@ -43,11 +44,13 @@ public class ability4Script : MonoBehaviour {
               Debug.Log("1");
 
                 collision.GetComponent<Rigidbody>().velocity += new Vector3(-knight.GetComponent<Player1Controls>().Ab1*30f, 0f, 0f);
+                effect.Play();
             }
             if (knight.GetComponent<Player1Controls>().isFlippingRight)
             {
                 Debug.Log("2");
                 collision.GetComponent<Rigidbody>().velocity += new Vector3(knight.GetComponent<Player1Controls>().Ab1 * 30f, 0f, 0f);
+                effect.Play();
             }
       }
     }
@@ -55,6 +58,7 @@ public class ability4Script : MonoBehaviour {
     private void OnCollisionExit(Collision collision)
     {
       //  gameObject.GetComponent<Collider>().enabled = false;
+      effect.Stop();
     }
 
 }
