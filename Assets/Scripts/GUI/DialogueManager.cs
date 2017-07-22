@@ -11,6 +11,7 @@ public class DialogueManager : MonoBehaviour {
     public GameObject playerIcon;
     public GameObject player;
     public GameObject healthPots;
+    public GameObject[] AbilityIcons;
     private string npc;
     public Text dtext;
     public bool dialogActive;
@@ -36,8 +37,12 @@ public class DialogueManager : MonoBehaviour {
             playerIcon.SetActive(false);
             playerReplyNo.SetActive(false);
             playerReplyYes.SetActive(false);
+            foreach (GameObject Icon in AbilityIcons)
+            {
+                Icon.SetActive(true);
+            }
         }
-		if(dialogActive && Input.GetKeyDown(KeyCode.E))
+        if (dialogActive && Input.GetKeyDown(KeyCode.E))
         {
             playerReplyYes.SetActive(false);
             playerReplyNo.SetActive(false);
@@ -46,6 +51,10 @@ public class DialogueManager : MonoBehaviour {
             dialogActive = false;
             guardIcon.SetActive(false);
             BrewerIcon.SetActive(false);
+            foreach (GameObject Icon in AbilityIcons)
+            {
+                Icon.SetActive(true);
+            }
             npc = "None";
         }
         //Potion Brewer Interactions
@@ -79,6 +88,10 @@ public class DialogueManager : MonoBehaviour {
                 playerReplyYes.SetActive(false);
                 BrewerIcon.SetActive(false);
                 dBox.SetActive(false);
+                foreach (GameObject Icon in AbilityIcons)
+                {
+                    Icon.SetActive(true);
+                }
                 npc = "None";
             }
         }
@@ -97,6 +110,10 @@ public class DialogueManager : MonoBehaviour {
             guardIcon.SetActive(false);
             BrewerIcon.SetActive(true);
             this.npc = npc;
+        }
+        foreach (GameObject Icon in AbilityIcons)
+        {
+            Icon.SetActive(false);
         }
     }
 
