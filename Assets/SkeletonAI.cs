@@ -5,10 +5,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class AI : MonoBehaviour
+public class SkeletonAI : MonoBehaviour
 {
     public string flip;
-    private GameObject player;
+    public GameObject player;
     public MonsterInterface ThisNPCStats;
     public GameObject ThisNPC;
     public bool inSight;
@@ -20,36 +20,37 @@ public class AI : MonoBehaviour
     private float x;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         ThisNPC = gameObject;
         ThisNPCStats = gameObject.GetComponent<MonsterInterface>();
         player = FindObjectOfType<KnightStats>().gameObject;
         counter = 0;
         InvokeRepeating("movement", 0, .03f);
-        ThisNPCStats.hp = 3;
+        ThisNPCStats.hp = 1;
         ThisNPCStats.ms = .25f;
-        ThisNPCStats.rotationSpeed = 4f;
+        ThisNPCStats.rotationSpeed = 2f;
         x = Mathf.Abs(transform.localScale.x);
-        sight = 3.5f;
+        sight = 5f;
 
     }
-    
-    void movement ()
+
+    void movement()
     {
         var target = player.transform.position;
         var gp = ThisNPCStats.transform.position;
-        range = Mathf.Sqrt((target.x - gp.x)* (target.x - gp.x) + (target.z - gp.z)* (target.z - gp.z));
+        range = Mathf.Sqrt((target.x - gp.x) * (target.x - gp.x) + (target.z - gp.z) * (target.z - gp.z));
 
-        if( range < sight )
+        if (range < sight)
         {
             inSight = true;
         }
         else
         {
-            if (counter % 60 ==0)
+            if (counter % 60 == 0)
             {
                 xVelocity = Random.Range(-0.02f, 0.02f);
-                if(xVelocity <0)
+                if (xVelocity < 0)
                 {
                     ThisNPCStats.isFlippingLeft = true;
                     ThisNPCStats.isFlippingRight = false;
@@ -70,15 +71,12 @@ public class AI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(ThisNPCStats.hp <=0)
+        if (ThisNPCStats.hp <= 0)
         {
-            player.GetComponent<KnightStats>().exp++; //im a genius
-          //  ThisNPC.SetActive(false);
+            //player.GetComponent<KnightStats>().exp++; //im a genius
+            ThisNPC.SetActive(false);
         }
-        if(ThisNPCStats.hp == 1)
-        {
-            ThisNPCStats.ms = .2f;
-        }
+
         var target = player.transform.position;
         if (inSight)
         {
@@ -104,11 +102,11 @@ public class AI : MonoBehaviour
             {
                 GetComponent<Rigidbody>().velocity += new Vector3(0f, 0f, ThisNPCStats.ms);
             }
-            sight = 7f;
+            sight = 10f;
         }
         else
         {
-            sight = 3.5f;
+            sight = 5f;
         }
         ThisNPCStats.CheckFlipping();
     }

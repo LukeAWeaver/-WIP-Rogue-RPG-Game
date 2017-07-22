@@ -12,11 +12,12 @@ public class MonsterInterface : MonoBehaviour
     public GameObject reward;
     public float rotationSpeed;
     public int coinAmount;
-    private GameObject player;
+    public GameObject player;
     public bool isBurning; //used for ability 1 ultimate
     // Use this for initialization
     void Start()
     {
+        reward = FindObjectOfType<coinPickUp>().gameObject;
         player = FindObjectOfType<KnightStats>().gameObject;
         isFlippingRight = false;
         isFlippingLeft = false;
@@ -29,6 +30,7 @@ public class MonsterInterface : MonoBehaviour
     {
         if(hp <= 0)
         {
+            //player.GetComponent<KnightStats>().exp++;
             var gold = Instantiate(reward, transform.position, transform.rotation);
             gold.transform.localScale = gold.transform.localScale * .4f;
             Destroy(transform.parent.gameObject);

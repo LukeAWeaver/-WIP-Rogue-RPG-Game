@@ -21,7 +21,7 @@ public class E_ClubSwing : MonoBehaviour
     {
     
     }
-    private void OnTriggerEnter(Collider collision)
+    private void OnTriggerStay(Collider collision)
     {
         int changeInHP = PlayerPrefs.GetInt("currentHP") - 1;
         if (collision.gameObject.GetComponent<KnightStats>() != null && !collision.gameObject.GetComponent<KnightStats>().isRecovering)
