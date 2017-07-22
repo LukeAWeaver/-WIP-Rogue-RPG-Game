@@ -95,37 +95,6 @@ public class ability2Script : MonoBehaviour {
       }
       else if(collision.gameObject.tag=="InteractableScenery")
         {
-<<<<<<< HEAD
-          if(collision.gameObject.transform.position.z > knight.transform.position.z)
-          {
-              collision.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 15f);
-              //Left
-              if(collision.gameObject.transform.position.x < knight.transform.position.x)
-              {
-                  collision.GetComponent<Rigidbody>().velocity = new Vector3(-15f, 0f, 0f);
-              }
-              //Right
-              else if(collision.gameObject.transform.position.x > knight.transform.position.x)
-              {
-                  collision.GetComponent<Rigidbody>().velocity = new Vector3(15f, 0f, 0f);
-              }
-          }
-          //Bottom
-         else if(collision.gameObject.transform.position.z < knight.transform.position.z)
-          {
-              collision.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, -15f);
-              //Left
-              if(collision.gameObject.transform.position.x < knight.transform.position.x)
-              {
-                  collision.GetComponent<Rigidbody>().velocity = new Vector3(-15f, 0f, 0f);
-              }
-              //Right
-              else if(collision.gameObject.transform.position.x > knight.transform.position.x)
-              {
-                  collision.GetComponent<Rigidbody>().velocity = new Vector3(15f, 0f, 0f);
-              }
-          }
-=======
             collision.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, -10f - knight.GetComponent<KnightStats>().AB2KB);
             //Left
             if (collision.gameObject.transform.position.x < knight.transform.position.x)
@@ -137,7 +106,6 @@ public class ability2Script : MonoBehaviour {
             {
                 collision.GetComponent<Rigidbody>().velocity = new Vector3(10f + knight.GetComponent<KnightStats>().AB2KB, 0f, 0f);
             }
->>>>>>> 799ab5ba635b10d592cd0887f25b394c46b104e5
         }
     }
 }
