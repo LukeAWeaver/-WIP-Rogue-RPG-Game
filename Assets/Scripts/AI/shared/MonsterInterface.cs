@@ -13,6 +13,7 @@ public class MonsterInterface : MonoBehaviour
     public float rotationSpeed;
     public int coinAmount;
     private GameObject player;
+    public bool isBurning; //used for ability 1 ultimate
     // Use this for initialization
     void Start()
     {
@@ -20,6 +21,7 @@ public class MonsterInterface : MonoBehaviour
         isFlippingRight = false;
         isFlippingLeft = false;
         rotationSpeed = 5.0f;
+        isBurning = false;
     }
 
     // Update is called once per frame
@@ -30,6 +32,10 @@ public class MonsterInterface : MonoBehaviour
             var gold = Instantiate(reward, transform.position, transform.rotation);
             gold.transform.localScale = gold.transform.localScale * .4f;
             Destroy(transform.parent.gameObject);
+        }
+        if(isBurning)
+        {
+            StartCoroutine(DOT());
         }
     }
     public void CheckFlipping()
@@ -63,5 +69,11 @@ public class MonsterInterface : MonoBehaviour
             transform.localScale = rot;
         }
     }
-
+    IEnumerator DOT()
+    {
+        isBurning = false;
+        hp--;
+        yield return new WaitForSeconds(1f);
+        isBurning = true;
+    }
 }

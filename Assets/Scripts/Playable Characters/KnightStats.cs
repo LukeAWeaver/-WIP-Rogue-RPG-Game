@@ -147,10 +147,12 @@ public class KnightStats : MonoBehaviour {
             {
                 if(timer%12 == 0 || timer % 12 == 1 || timer % 12 == 2 || timer % 12 == 3)
                 {
+                    if(Ab1 < 1.5)
                     GetComponent<SpriteRenderer>().color = Color.gray;
                 }
                 else
                 {
+                    if(Ab1 < 1.5)
                     GetComponent<SpriteRenderer>().color = Color.white;
                 }
                 timer++;
