@@ -10,9 +10,8 @@ public class ability2Script : MonoBehaviour {
     void Start ()
     {
         wave.Stop();
-
         gameObject.GetComponent<Collider>().enabled = false;
-      check = false;
+        check = false;
     }
 
     // Update is called once per frame
@@ -71,17 +70,35 @@ public class ability2Script : MonoBehaviour {
       }
       else if(collision.gameObject.tag=="InteractableScenery")
         {
-            collision.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, -15f);
-            //Left
-            if (collision.gameObject.transform.position.x < knight.transform.position.x)
-            {
-                collision.GetComponent<Rigidbody>().velocity = new Vector3(-15f, 0f, 0f);
-            }
-            //Right
-            else if (collision.gameObject.transform.position.x > knight.transform.position.x)
-            {
-                collision.GetComponent<Rigidbody>().velocity = new Vector3(15f, 0f, 0f);
-            }
+          if(collision.gameObject.transform.position.z > knight.transform.position.z)
+          {
+              collision.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 15f);
+              //Left
+              if(collision.gameObject.transform.position.x < knight.transform.position.x)
+              {
+                  collision.GetComponent<Rigidbody>().velocity = new Vector3(-15f, 0f, 0f);
+              }
+              //Right
+              else if(collision.gameObject.transform.position.x > knight.transform.position.x)
+              {
+                  collision.GetComponent<Rigidbody>().velocity = new Vector3(15f, 0f, 0f);
+              }
+          }
+          //Bottom
+         else if(collision.gameObject.transform.position.z < knight.transform.position.z)
+          {
+              collision.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, -15f);
+              //Left
+              if(collision.gameObject.transform.position.x < knight.transform.position.x)
+              {
+                  collision.GetComponent<Rigidbody>().velocity = new Vector3(-15f, 0f, 0f);
+              }
+              //Right
+              else if(collision.gameObject.transform.position.x > knight.transform.position.x)
+              {
+                  collision.GetComponent<Rigidbody>().velocity = new Vector3(15f, 0f, 0f);
+              }
+          }
         }
     }
 }
