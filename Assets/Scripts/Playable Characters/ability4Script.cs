@@ -27,7 +27,7 @@ public class ability4Script : MonoBehaviour {
             check = !check;
         knight.GetComponent<KnightStats>().energy = knight.GetComponent<KnightStats>().energy - 50;
       }
-      else if(Input.GetKeyUp("2"))
+      else if(Input.GetKeyUp("4"))
         {
             gameObject.GetComponent<Collider>().enabled = false;
             effectLeft.Stop();
@@ -58,5 +58,5 @@ public class ability4Script : MonoBehaviour {
       }
     }
 
-  
+
 }
