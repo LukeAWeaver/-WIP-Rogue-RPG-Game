@@ -14,6 +14,7 @@ public class ability1Script : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        ability1Icon = FindObjectOfType<A1ONCD>().gameObject;
         aura.Stop();
         knight = FindObjectOfType<KnightStats>().gameObject;
         isActiveToggle = 0;
@@ -22,9 +23,17 @@ public class ability1Script : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
+        if(knight.GetComponent<KnightStats>().UnlockAB1 == 0)
+        {
+            ability1Icon.SetActive(false);
+        }
+        else
+        {
+            ability1Icon.SetActive(true);
+        }
         if (onCD == false)
         {
-            if (Input.GetKeyDown("1") && GetComponentInParent<KnightStats>().energy > 0 && isActiveToggle == 0)
+            if (Input.GetKeyDown("1") && GetComponentInParent<KnightStats>().energy > 0 && isActiveToggle == 0 && knight.GetComponent<KnightStats>().UnlockAB1 == 1)
             {
                 isActiveToggle = 1;
             }

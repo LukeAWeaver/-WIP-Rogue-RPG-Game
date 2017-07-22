@@ -33,7 +33,11 @@ public class KnightStats : MonoBehaviour {
     public float AB2KB;
     public float AB2Radius;
     public int AB2Ultimate;
-    
+    public int UnlockAB1;
+    public int UnlockAB2;
+    public int UnlockAB3;
+    public int UnlockAB4;
+
     //called when scene loads or when object intantiated 
     void Start ()
   {
@@ -59,6 +63,11 @@ public class KnightStats : MonoBehaviour {
         AB2KB = PlayerPrefs.GetFloat("AB2KB");
         AB2Radius = PlayerPrefs.GetFloat("AB2Radius");
         AB2Ultimate = PlayerPrefs.GetInt("AB2Ultimate");
+        UnlockAB1 = PlayerPrefs.GetInt("UnlockAB1");
+        UnlockAB2 = PlayerPrefs.GetInt("UnlockAB2");
+        UnlockAB3 = PlayerPrefs.GetInt("UnlockAB3");
+        UnlockAB4 = PlayerPrefs.GetInt("UnlockAB4");
+
         InvokeRepeating("resetHP", 0, .03f);
         InvokeRepeating("EnergyRegen", 0, .25f);
     }
@@ -82,7 +91,12 @@ public class KnightStats : MonoBehaviour {
         PlayerPrefs.SetFloat("AB2Radius", AB2Radius);
         PlayerPrefs.SetInt("AB2Ultimate", AB2Ultimate);
         health = PlayerPrefs.GetInt("currentHP");
-        if(health <1)
+        PlayerPrefs.SetInt("UnlockAB1", UnlockAB1);
+        PlayerPrefs.SetInt("UnlockAB2", UnlockAB2);
+        PlayerPrefs.SetInt("UnlockAB3", UnlockAB3);
+        PlayerPrefs.SetInt("UnlockAB4", UnlockAB4);
+
+        if (health <1)
         {
             SceneManager.LoadScene("OverWorld");
         }

@@ -40,7 +40,7 @@ public class SwordSwing : MonoBehaviour {
             atkSpeedMod = 0f;
         }
         //ability 3 animation BEGIN
-        if (Input.GetKey("3") && player.GetComponent<KnightStats>().energy>=10 && ab3OnCD == false)
+        if (Input.GetKey("3") && player.GetComponent<KnightStats>().energy>=10 && ab3OnCD == false && player.GetComponent<KnightStats>().UnlockAB3 == 1)
         {
             if (swing.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
             {

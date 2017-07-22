@@ -18,10 +18,20 @@ public class AB3Tier1 : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         btn.onClick.AddListener(A3ATKPWR);
 
     }
-
+    private void Update()
+    {
+        if (player.GetComponent<KnightStats>().UnlockAB3 == 1 && player.GetComponentInChildren<ability3Script>().AB3dmg > 0) //atleast 1 point in current skill
+        {
+            GetComponent<Image>().color = Color.white;
+        }
+        else if (player.GetComponent<KnightStats>().UnlockAB3 == 1) //previous skill maxed out
+        {
+            GetComponent<Image>().color = new Color32(128, 113, 113, 255);
+        }
+    }
     void A3ATKPWR() //ability3 tier 1
     {
-        if (player.GetComponentInChildren<ability3Script>().AB3dmg < 5 && player.GetComponent<KnightStats>().SkillPoints > 0) //max upgrades is 5
+        if (player.GetComponentInChildren<ability3Script>().AB3dmg < 5 && player.GetComponent<KnightStats>().SkillPoints > 0 && player.GetComponent<KnightStats>().UnlockAB3 == 1) //max upgrades is 5
         {
             player.GetComponentInChildren<ability3Script>().AB3dmg++;
             player.GetComponent<KnightStats>().SkillPoints--;

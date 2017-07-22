@@ -18,10 +18,21 @@ public class AB2Tier1 : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         btn.onClick.AddListener(A2ATKPWR);
 
     }
+    private void Update()
+    {
+        if (player.GetComponent<KnightStats>().UnlockAB2 == 1 && player.GetComponent<KnightStats>().AB2BonusATK > 0)
+        {
+            GetComponent<Image>().color = Color.white;
+        }
+        else if (player.GetComponent<KnightStats>().UnlockAB2 == 1)
+        {
+            GetComponent<Image>().color = new Color32(128, 113, 113, 255);
+        }
+    }
 
     void A2ATKPWR() //ability2 tier 1
     {
-        if (player.GetComponent<KnightStats>().AB2BonusATK < 5 && player.GetComponent<KnightStats>().SkillPoints > 0) //max upgrades is 5
+        if (player.GetComponent<KnightStats>().AB2BonusATK < 5 && player.GetComponent<KnightStats>().SkillPoints > 0 && player.GetComponent<KnightStats>().UnlockAB2 == 1) //max upgrades is 5
         {
             player.GetComponent<KnightStats>().AB2BonusATK++;
             player.GetComponent<KnightStats>().SkillPoints--;

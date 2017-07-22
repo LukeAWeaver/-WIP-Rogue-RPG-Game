@@ -15,6 +15,7 @@ public class ability2Script : MonoBehaviour {
     int currentHP;
     void Start ()
     {
+        ability2Icon = FindObjectOfType<A2ONCD>().gameObject;
         wave.Stop();
         gameObject.GetComponent<Collider>().enabled = false;
         check = false;
@@ -23,9 +24,17 @@ public class ability2Script : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
+        if (knight.GetComponent<KnightStats>().UnlockAB2 == 0)
+        {
+            ability2Icon.SetActive(false);
+        }
+        else
+        {
+            ability2Icon.SetActive(true);
+        }
         wave.transform.localScale = new Vector3(1.5f + knight.GetComponent<KnightStats>().AB2Radius, 1.5f + knight.GetComponent<KnightStats>().AB2Radius, 1);
         GetComponent<Collider>().transform.localScale = new Vector3(1.5f + knight.GetComponent<KnightStats>().AB2Radius, 1.5f + knight.GetComponent<KnightStats>().AB2Radius, 1);
-        if (Input.GetKeyDown("2") && GetComponentInParent<KnightStats>().energy > 20 && ab2OnCD == false)
+        if (Input.GetKeyDown("2") && GetComponentInParent<KnightStats>().energy > 20 && ab2OnCD == false && knight.GetComponent<KnightStats>().UnlockAB2 == 1)
       {
             StartCoroutine(ability2CD());
             gameObject.GetComponent<Collider>().enabled = true;

@@ -18,10 +18,20 @@ public class AB2Tier4 : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         btn.onClick.AddListener(A2KB);
 
     }
-
+    private void Update()
+    {
+        if (player.GetComponent<KnightStats>().AB2Ultimate == 1 && player.GetComponent<KnightStats>().AB2Radius >= .5f)
+        {
+            GetComponent<Image>().color = Color.white;
+        }
+        else if (player.GetComponent<KnightStats>().AB2Radius >= .49f)
+        {
+            GetComponent<Image>().color = new Color32(128, 113, 113, 255);
+        }
+    }
     void A2KB() //ability2 tier 2
     {
-        if (player.GetComponent<KnightStats>().AB2Ultimate < 1 && player.GetComponent<KnightStats>().SkillPoints > 0) //max upgrades is 5
+        if (player.GetComponent<KnightStats>().AB2Ultimate < 1 && player.GetComponent<KnightStats>().SkillPoints > 0 && player.GetComponent<KnightStats>().AB2Radius >= .5f) //max upgrades is 5
         {
             player.GetComponent<KnightStats>().AB2Ultimate += 1;
             player.GetComponent<KnightStats>().SkillPoints--;

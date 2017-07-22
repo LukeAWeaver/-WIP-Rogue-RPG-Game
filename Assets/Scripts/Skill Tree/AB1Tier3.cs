@@ -22,11 +22,18 @@ public class AB1Tier3 : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     // Update is called once per frame
     void Update()
     {
-
+        if (player.GetComponent<KnightStats>().SPBonusMS >= .010f && player.GetComponent<KnightStats>().SPBonusScale > 0)
+        {
+            GetComponent<Image>().color = Color.white;
+        }
+        else if (player.GetComponent<KnightStats>().SPBonusMS >= .010f)
+        {
+            GetComponent<Image>().color = new Color32(128, 113, 113, 255);
+        }
     }
-    void SPA1MS() //ability1 tier 2
+    void SPA1MS() //ability1 tier 3
     {
-        if (player.GetComponent<KnightStats>().SPBonusScale < .15f && player.GetComponent<KnightStats>().SkillPoints > 0) //max upgrades is 3
+        if (player.GetComponent<KnightStats>().SPBonusScale < .15f && player.GetComponent<KnightStats>().SkillPoints > 0 && player.GetComponent<KnightStats>().SPBonusMS >= .010f) //max upgrades is 3
         {
             player.GetComponent<KnightStats>().SPBonusScale = .05f + player.GetComponent<KnightStats>().SPBonusScale;
             player.GetComponent<KnightStats>().SkillPoints--;
