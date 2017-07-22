@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ability2Script : MonoBehaviour {
 
     public GameObject knight;
+    public GameObject ability2Icon;
     bool check;
     public ParticleSystem wave;
     public AudioClip sfx;
     private AudioSource source;
+    private bool ab2OnCD;
     int currentHP;
     void Start ()
     {
@@ -20,10 +23,15 @@ public class ability2Script : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
+        if (ability2Icon.GetComponent<Image>().fillAmount < 1)
+        {
+            ability2Icon.GetComponent<Image>().fillAmount = ability2Icon.GetComponent<Image>().fillAmount + .00125f;
+        }
         wave.transform.localScale = new Vector3(1.5f + knight.GetComponent<KnightStats>().AB2Radius, 1.5f + knight.GetComponent<KnightStats>().AB2Radius, 1);
 
-        if (Input.GetKeyDown("2") && GetComponentInParent<KnightStats>().energy > 20)
+        if (Input.GetKeyDown("2") && GetComponentInParent<KnightStats>().energy > 20 && ab2OnCD == false)
       {
+            StartCoroutine(ability2CD());
             gameObject.GetComponent<Collider>().enabled = true;
             check = !check;
             knight.GetComponent<KnightStats>().energy = knight.GetComponent<KnightStats>().energy - 20;
@@ -94,5 +102,14 @@ public class ability2Script : MonoBehaviour {
                 collision.GetComponent<Rigidbody>().velocity = new Vector3(10f + knight.GetComponent<KnightStats>().AB2KB, 0f, 0f);
             }
         }
+    }
+    IEnumerator ability2CD()
+    {
+        ability2Icon.GetComponent<Image>().fillAmount = 0;
+        ab2OnCD = true;
+        ability2Icon.GetComponent<Image>().color = new Color32(128, 113, 113, 255);
+        yield return new WaitForSeconds(8f);
+        ability2Icon.GetComponent<Image>().color = Color.white;
+        ab2OnCD = false;
     }
 }
