@@ -31,10 +31,6 @@ public class SwordSwing : MonoBehaviour {
 
     void Update ()
     {
-        if (ability3Icon.GetComponent<Image>().fillAmount <1)
-        {
-            ability3Icon.GetComponent<Image>().fillAmount = ability3Icon.GetComponent<Image>().fillAmount + .01f;
-        }
         if (player.GetComponent<KnightStats>().weapon[0].gameObject.activeInHierarchy)
         {
             atkSpeedMod = .6f;

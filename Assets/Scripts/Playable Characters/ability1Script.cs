@@ -22,10 +22,6 @@ public class ability1Script : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        if (ability1Icon.GetComponent<Image>().fillAmount < 1)
-        {
-            ability1Icon.GetComponent<Image>().fillAmount = ability1Icon.GetComponent<Image>().fillAmount + .0018f;
-        }
         if (onCD == false)
         {
             if (Input.GetKeyDown("1") && GetComponentInParent<KnightStats>().energy > 0 && isActiveToggle == 0)
@@ -52,6 +48,9 @@ public class ability1Script : MonoBehaviour {
                 {
                     weapon.GetComponent<SpriteRenderer>().color = Color.red;
                 }
+            }
+            if(isActiveToggle == 4)
+            {
                 knight.GetComponent<KnightStats>().energy = knight.GetComponent<KnightStats>().energy - .1f;
             }
             if (isActiveToggle == 2 || knight.GetComponent<KnightStats>().energy < 1) //code only runs the frame ability1 is turned off

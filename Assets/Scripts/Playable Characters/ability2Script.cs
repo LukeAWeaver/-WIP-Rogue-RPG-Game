@@ -23,10 +23,6 @@ public class ability2Script : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        if (ability2Icon.GetComponent<Image>().fillAmount < 1)
-        {
-            ability2Icon.GetComponent<Image>().fillAmount = ability2Icon.GetComponent<Image>().fillAmount + .00125f;
-        }
         wave.transform.localScale = new Vector3(1.5f + knight.GetComponent<KnightStats>().AB2Radius, 1.5f + knight.GetComponent<KnightStats>().AB2Radius, 1);
 
         if (Input.GetKeyDown("2") && GetComponentInParent<KnightStats>().energy > 20 && ab2OnCD == false)
@@ -108,7 +104,7 @@ public class ability2Script : MonoBehaviour {
         ability2Icon.GetComponent<Image>().fillAmount = 0;
         ab2OnCD = true;
         ability2Icon.GetComponent<Image>().color = new Color32(128, 113, 113, 255);
-        yield return new WaitForSeconds(8f);
+        yield return new WaitForSeconds(6.8f);
         ability2Icon.GetComponent<Image>().color = Color.white;
         ab2OnCD = false;
     }
