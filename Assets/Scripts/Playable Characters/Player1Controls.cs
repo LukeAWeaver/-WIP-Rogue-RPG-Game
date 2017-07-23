@@ -12,6 +12,7 @@ public class Player1Controls : MonoBehaviour
     public GameObject autoAttack;
     public GameObject SetSkillTreeActive;
     public char previousKey;
+    public char previousKeyws;
     public bool isFlippingLeft;
     public bool isFlippingRight;
     public bool onGround;
@@ -83,9 +84,15 @@ public class Player1Controls : MonoBehaviour
                 {
                     isFlippingLeft = false;
                     isFlippingRight = true;
+                    GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
                 }
-                transform.Translate(gameObject.GetComponent<KnightStats>().movementSpeed, 0f, 0f);
+                if (GetComponent<Rigidbody>().velocity.x < gameObject.GetComponent<KnightStats>().movementSpeed * 200)
+                    GetComponent<Rigidbody>().velocity += new Vector3(gameObject.GetComponent<KnightStats>().movementSpeed *20, 0f, 0f);
                 previousKey = 'd';
+            }
+            if(Input.GetKeyUp("d"))
+            {
+                GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, GetComponent<Rigidbody>().velocity.z);
             }
             if (Input.GetKey("a"))
             {
@@ -93,17 +100,35 @@ public class Player1Controls : MonoBehaviour
                 {
                     isFlippingLeft = true;
                     isFlippingRight = false;
+                    GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, 0f);
                 }
-                transform.Translate(-gameObject.GetComponent<KnightStats>().movementSpeed, 0f, 0f);
+                if (GetComponent<Rigidbody>().velocity.x > -gameObject.GetComponent<KnightStats>().movementSpeed * 200)
+                    GetComponent<Rigidbody>().velocity += new Vector3(-gameObject.GetComponent<KnightStats>().movementSpeed * 20, 0f, 0f);
                 previousKey = 'a';
+            }
+            if (Input.GetKeyUp("a"))
+            {
+                GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, GetComponent<Rigidbody>().velocity.z);
             }
             if (Input.GetKey("w"))
             {
-                transform.Translate(0f, 0f, gameObject.GetComponent<KnightStats>().movementSpeed);
+
+                if (GetComponent<Rigidbody>().velocity.z < gameObject.GetComponent<KnightStats>().movementSpeed * 200)
+                    GetComponent<Rigidbody>().velocity += new Vector3(0f, 0f, gameObject.GetComponent<KnightStats>().movementSpeed * 20);
+            }
+            if (Input.GetKeyUp("w"))
+            {
+                GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, 0f, 0f);
             }
             if (Input.GetKey("s"))
             {
-                transform.Translate(0f, 0f, -gameObject.GetComponent<KnightStats>().movementSpeed);
+
+                if (GetComponent<Rigidbody>().velocity.z > -gameObject.GetComponent<KnightStats>().movementSpeed * 200)
+                    GetComponent<Rigidbody>().velocity += new Vector3(0f, 0f, -gameObject.GetComponent<KnightStats>().movementSpeed * 20);
+            }
+            if (Input.GetKeyUp("s"))
+            {
+                GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, 0f, 0f);
             }
             if (isMoving && isRunning && Input.GetKey("left shift"))
             {
@@ -111,6 +136,7 @@ public class Player1Controls : MonoBehaviour
                 gameObject.GetComponent<KnightStats>().energy = gameObject.GetComponent<KnightStats>().energy - .05f;
             }
         }
+
         CheckFlipping();
 
 

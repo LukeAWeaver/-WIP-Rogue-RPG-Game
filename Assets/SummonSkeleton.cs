@@ -37,15 +37,16 @@ public class SummonSkeleton : MonoBehaviour {
         {
             StartCoroutine(SummonSkeleOnCD());
             rng = Random.Range(0, 2);
-            if (rng == 1)
+            if (rng == 0)
             {
                 skele = Resources.Load("Skeleton") as GameObject;
+                Instantiate(skele, new Vector3(transform.position.x + Random.Range(-1f, 1f), transform.position.y + .5f, transform.position.z + Random.Range(-1f, 1f)), transform.rotation);
             }
-            else if (rng == 2)
+            else if (rng == 1)
             {
                 skele = Resources.Load("Skeleton2") as GameObject;
+                Instantiate(skele, new Vector3(transform.position.x + Random.Range(-1f, 1f), transform.position.y + .5f, transform.position.z + Random.Range(-1f, 1f)), transform.rotation);
             }
-            Instantiate(skele, new Vector3(transform.position.x + Random.Range(-1f, 1f), transform.position.y + .5f, transform.position.z + Random.Range(-1f, 1f)), transform.rotation);
         }
 	}
     IEnumerator SummonSkeleOnCD()
