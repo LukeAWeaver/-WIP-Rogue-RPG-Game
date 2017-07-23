@@ -58,7 +58,8 @@ public class SwordSwing : MonoBehaviour {
             else if (swing.GetCurrentAnimatorStateInfo(0).IsName("Ability3Hold") && test == 2)
             {
                 swing.SetInteger("state", 1);
-                var Projectile1 = Instantiate(ab3, transform.position, transform.rotation);
+                GameObject Ability3 = Resources.Load("Ability3") as GameObject;
+                var Projectile1 = Instantiate(Ability3, transform.position, transform.rotation);
                 if(player.GetComponentInChildren<ability3Script>().AB3Ultimate == 1)
                 {
                     StartCoroutine(ability3Ultimate());
@@ -136,10 +137,12 @@ public class SwordSwing : MonoBehaviour {
     IEnumerator ability3Ultimate()
     {
         yield return new WaitForSeconds(.8f);
-        var Projectile2 = Instantiate(ab3, transform.position, transform.rotation);
+        GameObject Ability32ndShot = Resources.Load("Ability3") as GameObject;
+        var Projectile2 = Instantiate(Ability32ndShot, transform.position, transform.rotation);
         Projectile2.gameObject.GetComponent<ability3Script>().test = 0;
         yield return new WaitForSeconds(.8f);
-        var Projectile3 = Instantiate(ab3, transform.position, transform.rotation);
+        GameObject Ability323rdShot = Resources.Load("Ability3") as GameObject;
+        var Projectile3 = Instantiate(Ability323rdShot, transform.position, transform.rotation);
         Projectile3.gameObject.GetComponent<ability3Script>().test = 0;
     }
 }

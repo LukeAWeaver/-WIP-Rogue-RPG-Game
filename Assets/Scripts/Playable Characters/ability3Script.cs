@@ -20,6 +20,7 @@ public class ability3Script : MonoBehaviour
     void Start()
     {
         ability3Icon = FindObjectOfType<A3ONCD>().gameObject;
+        knight = FindObjectOfType<KnightStats>().gameObject;
         AB3dmg = PlayerPrefs.GetInt("AB3dmg");
         AB3Speed = PlayerPrefs.GetFloat("AB3Speed");
         AB3duration = PlayerPrefs.GetFloat("AB3duration");

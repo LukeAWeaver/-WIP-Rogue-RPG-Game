@@ -99,7 +99,7 @@ public class ability2Script : MonoBehaviour {
           else if(gObject.transform.position.z < knight.transform.position.z && gObject.transform.position.x > knight.transform.position.x)
           {
               gObject.GetComponent<Rigidbody>().velocity = new Vector3(12f + knight.GetComponent<KnightStats>().AB2KB, 0f, -12f - knight.GetComponent<KnightStats>().AB2KB);
-          }
+          } 
         }
       }
       else if(collision.gameObject.tag=="InteractableScenery")
