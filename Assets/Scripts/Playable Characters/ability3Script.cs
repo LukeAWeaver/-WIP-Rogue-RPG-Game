@@ -19,6 +19,7 @@ public class ability3Script : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        ability3Icon = FindObjectOfType<A3ONCD>().gameObject;
         AB3dmg = PlayerPrefs.GetInt("AB3dmg");
         AB3Speed = PlayerPrefs.GetFloat("AB3Speed");
         AB3duration = PlayerPrefs.GetFloat("AB3duration");

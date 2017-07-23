@@ -11,6 +11,7 @@ public class E_hp : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        npc = transform.parent.GetComponentInChildren<MonsterInterface>().gameObject;
         stats = npc.GetComponent<MonsterInterface>();
         //currentHp.sprite = hpLeft[12];
     }
@@ -25,5 +26,9 @@ public class E_hp : MonoBehaviour
             gameObject.SetActive(false);
             Destroy(gameObject);
         }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        
     }
 }
