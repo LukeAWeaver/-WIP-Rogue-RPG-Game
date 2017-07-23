@@ -8,6 +8,7 @@ public class ability4Script : MonoBehaviour {
   bool check;
   public ParticleSystem effectLeft;
   public ParticleSystem effectRight;
+  List <GameObject> currentCollisions = new List <GameObject> ();
 
     // Use this for initialization
     void Start ()
@@ -35,29 +36,43 @@ public class ability4Script : MonoBehaviour {
             effectRight.Stop();
         }
     }
-
+    private void OnTriggerEnter (Collider collision)
+    {
+      if(collision.gameObject.GetComponent<MonsterInterface>() != null)
+      {
+            currentCollisions.Add (collision.gameObject);
+      }
+    }
     private void OnTriggerStay(Collider collision)
     {
 
       if(check && knight.GetComponent<KnightStats>().energy >50 && collision.gameObject.GetComponent<MonsterInterface>() != null)
       {
             check = false;
-            collision.gameObject.GetComponent<MonsterInterface>().hp = collision.gameObject.GetComponent<MonsterInterface>().hp -knight.GetComponent<KnightStats>().AD;
-            if (knight.GetComponent<Player1Controls>().isFlippingLeft)
+            foreach (GameObject gObject in currentCollisions)
             {
-              Debug.Log("1");
+              gObject.GetComponent<MonsterInterface>().hp = collision.gameObject.GetComponent<MonsterInterface>().hp -knight.GetComponent<KnightStats>().AD;
+              if (knight.GetComponent<Player1Controls>().isFlippingLeft)
+              {
+                Debug.Log("1");
 
-                collision.GetComponent<Rigidbody>().velocity += new Vector3(-knight.GetComponent<Player1Controls>().Ab1*30f, 0f, 0f);
-                effectLeft.Play();
+                  gObject.GetComponent<Rigidbody>().velocity += new Vector3(-knight.GetComponent<Player1Controls>().Ab1*30f, 0f, 0f);
+                  effectLeft.Play();
+              }
+              if (knight.GetComponent<Player1Controls>().isFlippingRight)
+              {
+                  Debug.Log("2");
+                  gObject.GetComponent<Rigidbody>().velocity += new Vector3(knight.GetComponent<Player1Controls>().Ab1 * 30f, 0f, 0f);
+                  effectRight.Play();
+              }
             }
-            if (knight.GetComponent<Player1Controls>().isFlippingRight)
-            {
-                Debug.Log("2");
-                collision.GetComponent<Rigidbody>().velocity += new Vector3(knight.GetComponent<Player1Controls>().Ab1 * 30f, 0f, 0f);
-                effectRight.Play();
-            }
-      }
+        }
     }
-
-
+    private void OnTriggerExit (Collider collision)
+    {
+      if(collision.gameObject.GetComponent<MonsterInterface>() != null)
+      {
+         currentCollisions.Remove(collision.gameObject);
+      }
+     }
 }

@@ -13,6 +13,7 @@ public class ability2Script : MonoBehaviour {
     private AudioSource source;
     private bool ab2OnCD;
     int currentHP;
+    List <GameObject> currentCollisions = new List <GameObject> ();
     void Start ()
     {
         ability2Icon = FindObjectOfType<A2ONCD>().gameObject;
@@ -59,8 +60,8 @@ public class ability2Script : MonoBehaviour {
                     currentHP = PlayerPrefs.GetInt("currentHP") + 2;
                 }
                 PlayerPrefs.SetInt("currentHP", currentHP);
-
             }
+
         }
       else if(Input.GetKeyUp("2"))
       {
@@ -68,29 +69,37 @@ public class ability2Script : MonoBehaviour {
         wave.Stop();
       }
     }
-
+    private void OnTriggerEnter (Collider collision)
+    {
+      if(collision.gameObject.GetComponent<MonsterInterface>() != null)
+      {
+            currentCollisions.Add (collision.gameObject);
+      }
+    }
     private void OnTriggerStay(Collider collision)
     {
       if(check && knight.GetComponent<KnightStats>().energy >20 && collision.gameObject.GetComponent<MonsterInterface>() != null)
       {
         check = false;
-        collision.gameObject.GetComponent<MonsterInterface>().hp = collision.gameObject.GetComponent<MonsterInterface>().hp - 1 - knight.GetComponent<KnightStats>().AB2BonusATK;
-        //Top
-        if(collision.gameObject.transform.position.z > knight.transform.position.z && collision.gameObject.transform.position.x < knight.transform.position.x)
+        foreach (GameObject gObject in currentCollisions)
         {
-            collision.GetComponent<Rigidbody>().velocity = new Vector3(-12f - knight.GetComponent<KnightStats>().AB2KB, 0f, 12f + knight.GetComponent<KnightStats>().AB2KB);
-        }
-        else if(collision.gameObject.transform.position.z > knight.transform.position.z && collision.gameObject.transform.position.x > knight.transform.position.x)
-        {
-            collision.GetComponent<Rigidbody>().velocity = new Vector3(12f + knight.GetComponent<KnightStats>().AB2KB, 0f, 12f + knight.GetComponent<KnightStats>().AB2KB);
-        }
-       else if(collision.gameObject.transform.position.z < knight.transform.position.z && collision.gameObject.transform.position.x < knight.transform.position.x)
-        {
-            collision.GetComponent<Rigidbody>().velocity = new Vector3(-12f - knight.GetComponent<KnightStats>().AB2KB, 0f, -12f - knight.GetComponent<KnightStats>().AB2KB);
-        }
-        else if(collision.gameObject.transform.position.z < knight.transform.position.z && collision.gameObject.transform.position.x > knight.transform.position.x)
-        {
-            collision.GetComponent<Rigidbody>().velocity = new Vector3(12f + knight.GetComponent<KnightStats>().AB2KB, 0f, -12f - knight.GetComponent<KnightStats>().AB2KB);
+         gObject.GetComponent<MonsterInterface>().hp = gObject.GetComponent<MonsterInterface>().hp - 1 - knight.GetComponent<KnightStats>().AB2BonusATK;
+          if(gObject.transform.position.z > knight.transform.position.z && gObject.transform.position.x < knight.transform.position.x)
+          {
+              gObject.GetComponent<Rigidbody>().velocity = new Vector3(-12f - knight.GetComponent<KnightStats>().AB2KB, 0f, 12f + knight.GetComponent<KnightStats>().AB2KB);
+          }
+          else if(gObject.transform.position.z > knight.transform.position.z && gObject.transform.position.x > knight.transform.position.x)
+          {
+              gObject.GetComponent<Rigidbody>().velocity = new Vector3(12f + knight.GetComponent<KnightStats>().AB2KB, 0f, 12f + knight.GetComponent<KnightStats>().AB2KB);
+          }
+         else if(gObject.transform.position.z < knight.transform.position.z && gObject.transform.position.x < knight.transform.position.x)
+          {
+              gObject.GetComponent<Rigidbody>().velocity = new Vector3(-12f - knight.GetComponent<KnightStats>().AB2KB, 0f, -12f - knight.GetComponent<KnightStats>().AB2KB);
+          }
+          else if(gObject.transform.position.z < knight.transform.position.z && gObject.transform.position.x > knight.transform.position.x)
+          {
+              gObject.GetComponent<Rigidbody>().velocity = new Vector3(12f + knight.GetComponent<KnightStats>().AB2KB, 0f, -12f - knight.GetComponent<KnightStats>().AB2KB);
+          }
         }
       }
       else if(collision.gameObject.tag=="InteractableScenery")
@@ -108,6 +117,13 @@ public class ability2Script : MonoBehaviour {
             }
         }
     }
+    private void OnTriggerExit (Collider collision)
+    {
+      if(collision.gameObject.GetComponent<MonsterInterface>() != null)
+      {
+         currentCollisions.Remove(collision.gameObject);
+      }
+     }
     IEnumerator ability2CD()
     {
         ability2Icon.GetComponent<Image>().fillAmount = 0;
