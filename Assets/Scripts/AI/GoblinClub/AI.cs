@@ -72,8 +72,7 @@ public class AI : MonoBehaviour
     {
         if(ThisNPCStats.hp <=0)
         {
-            player.GetComponent<KnightStats>().exp++; //im a genius
-          //  ThisNPC.SetActive(false);
+            player.GetComponent<KnightStats>().exp++;
         }
         if(ThisNPCStats.hp == 1)
         {

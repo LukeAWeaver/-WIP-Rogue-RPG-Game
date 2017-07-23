@@ -35,7 +35,6 @@ public class dogScript : MonoBehaviour {
         sniff = Random.Range(-5f, 5f);
         if(Thisdog.hp<=0)
         {
-            this.gameObject.SetActive(false);
             player.GetComponent<KnightStats>().exp = player.GetComponent<KnightStats>().exp + 2;
         }
         var target = player.transform.position;

@@ -30,7 +30,7 @@ public class MonsterInterface : MonoBehaviour
     {
         if(hp <= 0)
         {
-            //player.GetComponent<KnightStats>().exp++;
+            reward = Resources.Load("Coins") as GameObject;
             var gold = Instantiate(reward, transform.position, transform.rotation);
             gold.transform.localScale = gold.transform.localScale * .4f;
             Destroy(transform.parent.gameObject);

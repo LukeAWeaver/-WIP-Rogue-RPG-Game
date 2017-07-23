@@ -42,7 +42,8 @@ public class bowScript : MonoBehaviour
     }
     public void ShootArrow()
     {
-        var ThisEnemy = Instantiate(arrow, transform.position, transform.rotation);
+        arrow = Resources.Load("arrow") as GameObject;
+        var ThisArrow = Instantiate(arrow, transform.position, transform.rotation);
         source.clip = arrowShot;
         source.Play();
     }

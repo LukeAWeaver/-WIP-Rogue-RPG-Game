@@ -19,6 +19,7 @@ public class RandomMonsterSpawner : MonoBehaviour {
             int enemyIndex = Random.Range(0, RandomMonsters.Length);
             var ThisEnemy = Instantiate(RandomMonsters[enemyIndex], transform.position, transform.rotation);
             ThisEnemy.SetActive(true);
+            Destroy(this.gameObject);
             limit++;
         }
         /*

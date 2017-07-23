@@ -63,7 +63,7 @@ public class archerAI : MonoBehaviour
     {
         if (ThisNPCStats.hp <= 0)
         {
-            ThisNPC.SetActive(false);
+            //ThisNPC.SetActive(false);
             player.GetComponent<KnightStats>().exp++;
         }
         var target = player.transform.position;
