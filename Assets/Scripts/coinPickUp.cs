@@ -16,6 +16,7 @@ public class coinPickUp : MonoBehaviour
         sprite.sprite = sprites[0];
         sprite = GetComponent<SpriteRenderer>();
         source = GetComponent<AudioSource>();
+        gameObject.GetComponent<Transform>().localScale = new Vector3(.4f, .4f, .4f);
 
     }
     private void Update()

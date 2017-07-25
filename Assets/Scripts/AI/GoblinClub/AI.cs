@@ -18,7 +18,7 @@ public class AI : MonoBehaviour
     public float sight;
     public bool mobMentality;
     private float x;
-    List<GameObject> fellowMobs = new List<GameObject>();
+    public List<GameObject> fellowMobs = new List<GameObject>();
 
 
     // Use this for initialization

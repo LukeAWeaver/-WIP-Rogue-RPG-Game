@@ -14,6 +14,7 @@ public class MonsterInterface : MonoBehaviour
     public int coinAmount;
     public GameObject player;
     public bool inSight;
+    public weaponReward wr;
     public bool isBurning; //used for ability 1 ultimate
     // Use this for initialization
     void Start()
@@ -31,9 +32,16 @@ public class MonsterInterface : MonoBehaviour
     {
         if(hp <= 0)
         {
-            reward = Resources.Load("Coins") as GameObject;
+            if (gameObject.name == "mage")
+            {
+                gameObject.GetComponentInParent<Transform>().localScale = new Vector3(1f, 1f, 1f);
+                reward = Resources.Load("WeaponPickUp") as GameObject;
+            }
+            else
+            {
+                reward = Resources.Load("Coins") as GameObject;
+            }
             var gold = Instantiate(reward, transform.position, transform.rotation);
-            gold.transform.localScale = gold.transform.localScale * .4f;
             Destroy(transform.parent.gameObject);
         }
         if(isBurning)

@@ -28,6 +28,11 @@ public class SwordSwing : MonoBehaviour {
         AAOnCD = false;
         ab3OnCD = false;
     }
+    public void reset() //this is used for picking up weapons, otherwise AA/ab3onCD may stay false
+    {
+        AAOnCD = false;
+        ab3OnCD = false;
+    }
 
     void Update ()
     {
