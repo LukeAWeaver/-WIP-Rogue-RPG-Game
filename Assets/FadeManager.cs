@@ -20,10 +20,7 @@ public class FadeManager : MonoBehaviour {
     }
     // Update is called once per frame
     private void Update () {
-        if(Input.GetKey(KeyCode.Space))
-        {
-            Fade(true, 1.25f);
-        }
+
 		if(!isInTransition)
         {
             return;

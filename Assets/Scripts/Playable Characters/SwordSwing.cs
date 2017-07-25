@@ -11,6 +11,7 @@ public class SwordSwing : MonoBehaviour {
     public AudioClip swinging;
     public AudioClip ability3;
     public AudioClip hittingWood;
+    public AudioClip metalCollision;
     public GameObject ab3;
     public GameObject ability3Icon;
     private AudioSource source;
@@ -95,10 +96,18 @@ public class SwordSwing : MonoBehaviour {
     //handles collisions
     private void OnTriggerEnter(Collider collision)
     {
+        if (collision.gameObject.tag == "NPCSword")
+        {
+            source.clip = metalCollision;
+            source.Play();
+        }
+        else
+        {
+          //  source.clip = swinging;
+        }
         if (collision.gameObject.GetComponent<MonsterInterface>() != null)
         {
             //CombatTextManager.Instance.CreateText(collision.transform.position);
-
             collision.gameObject.GetComponent<MonsterInterface>().hp = collision.gameObject.GetComponent<MonsterInterface>().hp -player.GetComponent<KnightStats>().AD;
             if (player.GetComponent<Player1Controls>().isFlippingLeft)
             {
