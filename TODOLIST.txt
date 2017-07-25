@@ -2,7 +2,6 @@ TODO:
 Village:
 	-Add mountains in background
 	-Villager sprites
-	-Dialog box SFX
 	-Houses
 
 Player:
@@ -20,9 +19,6 @@ Terrain:
 	-doors leading to other rooms (the easiest way to handle the rooms would be to load a new scene)
 
 MISC:
-	-Delete clone objects (arrows, damage text, etc) *Use the destroy command*
-	-stop ability3 animation from running at start *no idea how to fix that*
-	-Save player stats and items after loading new scene *easy, I'll just google it*
 	-Fade out after scenes *we already have the script, it's attached to the fade panel on the main camera
 
 Bosses:
