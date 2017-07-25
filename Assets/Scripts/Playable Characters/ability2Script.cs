@@ -102,7 +102,7 @@ public class ability2Script : MonoBehaviour {
           } 
         }
       }
-      else if(collision.gameObject.tag=="InteractableScenery")
+      else if(collision.gameObject.tag== "InteractableScenery")
         {
             collision.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0f, -10f - knight.GetComponent<KnightStats>().AB2KB);
             //Left
@@ -119,10 +119,13 @@ public class ability2Script : MonoBehaviour {
     }
     private void OnTriggerExit (Collider collision)
     {
-      if(collision.gameObject.GetComponent<MonsterInterface>() != null)
-      {
-         currentCollisions.Remove(collision.gameObject);
-      }
+        foreach (GameObject gObject in currentCollisions)
+        {
+            if (gObject.GetComponent<MonsterInterface>().hp <= 0)
+            {
+                currentCollisions.Remove(gObject);
+            }
+        }
      }
     IEnumerator ability2CD()
     {

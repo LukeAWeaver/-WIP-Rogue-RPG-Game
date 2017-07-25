@@ -11,16 +11,19 @@ public class AI : MonoBehaviour
     private GameObject player;
     public MonsterInterface ThisNPCStats;
     public GameObject ThisNPC;
-    public bool inSight;
     public float range;
     public int counter;
     public float xVelocity;
     public float yVelocity;
     public float sight;
+    public bool mobMentality;
     private float x;
+    List<GameObject> fellowMobs = new List<GameObject>();
+
 
     // Use this for initialization
     void Start () {
+        mobMentality = false; //this is used for groups of AI chasing player
         ThisNPC = gameObject;
         ThisNPCStats = gameObject.GetComponent<MonsterInterface>();
         player = FindObjectOfType<KnightStats>().gameObject;
@@ -42,7 +45,11 @@ public class AI : MonoBehaviour
 
         if( range < sight )
         {
-            inSight = true;
+            GetComponent<MonsterInterface>().inSight = true;
+        }
+        else if(range>sight && GetComponent<MonsterInterface>().inSight == true)
+        {
+            GetComponent<MonsterInterface>().inSight = false;
         }
         else
         {
@@ -62,7 +69,7 @@ public class AI : MonoBehaviour
                 yVelocity = Random.Range(-0.02f, 0.02f);
             }
             transform.Translate(xVelocity, 0f, yVelocity);
-            inSight = false;
+            GetComponent<MonsterInterface>().inSight = false;
             counter++;
         }
     }
@@ -79,7 +86,7 @@ public class AI : MonoBehaviour
             ThisNPCStats.ms = .2f;
         }
         var target = player.transform.position;
-        if (inSight)
+        if (GetComponent<MonsterInterface>().inSight)
         {
             if (transform.position.x > (target.x + .6f))
             {
@@ -111,8 +118,34 @@ public class AI : MonoBehaviour
         }
         ThisNPCStats.CheckFlipping();
     }
-
-
-
-
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.GetComponent<AI>() != null || collision.gameObject.GetComponent<archerAI>() != null)
+        {
+            fellowMobs.Add(collision.gameObject);
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (GetComponent<MonsterInterface>().inSight)
+        {
+            foreach (GameObject mob in fellowMobs)
+            {
+                mob.GetComponent<MonsterInterface>().inSight = true;
+            }
+        }
+    }
+    private void OnTriggerExit(Collider collision)
+    {
+        if (collision.gameObject.GetComponent<AI>() != null || collision.gameObject.GetComponent<archerAI>() != null)
+        {
+            foreach (GameObject mob in fellowMobs)
+            {
+                if (mob.GetComponent<MonsterInterface>().inSight == false)
+                {
+                    fellowMobs.Remove(mob);
+                }
+            }
+        }
+    }
 }

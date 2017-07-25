@@ -13,6 +13,7 @@ public class MonsterInterface : MonoBehaviour
     public float rotationSpeed;
     public int coinAmount;
     public GameObject player;
+    public bool inSight;
     public bool isBurning; //used for ability 1 ultimate
     // Use this for initialization
     void Start()
@@ -39,6 +40,8 @@ public class MonsterInterface : MonoBehaviour
         {
             StartCoroutine(DOT());
         }
+
+
     }
     public void CheckFlipping()
     {
