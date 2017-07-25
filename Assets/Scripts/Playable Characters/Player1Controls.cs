@@ -23,7 +23,6 @@ public class Player1Controls : MonoBehaviour
     private AudioSource source;
 
 
-
     void Start()
     {
         source = GetComponent<AudioSource>();
@@ -31,11 +30,14 @@ public class Player1Controls : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         isMoving = false;
         walk = GetComponent<Animator>();
-        SetSkillTreeActive = FindObjectOfType<SKIdentifier>().gameObject;
         previousKey = 'd';
         onGround = true;
     }
+    private void Awake()
+    {
+        SetSkillTreeActive = FindObjectOfType<SKIdentifier>().gameObject;
 
+    }
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.K) && !STActive)

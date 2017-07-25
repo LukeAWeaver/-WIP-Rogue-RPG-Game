@@ -19,14 +19,16 @@ public class MonsterInterface : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        reward = FindObjectOfType<coinPickUp>().gameObject;
-        player = FindObjectOfType<KnightStats>().gameObject;
+
         isFlippingRight = false;
         isFlippingLeft = false;
         rotationSpeed = 5.0f;
         isBurning = false;
     }
-
+    private void Awake()
+    {
+        player = FindObjectOfType<KnightStats>().gameObject;
+    }
     // Update is called once per frame
     void Update()
     {
