@@ -127,10 +127,11 @@ public class AI : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (GetComponent<MonsterInterface>().inSight)
+        if (GetComponent<MonsterInterface>() != null || GetComponent<MonsterInterface>().inSight)
         {
             foreach (GameObject mob in fellowMobs)
             {
+                if(mob != null)
                 mob.GetComponent<MonsterInterface>().inSight = true;
             }
         }
@@ -141,7 +142,7 @@ public class AI : MonoBehaviour
         {
             foreach (GameObject mob in fellowMobs)
             {
-                if (mob.GetComponent<MonsterInterface>().inSight == false)
+                if (mob != null && mob.GetComponent<MonsterInterface>().inSight == false)
                 {
                     fellowMobs.Remove(mob);
                 }
