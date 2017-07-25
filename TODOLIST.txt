@@ -3,15 +3,14 @@ Village:
 	-Add mountains in background
 	-Villager sprites
 	-Dialog box SFX
+	-Houses
 
 Player:
-	-Player Ability 1,2,and 4.
-	Ability 1 - Offensive/Normal - Hits around player for high damage CD - 5s 
-	Ability 2 - Offensive/Normal - Buffs player damage for short time - 12s
-	Ability 4 - Offensive/Ultimate - Heavy hitting attack, one person. - 30s
+	-Player Ability 2,and 4.
+	Ability 2 - Offensive/Normal - Buffs player damage for short time - 12s **Fix Error**
+	Ability 4 - Offensive/Ultimate - Heavy hitting attack, one person. - 30s **Fix Error**
 AI:
 	-Dogs should circle player and randomly charge in
-	-AI should have mob mentality, if a mob sees the player nearby mobs of the same type should be attracted to the player too
 	-Fix Archer Arrows
 	-Shadow Knight AI (he should have the same abilities as the player) *classic Zelda ripoff*
 	
@@ -24,4 +23,19 @@ MISC:
 	-Delete clone objects (arrows, damage text, etc) *Use the destroy command*
 	-stop ability3 animation from running at start *no idea how to fix that*
 	-Save player stats and items after loading new scene *easy, I'll just google it*
-	-Fade out after scenes *we already have the script, it's attached to the fade panel on the main camera*
+	-Fade out after scenes *we already have the script, it's attached to the fade panel on the main camera
+
+Bosses:
+	Ogre- High hp and damage, slow at attacking
+
+	Final Boss - Creationist , Spawns undead versions of the most of the other bosses
+
+	Boss that removes players abilities, can only auto-attack.
+
+	Boss that dies by gimmicky minigame, can't attack the boss but gotta kill him with the environment.
+
+	Mini bosses such as the shadow knight.
+
+	Boss that can duplicate himself.
+
+	Vanilla bosses and such as well where they just do moves and stuff.
