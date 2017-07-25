@@ -51,20 +51,27 @@ public class ability4Script : MonoBehaviour {
             check = false;
             foreach (GameObject gObject in currentCollisions)
             {
-              gObject.GetComponent<MonsterInterface>().hp = collision.gameObject.GetComponent<MonsterInterface>().hp -knight.GetComponent<KnightStats>().AD;
-              if (knight.GetComponent<Player1Controls>().isFlippingLeft)
-              {
-                Debug.Log("1");
+                if (gObject != null)
+                {
+                    gObject.GetComponent<MonsterInterface>().hp = collision.gameObject.GetComponent<MonsterInterface>().hp - knight.GetComponent<KnightStats>().AD;
+                    if (knight.GetComponent<Player1Controls>().isFlippingLeft)
+                    {
+                        Debug.Log("1");
 
-                  gObject.GetComponent<Rigidbody>().velocity += new Vector3(-knight.GetComponent<Player1Controls>().Ab1*30f, 0f, 0f);
-                  effectLeft.Play();
-              }
-              if (knight.GetComponent<Player1Controls>().isFlippingRight)
-              {
-                  Debug.Log("2");
-                  gObject.GetComponent<Rigidbody>().velocity += new Vector3(knight.GetComponent<Player1Controls>().Ab1 * 30f, 0f, 0f);
-                  effectRight.Play();
-              }
+                        gObject.GetComponent<Rigidbody>().velocity += new Vector3(-knight.GetComponent<Player1Controls>().Ab1 * 30f, 0f, 0f);
+                        effectLeft.Play();
+                    }
+                    if (knight.GetComponent<Player1Controls>().isFlippingRight)
+                    {
+                        Debug.Log("2");
+                        gObject.GetComponent<Rigidbody>().velocity += new Vector3(knight.GetComponent<Player1Controls>().Ab1 * 30f, 0f, 0f);
+                        effectRight.Play();
+                    }
+                }
+                else
+                {
+                    currentCollisions.Remove(gObject);
+                }
             }
         }
     }

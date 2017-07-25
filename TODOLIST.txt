@@ -5,8 +5,6 @@ Village:
 	-Houses
 
 Player:
-	-Player Ability 2,and 4.
-	Ability 2 - Offensive/Normal - Buffs player damage for short time - 12s **Fix Error**
 	Ability 4 - Offensive/Ultimate - Heavy hitting attack, one person. - 30s **Fix Error**
 AI:
 	-Dogs should circle player and randomly charge in
@@ -17,9 +15,6 @@ Terrain:
 	-Terrain player can jump on (small hills or small cliffs)
 	-Hole leading to lower more difficult floor (new scene)
 	-doors leading to other rooms (the easiest way to handle the rooms would be to load a new scene)
-
-MISC:
-	-Fade out after scenes *we already have the script, it's attached to the fade panel on the main camera
 
 Bosses:
 	Ogre- High hp and damage, slow at attacking
