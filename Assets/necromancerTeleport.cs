@@ -21,7 +21,7 @@ public class necromancerTeleport : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        if(counter%2 == 0)
+        if(counter%90 == 0)
         {
             hpCheck = gameObject.GetComponent<MonsterInterface>().hp; //every other frame it will update hpCheck (this means every other frame hp check might be larger than necro's hp
         }
