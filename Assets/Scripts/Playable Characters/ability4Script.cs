@@ -12,8 +12,7 @@ public class ability4Script : MonoBehaviour {
     public GameObject ability4Icon;
     public bool ONCD;
     public bool check;
-    public ParticleSystem effectLeft;
-    public ParticleSystem effectRight;
+    public ParticleSystem effect;
     List <GameObject> currentCollisions = new List <GameObject> ();
 
     // Use this for initialization
@@ -27,38 +26,33 @@ public class ability4Script : MonoBehaviour {
 
         check = false;
         gameObject.GetComponent<Collider>().enabled = false;
-        effectLeft.Stop();
-        effectRight.Stop();
+        effect.Stop();
     }
 
     // Update is called once per frame
     void Update ()
     {
-        if (knight.GetComponent<KnightStats>().UnlockAB4 == 0)
-        {
-            ability4Icon.SetActive(false);
-        }
-        else
-        {
-            ability4Icon.SetActive(true);
-        }
-
-
-        if (Input.GetKeyDown("4") && GetComponentInParent<KnightStats>().energy > 50 && ONCD == false)
+      if (knight.GetComponent<KnightStats>().UnlockAB4 == 0)
       {
-            gameObject.GetComponent<Collider>().enabled = true;
-            check = !check;
+        ability4Icon.SetActive(false);
+      }
+      else
+      {
+        ability4Icon.SetActive(true);
+      }
+      if (Input.GetKeyDown("4") && GetComponentInParent<KnightStats>().energy > 50 && ONCD == false)
+      {
+        effect.Play();
+        gameObject.GetComponent<Collider>().enabled = true;
+        check = !check;
         knight.GetComponent<KnightStats>().energy = knight.GetComponent<KnightStats>().energy - 50;
-
       }
       else if(Input.GetKeyUp("4")  && ONCD == false)
-        {
-            gameObject.GetComponent<Collider>().enabled = false;
-            effectLeft.Stop();
-            effectRight.Stop();
-            StartCoroutine(Ability4onCD());
-
-        }
+      {
+        gameObject.GetComponent<Collider>().enabled = false;
+        effect.Stop();
+        StartCoroutine(Ability4onCD());
+      }
     }
     private void OnTriggerEnter (Collider collision)
     {
@@ -75,53 +69,44 @@ public class ability4Script : MonoBehaviour {
             check = false;
             foreach (GameObject gObject in currentCollisions)
             {
-                if (gObject != null)
+              if (gObject == null)
+              {
+
+              }
+              else if(AB4Ultimate=="enabled" && gObject!= null)
+              {
+                  gObject.GetComponent<MonsterInterface>().hp = collision.gameObject.GetComponent<MonsterInterface>().hp - 1 - AB4BonusATK * knight.GetComponent<KnightStats>().AD;
+                  if (knight.GetComponent<Player1Controls>().isFlippingLeft)
+                  {
+                      Debug.Log("1");
+                      gObject.GetComponent<Rigidbody>().velocity += new Vector3(-knight.GetComponent<Player1Controls>().Ab1 * 25f - AB4KB, 0f, 0f);
+                  }
+                  if (knight.GetComponent<Player1Controls>().isFlippingRight)
+                  {
+                      Debug.Log("2");
+                      gObject.GetComponent<Rigidbody>().velocity += new Vector3(knight.GetComponent<Player1Controls>().Ab1 * 25f + AB4KB, 0f, 0f);
+                  }
+              }
+              else if (gObject != null)
                 {
                     gObject.GetComponent<MonsterInterface>().hp = collision.gameObject.GetComponent<MonsterInterface>().hp - 1 - AB4BonusATK * knight.GetComponent<KnightStats>().AD;
                     if (knight.GetComponent<Player1Controls>().isFlippingLeft)
                     {
                         Debug.Log("1");
-
                         gObject.GetComponent<Rigidbody>().velocity += new Vector3(-knight.GetComponent<Player1Controls>().Ab1 * 25f - AB4KB, 0f, 0f);
-                        effectLeft.Play();
                     }
                     if (knight.GetComponent<Player1Controls>().isFlippingRight)
                     {
                         Debug.Log("2");
                         gObject.GetComponent<Rigidbody>().velocity += new Vector3(knight.GetComponent<Player1Controls>().Ab1 *25f + AB4KB, 0f, 0f);
-                        effectRight.Play();
                     }
-                }
-                if(AB4Ultimate=="enabled" && gObject!= null)
-                {
-                        gObject.GetComponent<MonsterInterface>().hp = collision.gameObject.GetComponent<MonsterInterface>().hp - 1 - AB4BonusATK * knight.GetComponent<KnightStats>().AD;
-                        if (knight.GetComponent<Player1Controls>().isFlippingLeft)
-                        {
-                            Debug.Log("1");
-
-                            gObject.GetComponent<Rigidbody>().velocity += new Vector3(-knight.GetComponent<Player1Controls>().Ab1 * 25f - AB4KB, 0f, 0f);
-                            effectLeft.Play();
-                        }
-                        if (knight.GetComponent<Player1Controls>().isFlippingRight)
-                        {
-                            Debug.Log("2");
-                            gObject.GetComponent<Rigidbody>().velocity += new Vector3(knight.GetComponent<Player1Controls>().Ab1 * 25f + AB4KB, 0f, 0f);
-                            effectRight.Play();
-                        }
-                }
-                else
-                {
-                    currentCollisions.Remove(gObject);
-                }
+              }
             }
         }
     }
     private void OnTriggerExit (Collider collision)
     {
-      if(collision.gameObject.GetComponent<MonsterInterface>() != null)
-      {
          currentCollisions.Remove(collision.gameObject);
-      }
      }
     IEnumerator Ability4onCD()
     {

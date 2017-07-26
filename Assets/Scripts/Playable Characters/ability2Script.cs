@@ -36,7 +36,7 @@ public class ability2Script : MonoBehaviour {
         wave.transform.localScale = new Vector3(1.5f + knight.GetComponent<KnightStats>().AB2Radius, 1.5f + knight.GetComponent<KnightStats>().AB2Radius, 1);
         GetComponent<Collider>().transform.localScale = new Vector3(1.5f + knight.GetComponent<KnightStats>().AB2Radius, 1.5f + knight.GetComponent<KnightStats>().AB2Radius, 1);
         if (Input.GetKeyDown("2") && GetComponentInParent<KnightStats>().energy > 20 && ab2OnCD == false && knight.GetComponent<KnightStats>().UnlockAB2 == 1)
-      {
+        {
 
             StartCoroutine(ability2CD());
             gameObject.GetComponent<Collider>().enabled = true;
@@ -129,7 +129,7 @@ public class ability2Script : MonoBehaviour {
     private void OnTriggerExit(Collider collision)
     {
 
-                currentCollisions.Remove(collision.gameObject);
+          currentCollisions.Remove(collision.gameObject);
     }
 
     IEnumerator ability2CD()
