@@ -24,7 +24,7 @@ public class SummonSkeleton : MonoBehaviour {
         var gp = ThisNPCStats.transform.position;
         ThisNPCStats = gameObject.GetComponent<MonsterInterface>();
 
-        range = Mathf.Sqrt((target.x - gp.x) * (target.x - gp.x) + (target.y - gp.y) * (target.y - gp.y));
+        range = Mathf.Sqrt((target.x - gp.x) * (target.x - gp.x) + (target.z - gp.z) * (target.z - gp.z));
         if (range < 10)
         {
             inSight = true;
