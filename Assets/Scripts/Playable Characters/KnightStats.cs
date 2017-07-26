@@ -25,6 +25,7 @@ public class KnightStats : MonoBehaviour {
     public Slider expBar;
     public int AD=0;
     public GameObject[] weapon;
+    public int currentWeapon;
     public int Ab1;
     public int SPBonusATK;
     public float SPBonusMS;
@@ -42,10 +43,11 @@ public class KnightStats : MonoBehaviour {
     public int UnlockAB3;
     public int UnlockAB4;
 
+
     //called when scene loads or when object intantiated 
     void Start ()
   {
-        Ab1=1;
+        Ab1 = 1;
         resting = 3;
         exp = 0;
         timer = 0;
@@ -54,6 +56,30 @@ public class KnightStats : MonoBehaviour {
         tempHP = 6;
         energy = 10000;
         isRecovering = false;
+
+
+        currentWeapon = PlayerPrefs.GetInt("currentWeapon");
+        if(currentWeapon == 1)
+        {
+            weapon[0].SetActive(true);
+            weapon[1].SetActive(true);
+            weapon[2].SetActive(false);
+            weapon[3].SetActive(false);
+        }
+        else if(currentWeapon == 2)
+        {
+            weapon[0].SetActive(false);
+            weapon[1].SetActive(false);
+            weapon[2].SetActive(true);
+            weapon[3].SetActive(false);
+        }
+        else if (currentWeapon == 3)
+        {
+            weapon[0].SetActive(true);
+            weapon[1].SetActive(false);
+            weapon[2].SetActive(false);
+            weapon[3].SetActive(true);
+        }
         gold = PlayerPrefs.GetInt("gold");
         level = PlayerPrefs.GetInt("level");
         SkillPoints = PlayerPrefs.GetInt("SP");
@@ -89,6 +115,7 @@ public class KnightStats : MonoBehaviour {
         currentEXP = (float)exp / (float)requiredExp;
         expBar.value = currentEXP;
         PlayerPrefs.SetInt("gold", gold);
+        PlayerPrefs.SetInt("currentWeapon", currentWeapon);
         PlayerPrefs.SetInt("level", level);
         PlayerPrefs.SetInt("SP", SkillPoints);
         PlayerPrefs.SetInt("SPBonusATK", SPBonusATK);

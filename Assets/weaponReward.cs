@@ -55,26 +55,27 @@ public class weaponReward : MonoBehaviour {
     void Update () {
 		if(isNear && Input.GetKeyDown(KeyCode.Space))
         {
-            if (rng == 2)
+            if (rng == 2) //if rng is 2 then the player is using a 2h weapon
             {
-                playerWeapons[0].SetActive(false);
+                playerWeapons[0].SetActive(false); //disable left arm
             }
             else
             {
                 playerWeapons[0].SetActive(true);
             }
-            if (playerWeapons[1].activeInHierarchy) //wood
+            if (playerWeapons[1].activeInHierarchy) //replace wood weapon with..
             {
-                if (gameObject.GetComponent<SpriteRenderer>().sprite == weapons[1]) //if its the same weapon, do nothing
+                if (gameObject.GetComponent<SpriteRenderer>().sprite == weapons[1]) // same weapon, do nothing
                 {
 
                 }
-                else
+                else                                //something else
                 {
                     playerWeapons[1].SetActive(false);
                     playerWeapons[rng].SetActive(true);
                     playerWeapons[rng].GetComponent<SwordSwing>().reset();
                     gameObject.GetComponent<SpriteRenderer>().sprite = weapons[1];
+                    player.GetComponent<KnightStats>().currentWeapon = rng;
                     rng = 1;
                 }
             }
@@ -90,6 +91,7 @@ public class weaponReward : MonoBehaviour {
                     playerWeapons[rng].SetActive(true);
                     playerWeapons[rng].GetComponent<SwordSwing>().reset();
                     gameObject.GetComponent<SpriteRenderer>().sprite = weapons[2];
+                    player.GetComponent<KnightStats>().currentWeapon = rng;
                     rng = 2;
                 }
             }
@@ -105,6 +107,7 @@ public class weaponReward : MonoBehaviour {
                     playerWeapons[rng].SetActive(true);
                     playerWeapons[rng].GetComponent<SwordSwing>().reset();
                     gameObject.GetComponent<SpriteRenderer>().sprite = weapons[3];
+                    player.GetComponent<KnightStats>().currentWeapon = rng;
                     rng = 3;
                 }
             }
