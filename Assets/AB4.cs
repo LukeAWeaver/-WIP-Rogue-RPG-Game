@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class AB3 : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class AB4 : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Button sp;
     private GameObject player;
@@ -15,13 +15,13 @@ public class AB3 : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         player = FindObjectOfType<KnightStats>().gameObject;
         Button btn = sp.GetComponent<Button>();
-        btn.onClick.AddListener(AB3Unlock);
+        btn.onClick.AddListener(AB4Unlock);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (player.GetComponent<KnightStats>().UnlockAB3 == 1)
+        if (player.GetComponent<KnightStats>().UnlockAB4 == 1)
         {
             GetComponent<Image>().color = Color.white;
         }
@@ -30,11 +30,11 @@ public class AB3 : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             GetComponent<Image>().color = new Color32(128, 113, 113, 255);
         }
     }
-    void AB3Unlock() //ability3
+    void AB4Unlock() //ability4
     {
-        if (player.GetComponent<KnightStats>().UnlockAB3 < 1 && player.GetComponent<KnightStats>().SkillPoints > 0) //max upgrades is 1
+        if (player.GetComponent<KnightStats>().UnlockAB4 < 1 && player.GetComponent<KnightStats>().SkillPoints > 0) //max upgrades is 1
         {
-            player.GetComponent<KnightStats>().UnlockAB3++;
+            player.GetComponent<KnightStats>().UnlockAB4++;
             gameObject.GetComponent<Image>().color = Color.white;
             player.GetComponent<KnightStats>().SkillPoints--;
         }
@@ -42,10 +42,11 @@ public class AB3 : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     //tooltip
     public void OnPointerEnter(PointerEventData eventData)
     {
-        gameObject.GetComponentInChildren<AB3Description>().gameObject.GetComponent<Text>().text = "Learn Ability3, player emits a wave that knocks enemies back."; //waaa this was crazy to code
+        gameObject.GetComponentInChildren<AB4Description>().gameObject.GetComponent<Text>().text = "Learn Ability4, shock waves send rocks flying at opponents."; //waaa this was crazy to code
     }
+
     public void OnPointerExit(PointerEventData eventData)
     {
-        gameObject.GetComponentInChildren<AB3Description>().gameObject.GetComponent<Text>().text = "";
+        gameObject.GetComponentInChildren<AB4Description>().gameObject.GetComponent<Text>().text = "";
     }
 }

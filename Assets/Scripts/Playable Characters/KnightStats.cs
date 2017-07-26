@@ -33,6 +33,10 @@ public class KnightStats : MonoBehaviour {
     public float AB2KB;
     public float AB2Radius;
     public int AB2Ultimate;
+    public int AB4BonusATK;
+    public float AB4KB;
+    public string AB4Stun;
+    public string AB4Ultimate;
     public int UnlockAB1;
     public int UnlockAB2;
     public int UnlockAB3;
@@ -59,10 +63,17 @@ public class KnightStats : MonoBehaviour {
         SPBonusATK = PlayerPrefs.GetInt("SPBonusATK");
         SPBonusMS = PlayerPrefs.GetFloat("SPBonusMS");
         SPBonusScale = PlayerPrefs.GetFloat("SPBonusScale");
+        //ability2
         AB2BonusATK = PlayerPrefs.GetInt("AB2BonusATK");
         AB2KB = PlayerPrefs.GetFloat("AB2KB");
         AB2Radius = PlayerPrefs.GetFloat("AB2Radius");
         AB2Ultimate = PlayerPrefs.GetInt("AB2Ultimate");
+        //ability 4
+        AB4BonusATK = PlayerPrefs.GetInt("AB4BonusATK");
+        AB4KB = PlayerPrefs.GetFloat("AB4KB");
+        AB4Stun = PlayerPrefs.GetString("AB4Stun");
+        AB4Ultimate= PlayerPrefs.GetString("AB4Ultimate");
+
         UnlockAB1 = PlayerPrefs.GetInt("UnlockAB1");
         UnlockAB2 = PlayerPrefs.GetInt("UnlockAB2");
         UnlockAB3 = PlayerPrefs.GetInt("UnlockAB3");
@@ -86,10 +97,17 @@ public class KnightStats : MonoBehaviour {
         PlayerPrefs.SetFloat("ms", movementSpeed);
         PlayerPrefs.SetFloat("critChance", critChance);
         PlayerPrefs.SetFloat("atkSpeed", attackSpeed);
+        //ab2
         PlayerPrefs.SetInt("AB2BonusATK", AB2BonusATK);
         PlayerPrefs.SetFloat("AB2KB", AB2KB);
         PlayerPrefs.SetFloat("AB2Radius", AB2Radius);
         PlayerPrefs.SetInt("AB2Ultimate", AB2Ultimate);
+        //ab4
+        PlayerPrefs.SetInt("AB4BonusATK", AB4BonusATK);
+        PlayerPrefs.SetFloat("AB4KB", AB4KB);
+        PlayerPrefs.SetString("AB4Stun", AB4Stun);
+        PlayerPrefs.SetString("AB4Ultimate", AB4Ultimate);
+
         health = PlayerPrefs.GetInt("currentHP");
         PlayerPrefs.SetInt("UnlockAB1", UnlockAB1);
         PlayerPrefs.SetInt("UnlockAB2", UnlockAB2);

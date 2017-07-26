@@ -257,7 +257,7 @@ public class Player1Controls : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Scenery" || collision.gameObject.tag == "npc" )
+        if(collision.gameObject.tag == "Scenery" || collision.gameObject.tag == "InteractableScenery" || collision.gameObject.tag == "npc" )
         {
             onGround = true;
             walk.SetBool("jump", false);
