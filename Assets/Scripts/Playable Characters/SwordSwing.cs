@@ -12,15 +12,16 @@ public class SwordSwing : MonoBehaviour {
     public AudioClip ability3;
     public AudioClip hittingWood;
     public AudioClip metalCollision;
-    public GameObject ab3;
     public GameObject ability3Icon;
     private AudioSource source;
+    public GameObject Ability3;
     private GameObject player;
     private bool ab3OnCD;
     private bool AAOnCD;
 
     // Use this for initialization
     void Start () {
+        Ability3 = Resources.Load("Ability3") as GameObject;
         player = FindObjectOfType<KnightStats>().gameObject;
         swing = GetComponent<Animator>();
         source = GetComponent<AudioSource>();
@@ -64,9 +65,13 @@ public class SwordSwing : MonoBehaviour {
             else if (swing.GetCurrentAnimatorStateInfo(0).IsName("Ability3Hold") && test == 2)
             {
                 swing.SetInteger("state", 1);
-                GameObject Ability3 = Resources.Load("Ability3") as GameObject;
                 var Projectile1 = Instantiate(Ability3, transform.position, transform.rotation);
-                if(player.GetComponentInChildren<ability3Script>().AB3Ultimate == 1)
+                Projectile1.GetComponent<ability3Script>().AB3duration = Ability3.GetComponent<ability3Script>().AB3duration;
+                Projectile1.GetComponent<ability3Script>().AB3Speed = Ability3.GetComponent<ability3Script>().AB3Speed;
+                Projectile1.GetComponent<ability3Script>().AB3dmg = Ability3.GetComponent<ability3Script>().AB3dmg;
+                Projectile1.GetComponent<ability3Script>().AB3Ultimate = Ability3.GetComponent<ability3Script>().AB3Ultimate;
+
+                if (Projectile1.GetComponent<ability3Script>().AB3Ultimate == 1)
                 {
 
                     StartCoroutine(ability3Ultimate());
@@ -153,13 +158,19 @@ public class SwordSwing : MonoBehaviour {
     {
         yield return new WaitForSeconds(.8f);
         swing.SetInteger("state", 1);
-        GameObject Ability32ndShot = Resources.Load("Ability3") as GameObject;
-        var Projectile2 = Instantiate(Ability32ndShot, transform.position, transform.rotation);
+        var Projectile2 = Instantiate(Ability3, transform.position, transform.rotation);
+        Projectile2.GetComponent<ability3Script>().AB3duration = Ability3.GetComponent<ability3Script>().AB3duration;
+        Projectile2.GetComponent<ability3Script>().AB3Speed = Ability3.GetComponent<ability3Script>().AB3Speed;
+        Projectile2.GetComponent<ability3Script>().AB3dmg = Ability3.GetComponent<ability3Script>().AB3dmg;
+        Projectile2.GetComponent<ability3Script>().AB3Ultimate = Ability3.GetComponent<ability3Script>().AB3Ultimate;
         Projectile2.gameObject.GetComponent<ability3Script>().test = 0;
         yield return new WaitForSeconds(.8f);
         swing.SetInteger("state", 1);
-        GameObject Ability323rdShot = Resources.Load("Ability3") as GameObject;
-        var Projectile3 = Instantiate(Ability323rdShot, transform.position, transform.rotation);
+        var Projectile3 = Instantiate(Ability3, transform.position, transform.rotation);
+        Projectile3.GetComponent<ability3Script>().AB3duration = Ability3.GetComponent<ability3Script>().AB3duration;
+        Projectile3.GetComponent<ability3Script>().AB3Speed = Ability3.GetComponent<ability3Script>().AB3Speed;
+        Projectile3.GetComponent<ability3Script>().AB3dmg = Ability3.GetComponent<ability3Script>().AB3dmg;
+        Projectile3.GetComponent<ability3Script>().AB3Ultimate = Ability3.GetComponent<ability3Script>().AB3Ultimate;
         Projectile3.gameObject.GetComponent<ability3Script>().test = 0;
     }
 }

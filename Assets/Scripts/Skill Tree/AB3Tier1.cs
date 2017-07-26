@@ -10,9 +10,12 @@ public class AB3Tier1 : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Button sp;
     private GameObject player;
+    public GameObject Ability3;
+
     // Use this for initialization
     void Start()
     {
+        Ability3 = Resources.Load("Ability3") as GameObject;
         player = FindObjectOfType<KnightStats>().gameObject;
         Button btn = sp.GetComponent<Button>();
         btn.onClick.AddListener(A3ATKPWR);
@@ -20,7 +23,7 @@ public class AB3Tier1 : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     private void Update()
     {
-        if (player.GetComponent<KnightStats>().UnlockAB3 == 1 && player.GetComponentInChildren<ability3Script>().AB3dmg > 0) //atleast 1 point in current skill
+        if (player.GetComponent<KnightStats>().UnlockAB3 == 1 && Ability3.GetComponent<ability3Script>().AB3dmg > 0) //atleast 1 point in current skill
         {
             GetComponent<Image>().color = Color.white;
         }
@@ -31,9 +34,9 @@ public class AB3Tier1 : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     void A3ATKPWR() //ability3 tier 1
     {
-        if (player.GetComponentInChildren<ability3Script>().AB3dmg < 5 && player.GetComponent<KnightStats>().SkillPoints > 0 && player.GetComponent<KnightStats>().UnlockAB3 == 1) //max upgrades is 5
+        if (Ability3.GetComponent<ability3Script>().AB3dmg < 5 && player.GetComponent<KnightStats>().SkillPoints > 0 && player.GetComponent<KnightStats>().UnlockAB3 == 1) //max upgrades is 5
         {
-            player.GetComponentInChildren<ability3Script>().AB3dmg++;
+            Ability3.GetComponent<ability3Script>().AB3dmg++;
             player.GetComponent<KnightStats>().SkillPoints--;
         }
     }

@@ -17,14 +17,15 @@ public class ability3Script : MonoBehaviour
     public AudioClip sfx;
     private AudioSource source;
     // Use this for initialization
+    private void Awake()
+    {
+
+    }
     void Start()
     {
         ability3Icon = FindObjectOfType<A3ONCD>().gameObject;
         knight = FindObjectOfType<KnightStats>().gameObject;
-        AB3dmg = PlayerPrefs.GetInt("AB3dmg");
-        AB3Speed = PlayerPrefs.GetFloat("AB3Speed");
-        AB3duration = PlayerPrefs.GetFloat("AB3duration");
-        AB3Ultimate = PlayerPrefs.GetInt("AB3Ultimate");
+
         source = GetComponent<AudioSource>();
         source.clip = sfx;
         source.Play();
@@ -53,11 +54,16 @@ public class ability3Script : MonoBehaviour
         {
             StartCoroutine(destroyA3());
         }
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        PlayerPrefs.SetInt("AB3dmg", AB3dmg);
+        PlayerPrefs.SetFloat("AB3Speed", AB3Speed);
+        PlayerPrefs.SetFloat("AB3duration", AB3duration);
+        PlayerPrefs.SetInt("AB3Ultimate", AB3Ultimate);
         if (knight.GetComponent<KnightStats>().UnlockAB3 == 0)
         {
             ability3Icon.SetActive(false);
@@ -68,10 +74,6 @@ public class ability3Script : MonoBehaviour
         }
 
         swing.speed = 2.5f - AB3duration;
-        PlayerPrefs.SetInt("AB3dmg", AB3dmg);
-        PlayerPrefs.SetFloat("AB3Speed", AB3Speed);
-        PlayerPrefs.SetInt("AB3Ultimate", AB3Ultimate);
-        PlayerPrefs.SetFloat("AB3duration", AB3duration);
 
         if (test == 0 && swing.GetCurrentAnimatorStateInfo(0).IsName("default"))
         {
