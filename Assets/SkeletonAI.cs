@@ -28,7 +28,7 @@ public class SkeletonAI : MonoBehaviour
         counter = 0;
         InvokeRepeating("movement", 0, .03f);
         ThisNPCStats.hp = 1;
-        ThisNPCStats.ms = .25f;
+        ThisNPCStats.ms = .4f;
         ThisNPCStats.rotationSpeed = 2f;
         x = Mathf.Abs(transform.localScale.x);
         sight = 5f;
@@ -67,6 +67,7 @@ public class SkeletonAI : MonoBehaviour
             counter++;
         }
     }
+    
 
     // Update is called once per frame
     void Update()
@@ -94,7 +95,11 @@ public class SkeletonAI : MonoBehaviour
                 if (GetComponent<Rigidbody>().velocity.x < 3f)
                     GetComponent<Rigidbody>().velocity += new Vector3(ThisNPCStats.ms, 0f, 0f);
             }
-            if (transform.position.z > (target.z + .01f) && GetComponent<Rigidbody>().velocity.z > -3f)
+            if(Mathf.Abs(transform.position.z - player.transform.position.z) <.01f)
+            {
+                GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, 0f, 0f);
+            }
+            else if (transform.position.z > (target.z + .01f) && GetComponent<Rigidbody>().velocity.z > -3f)
             {
                 GetComponent<Rigidbody>().velocity += new Vector3(0f, 0f, -ThisNPCStats.ms);
             }

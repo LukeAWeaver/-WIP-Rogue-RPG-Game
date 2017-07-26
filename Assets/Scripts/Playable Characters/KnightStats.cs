@@ -51,7 +51,6 @@ public class KnightStats : MonoBehaviour {
         resting = 3;
         exp = 0;
         timer = 0;
-        requiredExp = level + 3;
         health = 6;
         tempHP = 6;
         energy = 10000;
@@ -82,6 +81,7 @@ public class KnightStats : MonoBehaviour {
         }
         gold = PlayerPrefs.GetInt("gold");
         level = PlayerPrefs.GetInt("level");
+        requiredExp = level + 3;
         SkillPoints = PlayerPrefs.GetInt("SP");
         movementSpeed = PlayerPrefs.GetFloat("ms");
         critChance = PlayerPrefs.GetFloat("critChance");

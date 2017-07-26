@@ -41,7 +41,7 @@ public class AI : MonoBehaviour
     {
         var target = player.transform.position;
         var gp = ThisNPCStats.transform.position;
-        range = Mathf.Sqrt((target.x - gp.x)* (target.x - gp.x) + (target.z - gp.z)* (target.z - gp.z));
+        range = Mathf.Abs(Mathf.Sqrt((target.x - gp.x)* (target.x - gp.x) + (target.z - gp.z)* (target.z - gp.z)));
 
         if( range < sight )
         {
@@ -127,26 +127,17 @@ public class AI : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (GetComponent<MonsterInterface>() != null || GetComponent<MonsterInterface>().inSight)
-        {
             foreach (GameObject mob in fellowMobs)
             {
-                if(mob != null)
+                if(mob == null)
+                {
+                }
+                else if(GetComponent<MonsterInterface>().inSight)
                 mob.GetComponent<MonsterInterface>().inSight = true;
             }
-        }
     }
     private void OnTriggerExit(Collider collision)
     {
-        if (collision.gameObject.GetComponent<AI>() != null || collision.gameObject.GetComponent<archerAI>() != null)
-        {
-            foreach (GameObject mob in fellowMobs)
-            {
-                if (mob != null && mob.GetComponent<MonsterInterface>().inSight == false)
-                {
-                    fellowMobs.Remove(mob);
-                }
-            }
-        }
+        fellowMobs.Remove(collision.gameObject);
     }
 }
