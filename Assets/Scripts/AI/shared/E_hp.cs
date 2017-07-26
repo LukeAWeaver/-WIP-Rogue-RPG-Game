@@ -13,7 +13,10 @@ public class E_hp : MonoBehaviour
     {
         npc = transform.parent.GetComponentInChildren<MonsterInterface>().gameObject;
         stats = npc.GetComponent<MonsterInterface>();
-        //currentHp.sprite = hpLeft[12];
+    }
+    private void Awake()
+    {
+        
     }
 
     // Update is called once per frame

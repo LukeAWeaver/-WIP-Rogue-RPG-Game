@@ -5,36 +5,41 @@ using UnityEngine.UI;
 
 public class necromancerTeleport : MonoBehaviour {
 
-    public GameObject necromancer;
     private int necromancerHP;
     private int hpCheck;
     private Vector3 temp;
+    private int counter;
 
     // Use this for initialization
+
     void Start ()
     {
         hpCheck=gameObject.GetComponent<MonsterInterface>().hp;
-        necromancerHP=gameObject.GetComponent<MonsterInterface>().hp;
     }
+
 
     // Update is called once per frame
     void Update ()
     {
-        var necroPosition = necromancer.transform.position;
+        if(counter%2 == 0)
+        {
+            hpCheck = gameObject.GetComponent<MonsterInterface>().hp; //every other frame it will update hpCheck (this means every other frame hp check might be larger than necro's hp
+        }
+        counter++;
+        var necroPosition = gameObject.transform.position;
 
         temp=transform.position;
         temp.x = Random.Range(-3f, 3f);
         temp.z = Random.Range(-3f, 3f);
 
-        necromancerHP=gameObject.GetComponent<MonsterInterface>().hp;
-
         necroPosition +=temp;
         if(hpCheck==necromancerHP)
         {
-
+            Debug.Log("this is spam");
         }
-        else if(hpCheck < necromancerHP)
+        else if(hpCheck > gameObject.GetComponent<MonsterInterface>().hp)
         {
+            Debug.Log("tele");
             hpCheck=necromancerHP;
             gameObject.transform.position = necroPosition;
         }
