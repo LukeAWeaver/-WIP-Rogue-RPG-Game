@@ -22,7 +22,6 @@ public class ability3Script : MonoBehaviour
     }
     void Start()
     {
-        ability3Icon = FindObjectOfType<A3ONCD>().gameObject;
         knight = FindObjectOfType<KnightStats>().gameObject;
 
         source = GetComponent<AudioSource>();
