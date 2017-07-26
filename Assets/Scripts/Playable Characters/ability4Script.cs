@@ -40,7 +40,7 @@ public class ability4Script : MonoBehaviour {
       {
         ability4Icon.SetActive(true);
       }
-      if (Input.GetKeyDown("4") && GetComponentInParent<KnightStats>().energy > 50 && ONCD == false)
+      if (Input.GetKeyDown("4") && GetComponentInParent<KnightStats>().energy > 50 && ONCD == false && GetComponentInParent<KnightStats>().UnlockAB4 == 1)
       {
         effect.Play();
         gameObject.GetComponent<Collider>().enabled = true;

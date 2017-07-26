@@ -5,7 +5,6 @@ using UnityEngine;
 public class ability3Script : MonoBehaviour
 {
     public GameObject knight;
-    public GameObject ability3Icon;
     Animator swing;
     public int test;
     private bool direction;
@@ -64,14 +63,7 @@ public class ability3Script : MonoBehaviour
         PlayerPrefs.SetFloat("AB3Speed", AB3Speed);
         PlayerPrefs.SetFloat("AB3duration", AB3duration);
         PlayerPrefs.SetInt("AB3Ultimate", AB3Ultimate);
-        if (knight.GetComponent<KnightStats>().UnlockAB3 == 0)
-        {
-            ability3Icon.SetActive(false);
-        }
-        else
-        {
-            ability3Icon.SetActive(true);
-        }
+
 
         swing.speed = 2.5f - AB3duration;
 

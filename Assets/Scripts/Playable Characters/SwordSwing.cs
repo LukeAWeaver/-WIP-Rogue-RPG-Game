@@ -21,6 +21,7 @@ public class SwordSwing : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        ability3Icon = FindObjectOfType<A3ONCD>().gameObject;
         Ability3 = Resources.Load("Ability3") as GameObject;
         player = FindObjectOfType<KnightStats>().gameObject;
         swing = GetComponent<Animator>();
@@ -38,6 +39,15 @@ public class SwordSwing : MonoBehaviour {
 
     void Update ()
     {
+        if (player.GetComponent<KnightStats>().UnlockAB3 == 0)
+        {
+            ability3Icon.SetActive(false);
+        }
+        else
+        {
+            ability3Icon.SetActive(true);
+        }
+
         if (player.GetComponent<KnightStats>().weapon[0].gameObject.activeInHierarchy)
         {
             atkSpeedMod = .6f;
