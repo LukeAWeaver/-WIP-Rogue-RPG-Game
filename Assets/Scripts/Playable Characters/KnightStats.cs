@@ -43,10 +43,19 @@ public class KnightStats : MonoBehaviour {
     public int UnlockAB3;
     public int UnlockAB4;
 
+    public GameObject Ability3;
 
-    //called when scene loads or when object intantiated 
-    void Start ()
-  {
+    // Use this for initialization
+    private void Awake()
+    {
+        Ability3 = Resources.Load("Ability3") as GameObject;
+        Ability3.GetComponent<ability3Script>().AB3dmg = PlayerPrefs.GetInt("AB3dmg");
+        Ability3.GetComponent<ability3Script>().AB3Speed = PlayerPrefs.GetFloat("AB3Speed");
+        Ability3.GetComponent<ability3Script>().AB3duration = PlayerPrefs.GetFloat("AB3duration");
+        Ability3.GetComponent<ability3Script>().AB3Ultimate = PlayerPrefs.GetInt("AB3Ultimate");
+    }
+    void Start()
+    {
         Ab1 = 1;
         resting = 3;
         exp = 0;
@@ -129,12 +138,16 @@ public class KnightStats : MonoBehaviour {
         PlayerPrefs.SetFloat("AB2KB", AB2KB);
         PlayerPrefs.SetFloat("AB2Radius", AB2Radius);
         PlayerPrefs.SetInt("AB2Ultimate", AB2Ultimate);
+        //ab3
+        PlayerPrefs.SetInt("AB3dmg", Ability3.GetComponent<ability3Script>().AB3dmg);
+        PlayerPrefs.SetFloat("AB3Speed", Ability3.GetComponent<ability3Script>().AB3Speed);
+        PlayerPrefs.SetFloat("AB3duration", Ability3.GetComponent<ability3Script>().AB3duration);
+        PlayerPrefs.SetInt("AB3Ultimate", Ability3.GetComponent<ability3Script>().AB3Ultimate);
         //ab4
         PlayerPrefs.SetInt("AB4BonusATK", AB4BonusATK);
         PlayerPrefs.SetFloat("AB4KB", AB4KB);
         PlayerPrefs.SetString("AB4Stun", AB4Stun);
         PlayerPrefs.SetString("AB4Ultimate", AB4Ultimate);
-
         health = PlayerPrefs.GetInt("currentHP");
         PlayerPrefs.SetInt("UnlockAB1", UnlockAB1);
         PlayerPrefs.SetInt("UnlockAB2", UnlockAB2);

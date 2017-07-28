@@ -22,6 +22,7 @@ public class ability3Script : MonoBehaviour
     }
     void Start()
     {
+
         knight = FindObjectOfType<KnightStats>().gameObject;
 
         source = GetComponent<AudioSource>();
@@ -58,10 +59,7 @@ public class ability3Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerPrefs.SetInt("AB3dmg", AB3dmg);
-        PlayerPrefs.SetFloat("AB3Speed", AB3Speed);
-        PlayerPrefs.SetFloat("AB3duration", AB3duration);
-        PlayerPrefs.SetInt("AB3Ultimate", AB3Ultimate);
+
 
 
         swing.speed = 2.5f - AB3duration;

@@ -23,6 +23,7 @@ public class AB3Tier1 : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     private void Update()
     {
+
         if (player.GetComponent<KnightStats>().UnlockAB3 == 1 && Ability3.GetComponent<ability3Script>().AB3dmg > 0) //atleast 1 point in current skill
         {
             GetComponent<Image>().color = Color.white;
@@ -36,7 +37,9 @@ public class AB3Tier1 : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if (Ability3.GetComponent<ability3Script>().AB3dmg < 5 && player.GetComponent<KnightStats>().SkillPoints > 0 && player.GetComponent<KnightStats>().UnlockAB3 == 1) //max upgrades is 5
         {
+            //Ability3.GetComponent<ability3Script>().AB3dmg = PlayerPrefs.GetInt("AB3dmg");
             Ability3.GetComponent<ability3Script>().AB3dmg++;
+            //PlayerPrefs.SetInt("AB3dmg", Ability3.GetComponent<ability3Script>().AB3dmg);
             player.GetComponent<KnightStats>().SkillPoints--;
         }
     }

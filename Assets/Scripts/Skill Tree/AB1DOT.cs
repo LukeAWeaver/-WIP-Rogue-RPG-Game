@@ -21,7 +21,7 @@ public class AB1DOT : MonoBehaviour {
         if (other.gameObject.GetComponent<MonsterInterface>() != null && gameObject.GetComponent<ability1Script>().isActiveToggle == 4 && ultimateEnabled == 1)
         {
             npc = other.gameObject.GetComponent<MonsterInterface>();
-            npc.isBurning = true;
+            npc.exitBurningRadius = false;
         }
     }
     private void OnTriggerExit(Collider other)
@@ -29,7 +29,7 @@ public class AB1DOT : MonoBehaviour {
         if (other.gameObject.GetComponent<MonsterInterface>() != null)
         {
             npc = other.gameObject.GetComponent<MonsterInterface>();
-            npc.isBurning = false;
+            npc.exitBurningRadius = true;
         }
     }
 }

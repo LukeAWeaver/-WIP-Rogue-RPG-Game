@@ -16,14 +16,15 @@ public class MonsterInterface : MonoBehaviour
     public bool inSight;
     public weaponReward wr;
     public bool isBurning; //used for ability 1 ultimate
+    public bool exitBurningRadius;
     // Use this for initialization
     void Start()
     {
-
+        exitBurningRadius = true;
         isFlippingRight = false;
         isFlippingLeft = false;
         rotationSpeed = 5.0f;
-        isBurning = false;
+        isBurning = true;
     }
     private void Awake()
     {
@@ -46,12 +47,21 @@ public class MonsterInterface : MonoBehaviour
             var gold = Instantiate(reward, transform.position, transform.rotation);
             Destroy(transform.parent.gameObject);
         }
-        if(isBurning)
+        if (!exitBurningRadius)
         {
-            StartCoroutine(DOT());
+            if (isBurning)
+            {
+                StartCoroutine(DOT());
+            }
+            else if (!isBurning)
+            {
+                StopCoroutine(DOT());
+            }
         }
-
-
+        else
+        {
+            StopCoroutine(DOT());
+        }
     }
     public void CheckFlipping()
     {
@@ -86,9 +96,12 @@ public class MonsterInterface : MonoBehaviour
     }
     IEnumerator DOT()
     {
-        isBurning = false;
-        hp--;
-        yield return new WaitForSeconds(1f);
-        isBurning = true;
+        if (isBurning)
+        {
+            isBurning = false;
+            hp--;
+            yield return new WaitForSeconds(1f);
+            isBurning = true;
+        }
     }
 }
