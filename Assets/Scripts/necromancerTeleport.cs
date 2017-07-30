@@ -9,11 +9,12 @@ public class necromancerTeleport : MonoBehaviour {
     private int hpCheck;
     private Vector3 temp;
     private int counter;
-
+    public GameObject teleport;
     // Use this for initialization
 
     void Start ()
     {
+        teleport = Resources.Load("NecroTele") as GameObject;
         hpCheck=gameObject.GetComponent<MonsterInterface>().hp;
     }
 
@@ -27,7 +28,7 @@ public class necromancerTeleport : MonoBehaviour {
         }
         counter++;
         var necroPosition = gameObject.transform.position;
-
+        var necroRotation = gameObject.transform.rotation;
         temp=transform.position;
         temp.x = Random.Range(-3f, 3f);
         temp.z = Random.Range(-3f, 3f);
@@ -39,6 +40,7 @@ public class necromancerTeleport : MonoBehaviour {
         }
         else if(hpCheck > gameObject.GetComponent<MonsterInterface>().hp)
         {
+            var tele = Instantiate(teleport, necroPosition, necroRotation);
             Debug.Log("tele");
             hpCheck=necromancerHP;
             gameObject.transform.position = necroPosition;

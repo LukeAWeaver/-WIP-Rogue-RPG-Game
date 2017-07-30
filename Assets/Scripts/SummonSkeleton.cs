@@ -52,7 +52,7 @@ public class SummonSkeleton : MonoBehaviour {
     IEnumerator SummonSkeleOnCD()
     {
         onCD = true;
-        yield return new WaitForSeconds(.8f);
+        yield return new WaitForSeconds(100f);
         onCD = false;
     }
 }

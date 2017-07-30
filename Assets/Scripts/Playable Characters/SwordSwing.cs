@@ -125,11 +125,13 @@ public class SwordSwing : MonoBehaviour {
         {
             //CombatTextManager.Instance.CreateText(collision.transform.position);
             collision.gameObject.GetComponent<MonsterInterface>().hp = collision.gameObject.GetComponent<MonsterInterface>().hp -player.GetComponent<KnightStats>().AD;
-            if (player.GetComponent<Player1Controls>().isFlippingLeft)
+            if(collision.gameObject.GetComponent<SummonSkeleton>() != null){}
+            else if (player.GetComponent<Player1Controls>().isFlippingLeft)
             {
                 collision.GetComponent<Rigidbody>().velocity += new Vector3(-player.GetComponent<Player1Controls>().Ab1*10f, 0f, 0f);
             }
-            if (player.GetComponent<Player1Controls>().isFlippingRight)
+            if(collision.gameObject.GetComponent<SummonSkeleton>() != null){}
+            else if (player.GetComponent<Player1Controls>().isFlippingRight)
             {
                 collision.GetComponent<Rigidbody>().velocity += new Vector3(player.GetComponent<Player1Controls>().Ab1 * 10f, 0f, 0f);
             }
