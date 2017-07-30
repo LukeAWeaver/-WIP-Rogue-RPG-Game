@@ -7,9 +7,11 @@ public class randomRoom : MonoBehaviour {
     private int numberOfRooms;
     // Use this for initialization
     void Start () {
-        items = new GameObject[2];
+        items = new GameObject[3];
         items[0] = Resources.Load("DungeonTerrain1") as GameObject;
         items[1] = Resources.Load("DungeonTerrain2") as GameObject;
+        items[2] = Resources.Load("DungeonTerrain3") as GameObject;
+
 
         Invoke("randomRooms",0f);
     }
