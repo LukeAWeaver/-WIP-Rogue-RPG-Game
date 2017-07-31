@@ -18,7 +18,7 @@ public class Player1Controls : MonoBehaviour
     public bool onGround;
     private Rigidbody rb;
     private bool STActive;
-    Animator walk;
+    Animator action;
     public AudioClip jump;
     private AudioSource source;
 
@@ -29,7 +29,7 @@ public class Player1Controls : MonoBehaviour
         Ab1 = 1;
         rb = GetComponent<Rigidbody>();
         isMoving = false;
-        walk = GetComponent<Animator>();
+        action = GetComponent<Animator>();
         previousKey = 'd';
         onGround = true;
     }
@@ -50,13 +50,15 @@ public class Player1Controls : MonoBehaviour
             SetSkillTreeActive.SetActive(false);
             STActive = false;
         }
-        walk.SetBool("walking", false); // used for animation
+        action.SetBool("walking", false); // used for animation
         // BEING JUMPING SCRIPT
         if(Input.GetKeyDown(KeyCode.Space) && gameObject.GetComponent<KnightStats>().energy > 5 && onGround)
         {
+
             source.clip = jump;
             source.Play();
-            walk.SetBool("jump", true);
+            action.SetBool("jump", true);
+
             gameObject.GetComponent<KnightStats>().energy = gameObject.GetComponent<KnightStats>().energy - 5;
             rb.velocity = new Vector3(0f, 4f + Ab1, 0f);
             onGround = false;
@@ -74,9 +76,10 @@ public class Player1Controls : MonoBehaviour
         {
             CheckWalking();
             CheckRunning();
+            CheckRoll();
+
             if (!isRunning)
             {
-                CheckRoll();
             }
             //BASIC INPUT
             if (Input.GetKey("d"))
@@ -120,7 +123,7 @@ public class Player1Controls : MonoBehaviour
             }
             if (isMoving && isRunning && Input.GetKey("left shift"))
             {
-                walk.SetBool("shift", true);
+                action.SetBool("shift", true);
                 gameObject.GetComponent<KnightStats>().energy = gameObject.GetComponent<KnightStats>().energy - .05f;
             }
         }
@@ -149,7 +152,7 @@ public class Player1Controls : MonoBehaviour
         else
         {
             isRunning = false;
-            walk.SetBool("shift", false);
+            action.SetBool("shift", false);
         }
     }
     public void CheckWalking()
@@ -157,8 +160,8 @@ public class Player1Controls : MonoBehaviour
         if (!(Input.GetKey("a") && Input.GetKey("d")) && !(Input.GetKey("s") && Input.GetKey("w")) && (Input.GetKey("a") || Input.GetKey("d") || Input.GetKey("w") || Input.GetKey("s")))
         {
             isMoving = true;
-            walk.SetBool("walking", true);
-            if (walk.GetBool("roll") == false)
+            action.SetBool("walking", true);
+            if (action.GetBool("roll") == false)
             {
                 if (Ab1 == 1.5f)
                     gameObject.GetComponent<KnightStats>().movementSpeed = 0.02f * Ab1 + gameObject.GetComponent<KnightStats>().SPBonusMS;
@@ -171,19 +174,20 @@ public class Player1Controls : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftControl) && gameObject.GetComponent<KnightStats>().energy >= 20)
         {
-            if (!walk.GetCurrentAnimatorStateInfo(0).IsName("roll"))
+            action.SetBool("roll", true);
+
+            if (!action.GetCurrentAnimatorStateInfo(0).IsName("roll"))
             {
                 gameObject.GetComponent<KnightStats>().energy = gameObject.GetComponent<KnightStats>().energy - 20;
             }
-            walk.SetBool("roll", true);
             if (Ab1 == 1.5f)
                 gameObject.GetComponent<KnightStats>().movementSpeed = 0.1f * Ab1 + gameObject.GetComponent<KnightStats>().SPBonusMS;
             else
                 gameObject.GetComponent<KnightStats>().movementSpeed = 0.1f;
         }
-        if (walk.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !walk.IsInTransition(0))
+        if (action.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !action.IsInTransition(0))
         {
-            walk.SetBool("roll", false);
+            action.SetBool("roll", false);
         }
     }
     public void CheckFlipping()
@@ -260,7 +264,7 @@ public class Player1Controls : MonoBehaviour
         if(collision.gameObject.tag == "Scenery" || collision.gameObject.tag == "InteractableScenery" || collision.gameObject.tag == "npc" )
         {
             onGround = true;
-            walk.SetBool("jump", false);
+            action.SetBool("jump", false);
         }
     }
 }
