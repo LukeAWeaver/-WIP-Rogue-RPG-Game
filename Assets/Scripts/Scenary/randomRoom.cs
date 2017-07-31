@@ -1,16 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class randomRoom : MonoBehaviour {
     public GameObject[] items;
-    private int numberOfRooms;
     // Use this for initialization
     void Start () {
         items = new GameObject[3];
-        items[0] = Resources.Load("DungeonTerrain1") as GameObject;
-        items[1] = Resources.Load("DungeonTerrain2") as GameObject;
-        items[2] = Resources.Load("DungeonTerrain3") as GameObject;
+        
+        if (SceneManager.GetActiveScene().name == "DungeonBiome")
+        {
+            items[0] = Resources.Load("DungeonTerrain1") as GameObject;
+            items[1] = Resources.Load("DungeonTerrain2") as GameObject;
+            items[2] = Resources.Load("DungeonTerrain3") as GameObject;
+        }
+        else
+        {
+            items[0] = null;
+            items[1] = null;
+            items[2] = null;
+        }
 
 
         Invoke("randomRooms",0f);
