@@ -3,12 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RandomMonsterSpawner : MonoBehaviour {
-    public GameObject[] RandomMonsters;
+    private GameObject[] RandomMonsters;
+    private GameObject GoblinMelee;
+    private GameObject GoblinArcher;
+    private GameObject Dog;
+
     public float spawnDelay = .1f;
     public float spawnTime = 1f;
     public int limit;
     // Use this for initialization
     void Start () {
+        RandomMonsters = new GameObject[3];
+        GoblinMelee = Resources.Load("GoblinClub") as GameObject;
+        RandomMonsters[0] = GoblinMelee;
+        GoblinArcher = Resources.Load("GoblinBow") as GameObject;
+        RandomMonsters[1] = GoblinArcher;
+        Dog = Resources.Load("dog") as GameObject;
+        RandomMonsters[2] = Dog;
+
+
+
         limit = 0;
         InvokeRepeating("SpawnRandom", spawnDelay, spawnTime);
     }
@@ -18,6 +32,11 @@ public class RandomMonsterSpawner : MonoBehaviour {
         {
             int enemyIndex = Random.Range(0, RandomMonsters.Length);
             var ThisEnemy = Instantiate(RandomMonsters[enemyIndex], transform.position, transform.rotation);
+            if(ThisEnemy.gameObject.name == "dog(Clone)")
+            {
+                Debug.Log("test");
+                //ThisEnemy.gameObject.GetComponent<Transform>().rotation = new Quaternion(0f, 0f, 0f, 0f);
+            }
             ThisEnemy.SetActive(true);
             Destroy(this.gameObject);
             limit++;
