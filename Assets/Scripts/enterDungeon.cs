@@ -28,7 +28,7 @@ public class enterDungeon : MonoBehaviour {
     {
 
         yield return new WaitForSeconds(1.3f);
-        SceneManager.LoadScene("DungeonBiome");
+        SceneManager.LoadScene("ForestBiome");
 
     }
 }

@@ -15,6 +15,12 @@ public class randomRoom : MonoBehaviour {
             items[1] = Resources.Load("DungeonTerrain2") as GameObject;
             items[2] = Resources.Load("DungeonTerrain3") as GameObject;
         }
+        else if (SceneManager.GetActiveScene().name == "ForestBiome")
+        {
+            items[0] = Resources.Load("GrassTerrain1") as GameObject;
+            items[1] = Resources.Load("GrassTerrain2") as GameObject;
+            items[2] = Resources.Load("GrassTerrain1") as GameObject;
+        }
         else
         {
             items[0] = null;

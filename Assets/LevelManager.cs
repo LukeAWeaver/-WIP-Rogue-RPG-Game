@@ -36,7 +36,7 @@ public class LevelManager : MonoBehaviour {
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(SceneManager.GetActiveScene().name == "DungeonBiome")
+        if(SceneManager.GetActiveScene().name == "DungeonBiome" || SceneManager.GetActiveScene().name == "ForestBiome")
         {
             CF++;
             PlayerPrefs.SetInt("CurrentFloor", CF);
@@ -44,11 +44,11 @@ public class LevelManager : MonoBehaviour {
         }
         if (CF<3) // 0,1,2
         {
-            SceneManager.LoadScene("DungeonBiome");
+            SceneManager.LoadScene("ForestBiome");
         }
         else if(CF<6) // 3,4,5
         {
-            SceneManager.LoadScene("Floor1");
+            SceneManager.LoadScene("DungeonBiome");
 
         }
     }

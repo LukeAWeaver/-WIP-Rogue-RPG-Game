@@ -16,6 +16,7 @@ public class necromancerTeleport : MonoBehaviour {
 
     void Start ()
     {
+        necromancer = FindObjectOfType<SummonSkeleton>().gameObject;
         hpCheck=gameObject.GetComponent<MonsterInterface>().hp;
     }
 
@@ -35,7 +36,9 @@ public class necromancerTeleport : MonoBehaviour {
         }
         else if(hpCheck > gameObject.GetComponent<MonsterInterface>().hp)
         {
-            teleportStart.Play();
+            var ts = Instantiate(teleportStart,necromancer.transform.position,Quaternion.Euler(-90f,0f,0f));
+            ts.Play();
+            //teleportStart.Play();
             StartCoroutine(Vanish());
             Debug.Log("tele");
             hpCheck=necromancerHP;
@@ -45,17 +48,18 @@ public class necromancerTeleport : MonoBehaviour {
   IEnumerator Vanish()
   {
       Debug.Log("Coroutine");
-      yield return new WaitForSeconds(1.5f);
       var necroPosition = gameObject.transform.position;
 
       temp=transform.position;
       temp.x = Random.Range(-8f, 8f);
       temp.z = Random.Range(-8f, 8f);
-      necroPosition +=temp;
+        var te = Instantiate(teleportEnd, (necromancer.transform.position + temp), Quaternion.Euler(-90f, 0f, 0f));
+        necroPosition +=temp;
+        te.Play();
+        //teleportEnd.Play();
+        yield return new WaitForSeconds(.5f);
+        gameObject.transform.position = necroPosition;
 
-      gameObject.transform.position = necroPosition;
-      Debug.Log("Wait");
-      teleportEnd.Play();
-      Debug.Log("Animation");
-  }
+
+    }
 }
