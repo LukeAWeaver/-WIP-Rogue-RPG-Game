@@ -4,17 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class necromancerTeleport : MonoBehaviour {
-
+    public GameObject necromancer;
     private int necromancerHP;
     private int hpCheck;
     private Vector3 temp;
+    private Vector3 temp1;
     private int counter;
-    public GameObject teleport;
+    public ParticleSystem teleportStart;
+    public ParticleSystem teleportEnd;
     // Use this for initialization
 
     void Start ()
     {
-        teleport = Resources.Load("NecroTele") as GameObject;
         hpCheck=gameObject.GetComponent<MonsterInterface>().hp;
     }
 
@@ -27,23 +28,34 @@ public class necromancerTeleport : MonoBehaviour {
             hpCheck = gameObject.GetComponent<MonsterInterface>().hp; //every other frame it will update hpCheck (this means every other frame hp check might be larger than necro's hp
         }
         counter++;
-        var necroPosition = gameObject.transform.position;
-        var necroRotation = gameObject.transform.rotation;
-        temp=transform.position;
-        temp.x = Random.Range(-3f, 3f);
-        temp.z = Random.Range(-3f, 3f);
 
-        necroPosition +=temp;
         if(hpCheck==necromancerHP)
         {
             Debug.Log("this is spam");
         }
         else if(hpCheck > gameObject.GetComponent<MonsterInterface>().hp)
         {
-            var tele = Instantiate(teleport, necroPosition, necroRotation);
+            teleportStart.Play();
+            StartCoroutine(Vanish());
             Debug.Log("tele");
             hpCheck=necromancerHP;
-            gameObject.transform.position = necroPosition;
+
         }
 	}
+  IEnumerator Vanish()
+  {
+      Debug.Log("Coroutine");
+      yield return new WaitForSeconds(1.5f);
+      var necroPosition = gameObject.transform.position;
+
+      temp=transform.position;
+      temp.x = Random.Range(-8f, 8f);
+      temp.z = Random.Range(-8f, 8f);
+      necroPosition +=temp;
+
+      gameObject.transform.position = necroPosition;
+      Debug.Log("Wait");
+      teleportEnd.Play();
+      Debug.Log("Animation");
+  }
 }
