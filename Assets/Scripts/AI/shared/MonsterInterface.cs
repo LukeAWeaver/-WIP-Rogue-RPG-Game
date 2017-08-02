@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MonsterInterface : MonoBehaviour
 {
@@ -28,7 +29,14 @@ public class MonsterInterface : MonoBehaviour
     }
     private void Awake()
     {
-        player = FindObjectOfType<KnightStats>().gameObject;
+        if (SceneManager.GetActiveScene().name == "TitleScreen")
+        {
+
+        }
+        else
+        {
+            player = FindObjectOfType<KnightStats>().gameObject;
+        }
     }
     // Update is called once per frame
     void Update()

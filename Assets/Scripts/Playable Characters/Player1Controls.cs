@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player1Controls : MonoBehaviour
 {
@@ -35,8 +36,14 @@ public class Player1Controls : MonoBehaviour
     }
     private void Awake()
     {
-        SetSkillTreeActive = FindObjectOfType<SKIdentifier>().gameObject;
+        if (SceneManager.GetActiveScene().name == "TitleScreen")
+        {
 
+        }
+        else
+        {
+            SetSkillTreeActive = FindObjectOfType<SKIdentifier>().gameObject;
+        }
     }
     void Update()
     {
@@ -261,10 +268,17 @@ public class Player1Controls : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Scenery" || collision.gameObject.tag == "InteractableScenery" || collision.gameObject.tag == "npc" )
+        if (collision.gameObject.tag == "Scenery" || collision.gameObject.tag == "InteractableScenery" || collision.gameObject.tag == "npc")
         {
             onGround = true;
-            action.SetBool("jump", false);
+            if (SceneManager.GetActiveScene().name == "TitleScreen")
+            {
+
+            }
+            else
+            {
+                action.SetBool("jump", false);
+            }
         }
     }
 }
