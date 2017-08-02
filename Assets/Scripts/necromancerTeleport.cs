@@ -53,7 +53,7 @@ public class necromancerTeleport : MonoBehaviour {
       temp=transform.position;
       temp.x = Random.Range(-8f, 8f);
       temp.z = Random.Range(-8f, 8f);
-        var te = Instantiate(teleportEnd, (necromancer.transform.position + temp), Quaternion.Euler(-90f, 0f, 0f));
+        var te = Instantiate(teleportEnd, (new Vector3(necromancer.transform.position.x, necromancer.transform.position.y - .5f, necromancer.transform.position.z) + temp), Quaternion.Euler(-90f, 0f, 0f));
         necroPosition +=temp;
         te.Play();
         //teleportEnd.Play();
