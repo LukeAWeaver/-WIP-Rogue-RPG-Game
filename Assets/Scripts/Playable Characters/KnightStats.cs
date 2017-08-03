@@ -148,12 +148,15 @@ public class KnightStats : MonoBehaviour {
         PlayerPrefs.SetFloat("AB4KB", AB4KB);
         PlayerPrefs.SetString("AB4Stun", AB4Stun);
         PlayerPrefs.SetString("AB4Ultimate", AB4Ultimate);
-        health = PlayerPrefs.GetInt("currentHP");
         PlayerPrefs.SetInt("UnlockAB1", UnlockAB1);
         PlayerPrefs.SetInt("UnlockAB2", UnlockAB2);
         PlayerPrefs.SetInt("UnlockAB3", UnlockAB3);
         PlayerPrefs.SetInt("UnlockAB4", UnlockAB4);
-
+        health = PlayerPrefs.GetInt("currentHP");
+        if(PlayerPrefs.GetInt("currentHP")>12)
+        {
+            PlayerPrefs.SetInt("currentHP", 12);
+        }
         if (health <1)
         {
             SceneManager.LoadScene("OverWorld");

@@ -19,6 +19,7 @@ public class hp : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        if(stats.health<=12)
         gameObject.GetComponent<Image>().sprite = hpLeft[stats.health];
 
     }

@@ -65,7 +65,7 @@ public class arrowScript : MonoBehaviour {
         else
         {
 
-            CombatTextManager.Instance.CreateText(collision.transform.position);
+            //CombatTextManager.Instance.CreateText(collision.transform.position);
             PlayerPrefs.SetInt("currentHP", changeInHP);
             collision.gameObject.GetComponent<KnightStats>().isRecovering = true; //im a genius
                 Destroy(gameObject);
