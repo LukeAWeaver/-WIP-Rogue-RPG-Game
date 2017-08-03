@@ -12,6 +12,7 @@ public class necromancerTeleport : MonoBehaviour {
     private int counter;
     public ParticleSystem teleportStart;
     public ParticleSystem teleportEnd;
+    private float radius = 1f;
     // Use this for initialization
 
     void Start ()
@@ -36,7 +37,7 @@ public class necromancerTeleport : MonoBehaviour {
         }
         else if(hpCheck > gameObject.GetComponent<MonsterInterface>().hp)
         {
-            var ts = Instantiate(teleportStart,necromancer.transform.position,Quaternion.Euler(-90f,0f,0f));
+            var ts = Instantiate(teleportStart, new Vector3(necromancer.transform.position.x, necromancer.transform.position.y - .5f, necromancer.transform.position.z), Quaternion.Euler(-90f,0f,0f));
             ts.Play();
             //teleportStart.Play();
             StartCoroutine(Vanish());
@@ -47,19 +48,25 @@ public class necromancerTeleport : MonoBehaviour {
 	}
   IEnumerator Vanish()
   {
-      Debug.Log("Coroutine");
-      var necroPosition = gameObject.transform.position;
+    Debug.Log("Coroutine");
+    var necroPosition = gameObject.transform.position;
 
-      temp=transform.position;
+    temp=transform.position;
+    temp.x = Random.Range(-8f, 8f);
+    temp.z = Random.Range(-8f, 8f);
+    temp1=necroPosition+temp;
+    if(Physics.CheckSphere (temp1, radius)){
       temp.x = Random.Range(-8f, 8f);
       temp.z = Random.Range(-8f, 8f);
+      Vanish();
+    }
+    else{
         var te = Instantiate(teleportEnd, (new Vector3(necromancer.transform.position.x, necromancer.transform.position.y - .5f, necromancer.transform.position.z) + temp), Quaternion.Euler(-90f, 0f, 0f));
         necroPosition +=temp;
         te.Play();
         //teleportEnd.Play();
         yield return new WaitForSeconds(.5f);
         gameObject.transform.position = necroPosition;
-
-
+      }
     }
 }
