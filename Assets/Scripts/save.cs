@@ -10,6 +10,7 @@ public class save : MonoBehaviour {
         PlayerPrefs.SetFloat("atkSpeed", 1f);
         PlayerPrefs.SetInt("hpPots", 0);
         PlayerPrefs.SetInt("hpPots", 0);
+        PlayerPrefs.SetInt("CurrentFloor", 0);
         PlayerPrefs.SetInt("currentWeapon", 1); //respawn with woodenSword
 
     }

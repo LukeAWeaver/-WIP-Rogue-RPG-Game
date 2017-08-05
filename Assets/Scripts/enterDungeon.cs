@@ -28,7 +28,16 @@ public class enterDungeon : MonoBehaviour {
     {
 
         yield return new WaitForSeconds(1.3f);
+        if(PlayerPrefs.GetInt("CurrentFloor") <3)
         SceneManager.LoadScene("ForestBiome");
+        else if(PlayerPrefs.GetInt("CurrentFloor") < 6)
+        {
+            SceneManager.LoadScene("CemeteryBiome");
+        }
+        else if (PlayerPrefs.GetInt("CurrentFloor") < 9)
+        {
+            SceneManager.LoadScene("DungeonBiome");
+        }
 
     }
 }

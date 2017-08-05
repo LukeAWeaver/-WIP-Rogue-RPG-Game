@@ -12,7 +12,7 @@ public class LevelManager : MonoBehaviour {
 
     void Start()
     {
-        if(PlayerPrefs.GetInt("CurrentFloor") == 2)
+        if(PlayerPrefs.GetInt("CurrentFloor") == 5)
         {
             BOSS = Resources.Load("Necromancer") as GameObject;
             var boss = Instantiate(BOSS);
@@ -24,11 +24,7 @@ public class LevelManager : MonoBehaviour {
 
         // Update is called once per frame
         void Update ()
-    {
-        if(player.GetComponent<KnightStats>().health<=0)
-        {
-            PlayerPrefs.SetInt("CurrentFloor", 0);
-        }
+         {
 
         CF = PlayerPrefs.GetInt("CurrentFloor");
         Debug.Log(CF);
@@ -36,7 +32,7 @@ public class LevelManager : MonoBehaviour {
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(SceneManager.GetActiveScene().name == "DungeonBiome" || SceneManager.GetActiveScene().name == "ForestBiome")
+        if(SceneManager.GetActiveScene().name == "DungeonBiome" || SceneManager.GetActiveScene().name == "ForestBiome" || SceneManager.GetActiveScene().name == "CemeteryBiome")
         {
             CF++;
             PlayerPrefs.SetInt("CurrentFloor", CF);
@@ -47,6 +43,11 @@ public class LevelManager : MonoBehaviour {
             SceneManager.LoadScene("ForestBiome");
         }
         else if(CF<6) // 3,4,5
+        {
+            SceneManager.LoadScene("CemeteryBiome");
+
+        }
+        else if (CF < 6) // 6,7,8
         {
             SceneManager.LoadScene("DungeonBiome");
 
