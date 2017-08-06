@@ -20,8 +20,8 @@ public class skillTrainer : MonoBehaviour
         source.clip = speech;
         npc = "SkillTrainer";
         dManager = FindObjectOfType<DialogueManager>();
-        dialogue0 = "Potion Brewer: If you give me 100 gold, i'll train ya. (Give's Skill Point)";
-        dialogue1 = "Potion Brewer: You look weak. I'll train ya, but it'll cost ya 100. (Give's Skill Point)";
+        dialogue0 = "Skill Trainer: If you give me 100 gold, i'll train ya. (Give's Skill Point)";
+        dialogue1 = "Skill Trainer: You look weak. I'll train ya, but it'll cost ya 100. (Give's Skill Point)";
     }
 
     // Update is called once per frame

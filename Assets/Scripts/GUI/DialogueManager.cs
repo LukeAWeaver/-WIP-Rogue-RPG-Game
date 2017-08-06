@@ -25,7 +25,7 @@ public class DialogueManager : MonoBehaviour {
         playerReplyNo.SetActive(false);
         playerReplyYes.SetActive(false);
     }
-	
+
 	// Update is called once per frame
 	void Update () {
         if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A)) //movement disables dialog box
@@ -95,6 +95,44 @@ public class DialogueManager : MonoBehaviour {
                 npc = "None";
             }
         }
+        //Skill Trainer Interactions
+        if (npc == "SkillTrainer" && dialogActive)
+        {
+            playerIcon.SetActive(true);
+            if(!playerReplyNo.activeInHierarchy)
+            {
+                playerReplyYes.SetActive(true);
+            }
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                playerReplyYes.SetActive(true);
+                playerReplyNo.SetActive(false);
+
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                playerReplyYes.SetActive(false);
+                playerReplyNo.SetActive(true);
+            }
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                if (playerReplyYes.activeInHierarchy && player.GetComponent<KnightStats>().gold>=100)
+                {
+                    player.GetComponent<KnightStats>().SkillPoints++;
+                    player.GetComponent<KnightStats>().gold = player.GetComponent<KnightStats>().gold - 100;
+                }
+                playerIcon.SetActive(false);
+                playerReplyNo.SetActive(false);
+                playerReplyYes.SetActive(false);
+                BrewerIcon.SetActive(false);
+                dBox.SetActive(false);
+                foreach (GameObject Icon in AbilityIcons)
+                {
+                    Icon.SetActive(true);
+                }
+                npc = "None";
+            }
+        }
     }
     public void ShowBox(string dialogue,string npc)
     {
@@ -106,6 +144,12 @@ public class DialogueManager : MonoBehaviour {
             guardIcon.SetActive(true);
         }
         if(npc == "PotionBrewer")
+        {
+            guardIcon.SetActive(false);
+            BrewerIcon.SetActive(true);
+            this.npc = npc;
+        }
+        if (npc == "SkillTrainer")
         {
             guardIcon.SetActive(false);
             BrewerIcon.SetActive(true);
