@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour {
     public GameObject dBox;
@@ -15,8 +16,19 @@ public class DialogueManager : MonoBehaviour {
     private string npc;
     public Text dtext;
     public bool dialogActive;
-	// Use this for initialization
-	void Start () {
+    FadeManager fm;
+    public GameObject thisNPC;
+
+    // Use this for initialization
+    void Start () {
+        fm = FindObjectOfType<FadeManager>();
+        AbilityIcons = new GameObject[4];
+        AbilityIcons[0] = FindObjectOfType<A1ONCD>().gameObject;
+        AbilityIcons[1] = FindObjectOfType<A2ONCD>().gameObject;
+        AbilityIcons[2] = FindObjectOfType<A3ONCD>().gameObject;
+        AbilityIcons[3] = FindObjectOfType<A4ONCD>().gameObject;
+
+
         dialogActive = false;
         dBox.SetActive(false);
         guardIcon.SetActive(false);
@@ -25,7 +37,10 @@ public class DialogueManager : MonoBehaviour {
         playerReplyNo.SetActive(false);
         playerReplyYes.SetActive(false);
     }
-
+    public void assignNPC(GameObject NPC)
+    {
+        thisNPC = NPC;
+    }
 	// Update is called once per frame
 	void Update () {
         if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A)) //movement disables dialog box
@@ -57,9 +72,23 @@ public class DialogueManager : MonoBehaviour {
             }
             npc = "None";
         }
+        //potion brewer saved interaction
+        if (npc == "SavedPotionBrewer" && dialogActive)
+        {
+                StartCoroutine(transition());
+            foreach (GameObject Icon in AbilityIcons)
+            {
+                Icon.SetActive(true);
+            }
+            npc = "None";
+        }
         //Potion Brewer Interactions
         if (npc == "PotionBrewer" && dialogActive)
         {
+            foreach (GameObject Icon in AbilityIcons)
+            {
+                Icon.SetActive(false);
+            }
             playerIcon.SetActive(true);
             if(!playerReplyNo.activeInHierarchy)
             {
@@ -143,7 +172,7 @@ public class DialogueManager : MonoBehaviour {
         {
             guardIcon.SetActive(true);
         }
-        if(npc == "PotionBrewer")
+        if(npc == "PotionBrewer" || npc == "SavedPotionBrewer")
         {
             guardIcon.SetActive(false);
             BrewerIcon.SetActive(true);
@@ -160,5 +189,25 @@ public class DialogueManager : MonoBehaviour {
             Icon.SetActive(false);
         }
     }
-
+    IEnumerator transition()
+    {
+        BrewerIcon.SetActive(true);
+        dBox.SetActive(true);
+        yield return new WaitForSeconds(4.5f);
+        fm.Fade(true, .25f);
+        yield return new WaitForSeconds(.5f);
+        fm.Fade(false, 1.25f);
+        healthPots.GetComponent<PlayerPotions>().hpPot++;
+        playerIcon.SetActive(false);
+        playerReplyNo.SetActive(false);
+        playerReplyYes.SetActive(false);
+        BrewerIcon.SetActive(false);
+        dBox.SetActive(false);
+        foreach (GameObject Icon in AbilityIcons)
+        {
+            Icon.SetActive(true);
+        }
+        npc = "None";
+        Destroy(thisNPC);
+    }
 }

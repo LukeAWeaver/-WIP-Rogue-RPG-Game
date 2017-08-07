@@ -32,6 +32,10 @@ public class LevelManager : MonoBehaviour {
     }
     private void OnTriggerEnter(Collider other)
     {
+        if(gameObject.GetComponent<potionBrewerAI>() !=null)
+        {
+            Debug.Log("testsss");
+        }
         if(SceneManager.GetActiveScene().name == "DungeonBiome" || SceneManager.GetActiveScene().name == "ForestBiome" || SceneManager.GetActiveScene().name == "CemeteryBiome")
         {
             CF++;
