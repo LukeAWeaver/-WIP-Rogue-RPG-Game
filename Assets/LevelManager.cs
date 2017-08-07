@@ -51,7 +51,7 @@ public class LevelManager : MonoBehaviour {
             SceneManager.LoadScene("CemeteryBiome");
 
         }
-        else if (CF < 6) // 6,7,8
+        else if (CF < 9) // 6,7,8
         {
             SceneManager.LoadScene("DungeonBiome");
 
