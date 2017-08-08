@@ -8,6 +8,8 @@ public class RandomMonsterSpawner : MonoBehaviour {
     private GameObject GoblinMelee;
     private GameObject GoblinArcher;
     private GameObject Dog;
+    private GameObject SkeleSpear;
+    private GameObject SkeleShield;
 
     public float spawnDelay = .1f;
     public float spawnTime = 1f;
@@ -15,14 +17,17 @@ public class RandomMonsterSpawner : MonoBehaviour {
     public int enemyIndex;
     // Use this for initialization
     void Start () {
-        RandomMonsters = new GameObject[3];
+        RandomMonsters = new GameObject[5];
         GoblinMelee = Resources.Load("GoblinClub") as GameObject;
         RandomMonsters[0] = GoblinMelee;
         GoblinArcher = Resources.Load("GoblinBow") as GameObject;
         RandomMonsters[1] = GoblinArcher;
         Dog = Resources.Load("dog") as GameObject;
         RandomMonsters[2] = Dog;
-
+        SkeleSpear = Resources.Load("Skeleton") as GameObject;
+        RandomMonsters[3] = SkeleSpear;
+        SkeleShield = Resources.Load("Skeleton2") as GameObject;
+        RandomMonsters[4] = SkeleShield;
 
 
         limit = 0;
@@ -37,7 +42,7 @@ public class RandomMonsterSpawner : MonoBehaviour {
                 enemyIndex = Random.Range(0, 2);
             }
             else
-                enemyIndex = Random.Range(0, RandomMonsters.Length);
+                enemyIndex = Random.Range(2, RandomMonsters.Length);
             var ThisEnemy = Instantiate(RandomMonsters[enemyIndex], transform.position, transform.rotation);
             if(ThisEnemy.gameObject.name == "dog(Clone)")
             {
