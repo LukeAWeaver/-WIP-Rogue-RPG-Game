@@ -42,7 +42,8 @@ public class KnightStats : MonoBehaviour {
     public int UnlockAB2;
     public int UnlockAB3;
     public int UnlockAB4;
-
+    FadeManager fm;
+    public Text youDied;
     public GameObject Ability3;
 
     // Use this for initialization
@@ -56,6 +57,7 @@ public class KnightStats : MonoBehaviour {
     }
     void Start()
     {
+        youDied = FindObjectOfType<youdiedIdentifier>().gameObject.GetComponent<Text>();
         Ab1 = 1;
         resting = 3;
         exp = 0;
@@ -64,6 +66,7 @@ public class KnightStats : MonoBehaviour {
         tempHP = 6;
         energy = 10000;
         isRecovering = false;
+        fm = FindObjectOfType<FadeManager>();
 
 
         currentWeapon = PlayerPrefs.GetInt("currentWeapon");
@@ -160,7 +163,7 @@ public class KnightStats : MonoBehaviour {
         }
         if (health <1)
         {
-            SceneManager.LoadScene("OverWorld");
+            StartCoroutine(dead());
         }
         if(exp>=requiredExp)
         {
@@ -240,6 +243,15 @@ public class KnightStats : MonoBehaviour {
             }
         }
     }
+    IEnumerator dead()
+    {
+        fm.Fade(false, 1.25f);
+        yield return new WaitForSeconds(1.5f);
+        youDied.enabled = true;
+        yield return new WaitForSeconds(1.5f);
+        youDied.enabled = false;
+        SceneManager.LoadScene("OverWorld");
 
+    }
 
 }
