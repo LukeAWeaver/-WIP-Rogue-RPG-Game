@@ -21,6 +21,7 @@ public class DialogueManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        player = FindObjectOfType<KnightStats>().gameObject;
         fm = FindObjectOfType<FadeManager>();
         AbilityIcons = new GameObject[4];
         AbilityIcons[0] = FindObjectOfType<A1ONCD>().gameObject;

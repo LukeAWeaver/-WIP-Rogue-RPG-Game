@@ -14,6 +14,7 @@ public class ability1Script : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        KnightIcon = FindObjectOfType<lowHPIcon>().gameObject.GetComponent<Image>();
         ability1Icon = FindObjectOfType<A1ONCD>().gameObject;
         aura.Stop();
         knight = FindObjectOfType<KnightStats>().gameObject;
