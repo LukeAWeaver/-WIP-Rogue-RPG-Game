@@ -5,18 +5,18 @@ using UnityEngine;
 public class coinPickUp : MonoBehaviour
 {
 
-    public SpriteRenderer sprite;
-    public Sprite[] sprites;
+   // public SpriteRenderer sprite;
+    //public Sprite[] sprites;
     public int goldAmount;
     public AudioClip coinGrab;
     private AudioSource source;
     void Start()
     {
         goldAmount = 5;
-        sprite.sprite = sprites[0];
-        sprite = GetComponent<SpriteRenderer>();
+       // sprite.sprite = sprites[0];
+        //sprite = GetComponent<SpriteRenderer>();
         source = GetComponent<AudioSource>();
-        gameObject.GetComponent<Transform>().localScale = new Vector3(.4f, .4f, .4f);
+        //gameObject.GetComponent<Transform>().localScale = new Vector3(.4f, .4f, .4f);
 
     }
     private void Update()

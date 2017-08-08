@@ -116,6 +116,7 @@ public class KnightStats : MonoBehaviour {
 
         InvokeRepeating("resetHP", 0, .03f);
         InvokeRepeating("EnergyRegen", 0, .25f);
+        expBar = FindObjectOfType<xpbarIdentifier>().gameObject.GetComponent<Slider>();
     }
 
     // Update is called once per frame

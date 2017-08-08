@@ -19,10 +19,10 @@ public class goldScript : MonoBehaviour
     void Update()
     {
         if (player.GetComponent<KnightStats>().gold > 0)
-            text.text = player.GetComponent<KnightStats>().gold.ToString();
+            text.text = "X" + player.GetComponent<KnightStats>().gold.ToString();
         else if (player.GetComponent<KnightStats>().gold == 0)
         {
-            text.text = "";
+            text.text = "X0";
         }
     }
 }
