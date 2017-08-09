@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class weaponReward : MonoBehaviour {
     public GameObject text;
+    public GameObject textDescription2H;
     public GameObject player;
     public Sprite[] weapons;
     public GameObject[] playerWeapons; //0 wooden sword, 1 2h, 2 vampiric sword
@@ -15,6 +16,10 @@ public class weaponReward : MonoBehaviour {
 	void Start () {
         weapons = new Sprite[4];
         playerWeapons = new GameObject[4];
+        textDescription2H = FindObjectOfType<tooltip2descriptor>().gameObject;
+        textDescription2H.GetComponent<Image>().enabled = false;
+        textDescription2H.GetComponentInChildren<Text>().enabled = false;
+
         canvas = FindObjectOfType<Canvas>();
         text = FindObjectOfType<weaponPickUpText>().gameObject;
         text.GetComponentInChildren<Image>().enabled = false;
@@ -25,7 +30,7 @@ public class weaponReward : MonoBehaviour {
         weapons[2] = Resources.Load<Sprite>("2HLS");
         weapons[3] = Resources.Load<Sprite>("redSword");
         //text.transform.SetParent(canvas.transform);
-        rng = Random.Range(1, weapons.Length);
+        rng = Random.Range(2, weapons.Length);
         player = FindObjectOfType<KnightStats>().gameObject;
         gameObject.GetComponent<SpriteRenderer>().sprite = weapons[rng];
         GetComponent<Transform>().localScale = new Vector3(.55f, .55f, .55f);
@@ -111,6 +116,7 @@ public class weaponReward : MonoBehaviour {
                     rng = 3;
                 }
             }
+
         }
 
     }
@@ -121,6 +127,17 @@ public class weaponReward : MonoBehaviour {
             isNear = true;
             text.GetComponentInChildren<Image>().enabled = true;
             text.GetComponentInChildren<Text>().enabled = true;
+            if (rng == 2)
+            {
+                textDescription2H.GetComponent<Image>().enabled = true;
+                foreach (Transform child in textDescription2H.transform)
+                {
+                    if(child.GetComponent<Image>() != null)
+                    child.GetComponent<Image>().enabled = true;
+                    if (child.GetComponent<Text>() != null)
+                        child.GetComponent<Text>().enabled = true;
+                }
+            }
         }
     }
     private void OnTriggerExit(Collider other)
@@ -130,6 +147,14 @@ public class weaponReward : MonoBehaviour {
             isNear = false;
             text.GetComponentInChildren<Image>().enabled = false;
             text.GetComponentInChildren<Text>().enabled = false;
+            textDescription2H.GetComponent<Image>().enabled = false;
+            foreach (Transform child in textDescription2H.transform)
+            {
+                if (child.GetComponent<Image>() != null)
+                    child.GetComponent<Image>().enabled = false;
+                if (child.GetComponent<Text>() != null)
+                    child.GetComponent<Text>().enabled = false;
+            }
         }
     }
 }

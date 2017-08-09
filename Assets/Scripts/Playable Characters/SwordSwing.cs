@@ -145,10 +145,8 @@ public class SwordSwing : MonoBehaviour {
         GetComponent<Collider>().enabled = true;
         swing.SetInteger("state", 1);
         source.clip = swinging;
-        if (swing.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !swing.IsInTransition(0))
-        {
-            source.Play();
-        }
+        source.Play();
+
         yield return new WaitForSeconds(.2f);
         GetComponent<Collider>().enabled = false;
         swing.SetInteger("state", 0);

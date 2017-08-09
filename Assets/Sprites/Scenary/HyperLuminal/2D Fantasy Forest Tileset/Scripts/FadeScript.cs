@@ -32,7 +32,7 @@ public class FadeScript : MonoBehaviour
 	{
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		FadeType = FADETYPE.IN;
-		AlphaValue = 1.0f;
+		AlphaValue = .40f;
 	}
 	
 	// Update is called once per frame
