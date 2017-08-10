@@ -58,13 +58,8 @@ public class necromancerTeleport : MonoBehaviour {
 
     if(Physics.CheckSphere (temp1, radius))
     {
-      Debug.Log("Check");
-      while(Physics.CheckSphere(temp1, radius))
-        {
-            temp.x = Random.Range(-8f, 8f);
-            temp.z = Random.Range(-8f, 8f);
+            StartCoroutine(Vanish());
         }
-    }
     else
         {
         var teleportE = Instantiate(teleportEnd, (new Vector3(necromancer.transform.position.x, necromancer.transform.position.y - .5f, necromancer.transform.position.z) + temp), Quaternion.Euler(-90f, 0f, 0f));
