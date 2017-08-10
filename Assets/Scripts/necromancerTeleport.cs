@@ -37,9 +37,8 @@ public class necromancerTeleport : MonoBehaviour {
         }
         else if(hpCheck > gameObject.GetComponent<MonsterInterface>().hp)
         {
-            var ts = Instantiate(teleportStart, new Vector3(necromancer.transform.position.x, necromancer.transform.position.y - .5f, necromancer.transform.position.z), Quaternion.Euler(-90f,0f,0f));
-            ts.Play();
-            //teleportStart.Play();
+            var teleportS = Instantiate(teleportStart, new Vector3(necromancer.transform.position.x, necromancer.transform.position.y - .5f, necromancer.transform.position.z), Quaternion.Euler(-90f,0f,0f));
+            teleportS.Play();
             StartCoroutine(Vanish());
             Debug.Log("tele");
             hpCheck=necromancerHP;
@@ -54,19 +53,25 @@ public class necromancerTeleport : MonoBehaviour {
     temp=transform.position;
     temp.x = Random.Range(-8f, 8f);
     temp.z = Random.Range(-8f, 8f);
+
     temp1=necroPosition+temp;
-    if(Physics.CheckSphere (temp1, radius)){
-      temp.x = Random.Range(-8f, 8f);
-      temp.z = Random.Range(-8f, 8f);
-      Vanish();
+
+    if(Physics.CheckSphere (temp1, radius))
+    {
+      Debug.Log("Check");
+      while(Physics.CheckSphere(temp1, radius))
+        {
+            temp.x = Random.Range(-8f, 8f);
+            temp.z = Random.Range(-8f, 8f);
+        }
     }
-    else{
-        var te = Instantiate(teleportEnd, (new Vector3(necromancer.transform.position.x, necromancer.transform.position.y - .5f, necromancer.transform.position.z) + temp), Quaternion.Euler(-90f, 0f, 0f));
+    else
+        {
+        var teleportE = Instantiate(teleportEnd, (new Vector3(necromancer.transform.position.x, necromancer.transform.position.y - .5f, necromancer.transform.position.z) + temp), Quaternion.Euler(-90f, 0f, 0f));
         necroPosition +=temp;
-        te.Play();
-        //teleportEnd.Play();
+        teleportE.Play();
         yield return new WaitForSeconds(.5f);
         gameObject.transform.position = necroPosition;
-      }
+        }
     }
 }
