@@ -13,12 +13,18 @@ public class necromancerTeleport : MonoBehaviour {
     public ParticleSystem teleportStart;
     public ParticleSystem teleportEnd;
     private float radius = 1f;
+    private AudioSource source;
+    public AudioClip teleSFX;
+
     // Use this for initialization
 
     void Start ()
     {
         necromancer = FindObjectOfType<SummonSkeleton>().gameObject;
         hpCheck=gameObject.GetComponent<MonsterInterface>().hp;
+        source = GetComponent<AudioSource>();
+        source.clip = teleSFX;
+
     }
 
 
@@ -47,6 +53,7 @@ public class necromancerTeleport : MonoBehaviour {
 	}
   IEnumerator Vanish()
   {
+        source.Play();
     Debug.Log("Coroutine");
     var necroPosition = gameObject.transform.position;
 
