@@ -4,13 +4,21 @@ using UnityEngine;
 
 public class spear : MonoBehaviour {
     public GameObject thisSkeleton;
-	// Use this for initialization
-	void Start () {
+    public Animator anim;
+    // Use this for initialization
+    private void Awake()
+    {
         thisSkeleton = GetComponentInParent<SkeletonAI>().gameObject;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        anim = GetComponent<Animator>();
+
+    }
+    void Start () {
+
+        anim.SetFloat("attack", 0);
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
     private void OnTriggerEnter(Collider collision)
@@ -18,6 +26,8 @@ public class spear : MonoBehaviour {
         int changeInHP = PlayerPrefs.GetInt("currentHP") - 2;
         if (collision.gameObject.GetComponent<KnightStats>() != null && !collision.gameObject.GetComponent<KnightStats>().isRecovering)
         {
+            anim.SetFloat("attack", 1);
+            StartCoroutine(AutoAttack());
             collision.GetComponent<Rigidbody>().velocity += new Vector3(0f, 3f, 0f);
             if (thisSkeleton.GetComponent<MonsterInterface>().isFlippingLeft)
             {
@@ -35,4 +45,11 @@ public class spear : MonoBehaviour {
 
         }
     }
+    IEnumerator AutoAttack()
+    {
+        yield return new WaitForSeconds(.8f);
+        anim.SetFloat("attack", 0);
+
+    }
+
 }
