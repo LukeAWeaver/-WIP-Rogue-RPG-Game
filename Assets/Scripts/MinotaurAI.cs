@@ -8,6 +8,7 @@ public class MinotaurAI : MonoBehaviour
     private GameObject player;
     public MonsterInterface ThisNPCStats;
     public float range;
+    private bool onCD;
     // Use this for initialization
     void Start()
     {
@@ -33,8 +34,9 @@ public class MinotaurAI : MonoBehaviour
         {
             inSight = false;
         }
-        if (inSight && range > 5)
+        if (inSight && range > 5 && onCD==false)
         {
+            StartCoroutine(chargeONCD());
             StartCoroutine(charge());
         }
         /*else if(range < 2)
@@ -54,9 +56,10 @@ public class MinotaurAI : MonoBehaviour
         var target = player.transform.position;
         gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
         yield return new WaitForSeconds(2f);
-        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position,target,1f);
-        yield return new WaitForSeconds(10f);
+        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position,target,5f);
         gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        //yield return new WaitForSeconds(5f);
+       
     }
     IEnumerator knockback()
     {
@@ -84,5 +87,11 @@ public class MinotaurAI : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         yield return new WaitForSeconds(5f);
         gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+    }
+    IEnumerator chargeONCD()
+    {
+        onCD = true;
+        yield return new WaitForSeconds(8f);
+        onCD = false;
     }
 }
