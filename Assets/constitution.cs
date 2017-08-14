@@ -31,7 +31,7 @@ public class constitution : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     //tooltip
     public void OnPointerEnter(PointerEventData eventData)
     {
-        gameObject.GetComponentInChildren<constDescription>().gameObject.GetComponent<Text>().text = "Constitution will help you survive longer. (Upgradable at the attribution trainer)"; //waaa this was crazy to code
+        gameObject.GetComponentInChildren<constDescription>().gameObject.GetComponent<Text>().text = "Constitution will help you survive longer. (Upgradable at the Attribution Trainer)"; //waaa this was crazy to code
     }
 
     public void OnPointerExit(PointerEventData eventData)

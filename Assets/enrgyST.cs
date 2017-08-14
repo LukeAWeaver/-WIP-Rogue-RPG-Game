@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class str : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class enrgyST : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Button sp;
     private GameObject player;
@@ -43,11 +43,11 @@ public class str : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     //tooltip
     public void OnPointerEnter(PointerEventData eventData)
     {
-        gameObject.GetComponentInChildren<strDescription>().gameObject.GetComponent<Text>().text = "Strength will help you hit harder. (Upgradable at Attribution Trainer)"; //waaa this was crazy to code
+        gameObject.GetComponentInChildren<enrgyDescription>().gameObject.GetComponent<Text>().text = "Endurance increases the players max energy. (Upgradable at Attribution Trainer)"; //waaa this was crazy to code
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        gameObject.GetComponentInChildren<strDescription>().gameObject.GetComponent<Text>().text = "";
+        gameObject.GetComponentInChildren<enrgyDescription>().gameObject.GetComponent<Text>().text = "";
     }
 }
