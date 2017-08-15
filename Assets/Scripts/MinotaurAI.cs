@@ -9,6 +9,7 @@ public class MinotaurAI : MonoBehaviour
     public MonsterInterface ThisNPCStats;
     public float range;
     private bool onCD;
+    private bool canTakeDamage;
     // Use this for initialization
     void Start()
     {
@@ -39,16 +40,16 @@ public class MinotaurAI : MonoBehaviour
             StartCoroutine(chargeONCD());
             StartCoroutine(charge());
         }
-        /*else if(range < 2)
-        {
-            StartCoroutine(knockback());
-        }*/
     }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "TreeMino")
         {
             StartCoroutine(stunned());
+        }
+        if (canTakeDamage)
+        {
+
         }
     }
     IEnumerator charge()
@@ -58,35 +59,42 @@ public class MinotaurAI : MonoBehaviour
         yield return new WaitForSeconds(2f);
         gameObject.transform.position = Vector3.Lerp(gameObject.transform.position,target,5f);
         gameObject.GetComponent<SpriteRenderer>().color = Color.white;
-        //yield return new WaitForSeconds(5f);
-       
+        yield return new WaitForSeconds(2f);
+        StartCoroutine(knockback());
+
     }
     IEnumerator knockback()
     {
-        var minoPos = ThisNPCStats.transform.position;
-        if (minoPos.z > player.transform.position.z && minoPos.x < player.transform.position.x)
+        if (range < 3)
         {
-            player.GetComponent<Rigidbody>().velocity = new Vector3(-12f, 0f, 12f);
+            var minoPos = ThisNPCStats.transform.position;
+            if (minoPos.z < player.transform.position.z && minoPos.x > player.transform.position.x)
+            {
+                player.GetComponent<Rigidbody>().velocity = new Vector3(-20f, 0f, 20f);
+            }
+            else if (minoPos.z < player.transform.position.z && minoPos.x < player.transform.position.x)
+            {
+                player.GetComponent<Rigidbody>().velocity = new Vector3(20f, 0f, 20f);
+            }
+            else if (minoPos.z > player.transform.position.z && minoPos.x > player.transform.position.x)
+            {
+                player.GetComponent<Rigidbody>().velocity = new Vector3(-20f, 0f, -20f);
+            }
+            else if (minoPos.z > player.transform.position.z && minoPos.x < player.transform.position.x)
+            {
+                player.GetComponent<Rigidbody>().velocity = new Vector3(20f, 0f, -20f);
+            }
+            yield return new WaitForSeconds(1f);
         }
-        else if (minoPos.z > player.transform.position.z && minoPos.x > player.transform.position.x)
-        {
-            player.GetComponent<Rigidbody>().velocity = new Vector3(12f, 0f, 12f);
-        }
-        else if (minoPos.z < player.transform.position.z && minoPos.x < player.transform.position.x)
-        {
-            player.GetComponent<Rigidbody>().velocity = new Vector3(-12f, 0f, -12f);
-        }
-        else if (minoPos.z < player.transform.position.z && minoPos.x > player.transform.position.x)
-        {
-            player.GetComponent<Rigidbody>().velocity = new Vector3(12f , 0f, -12f);
-        }
-        yield return new WaitForSeconds(1f);
     }
     IEnumerator stunned()
     {
+        canTakeDamage = true;
         gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         yield return new WaitForSeconds(5f);
+        canTakeDamage = false;
         gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        StartCoroutine(knockback());
     }
     IEnumerator chargeONCD()
     {
