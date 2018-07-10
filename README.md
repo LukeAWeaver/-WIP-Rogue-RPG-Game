@@ -1,7 +1,3 @@
-# 2-D-Battler-Game
-Unity Project in C#
-
-
 # Doodle Warriors
 Doodle Warriors is a Rogue/RPG style Indie game in developement by @LukeWeaver & @RonySingh
 
