@@ -1,5 +1,5 @@
 # Doodle Warriors
-Doodle Warriors is a Rogue/RPG style Indie game in developement by @LukeWeaver & @RonySingh
+Doodle Warriors is a Rogue/RPG style Indie game in development by @LukeWeaver & @RonySingh
 
 # How does it work?
 Doodle Warriors utilizes Unity's physics engine and GameObjects API to allow complex interactions between the player, their enviroment, and enemies. Save files are saved in the registry to save progress.
