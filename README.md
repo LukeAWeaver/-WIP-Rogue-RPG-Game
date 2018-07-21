@@ -9,3 +9,8 @@ Anyone who likes randomly generated enemies and terrain should play this game! (
 
 # Where can I get it?
 Some day when I have more time, I will finish developement and publish the game onto Steam.
+
+
+
+![Early Alpha Gameplay Screenshot](https://i.imgur.com/MZo7pNe.png)
+
